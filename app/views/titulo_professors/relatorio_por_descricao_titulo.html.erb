@@ -64,8 +64,9 @@ display: none;
   <%end%>
 
 </table>
-<b><%= @relatorio_por_descricao_titulo.count %> registros encontrados.</b>
-
+<%if !(@relatorio_por_descricao_titulo == "Descreva o titulo para filtragem")%>
+  <b><%= @relatorio_por_descricao_titulo.count() %> registros encontrados.</b>
+<%end%>
 <br/>
 <div class="botao">
   <input type="Button" Value="Imprimir" onclick="Imprimir()">

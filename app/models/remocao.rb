@@ -35,7 +35,7 @@ def executar_remocao
         self.unidade_atual = @trab_atual.unidade
       end
 #================Atualiza Trabalhados==================
-        @atualiza_trabalhado.unidade = 0
+        #@atualiza_trabalhado.unidade = 0
         @atualiza_trabalhado.save
 #================Atualiza Acum_trabs===================
       @ac_t.verifica = 2
@@ -45,47 +45,58 @@ def executar_remocao
       @ac_t.save
 #===============Atualiza Professors====================
         @at_professors.flag = 1
+        @at_professors.sede_id_ant = @at_professors.sede_id
         @at_professors.save
 #======================================================
   end
 end
 
 def finalizar_remocao
-        @trab_ant = Trabalhado.find(:all, :conditions => 'professor_id = ' + (self.professor_id).to_s + ' and ano = ' + $data2.to_s + ' and ano_letivo = ' + $data.to_s)
+      @trab_ant = Trabalhado.find(:all, :conditions => 'professor_id = ' + (self.professor_id).to_s + ' and ano = ' + $data2.to_s + ' and ano_letivo = ' + $data.to_s)
       @trab_atual = Trabalhado.find(:all, :conditions => 'professor_id = ' + (self.professor_id).to_s + ' and ano = ' + $data.to_s + ' and ano_letivo = ' + $data.to_s)
       @atualiza_trabalhado = Trabalhado.find(:all, :conditions => 'professor_id = ' + (self.professor_id).to_s + ' and ano_letivo = ' + $data.to_s)
       @ac_t = AcumTrab.find(:all, :conditions => 'professor_id = ' + (self.professor_id).to_s)
-      @at_professors = Professor.find(:all, :conditions => 'id = ' + (self.professor_id).to_s)
 
     	if remocao_efetivada == 1 then
         self.flag_remocao_finalizada = 1;
         self.status = 0;
 
-        @sede_pro = find(:all, :conditions => 'professor_id = ' + (self.professor_id).tp_s)
+        @sede_pro = Professor.find(:all, :conditions => 'id = ' + (self.professor_id).to_s)
         for sede_ant in @sede_pro
           sede_ant.sede_id_ant = sede_ant.sede_id
-          sede_and.sede_id = self.sede_id
+          sede_ant.sede_id = self.unidade_id
+          sede_ant.save
         end
       else
         self.flag_remocao_finalizada = 1
         for atualiza_ac_t in @ac_t
           atualiza_ac_t.verifica = 2
-          atualiza_ac_t.valor_unid = self.valor_unid
-          atualiza_ac_t.tot_acum_unid = self.tot_acum_unid
+          atualiza_ac_t.valor_unid = atualiza_ac_t.valor_unid + self.valor_unid
+          atualiza_ac_t.tot_acum_unid = atualiza_ac_t.tot_acum_unid + self.tot_acum_unid
+          atualiza_ac_t.tot_geral_unid = atualiza_ac_t.tot_geral_unid + self.tot_geral_unid
+          #atualiza_ac_t.tot_acum_unid = atualiza_ac_t.tot_acum_unid + self.tot_acum_unid
+          #atualiza_ac_t.tot_geral_unid = atualiza_ac_t.tot_geral_unid + self.tot_acum_unid
+          #atualiza_ac_t.tot_acum_unid = self.tot_acum_unid
+          #atualiza_ac_t.tot_geral_unid = self.tot_acum_unid
+          atualiza_ac_t.tot_acum_ant_unid = atualiza_ac_t.tot_acum_ant_unid + self.tot_geral_unid
+          $remocao = 1
           atualiza_ac_t.save
         end
         self.status = 0
 
         for t_ant in @trab_ant
           t_ant.unidade = self.unidade_ant
+          t_ant.dias_unidade = self.unidade_ant - (t_ant.f_abonada + t_ant.atestado + t_ant.f_justif + t_ant.f_injustif + t_ant.lic_saude)
           t_ant.save
         end
         for t_atu in @trab_atual
           t_atu.unidade = self.unidade_atual
+          t_atu.dias_unidade = self.unidade_atual - (t_atu.f_abonada + t_atu.atestado + t_atu.f_justif + t_atu.f_injustif + t_atu.lic_saude)
           t_atu.save
         end
 
       #Contas complexas
+      @at_professors = Professor.find(:all, :conditions => 'id = ' + (self.professor_id).to_s)
       for prof1 in @at_professors
         for k in @ac_t
           for l in @trab_ant
@@ -97,9 +108,9 @@ def finalizar_remocao
             end
           end
         end
-          prof1.total_trabalhado = self.total
-          prof1.pontuacao_final = self.total + prof1.total_titulacao
-          prof1.save
+ #         prof1.total_trabalhado = self.total
+ #        prof1.pontuacao_final = self.total + prof1.total_titulacao
+ #        prof1.save
       end
       end
 end

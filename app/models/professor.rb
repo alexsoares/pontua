@@ -14,6 +14,7 @@ validates_numericality_of :INEP, :only_integer => true, :message =>  ' - SOMENTE
 validates_numericality_of :RD, :only_integer => true, :message =>  ' - SOMENTE NÚMEROS'
 
   def before_save
+    self.pontuacao_final = (self.total_trabalhado + self.total_titulacao)
     self.nome.upcase!
     self.endres.upcase!
     self.bairro.upcase!
@@ -21,7 +22,6 @@ validates_numericality_of :RD, :only_integer => true, :message =>  ' - SOMENTE N
     self.cidade.upcase!
     self.funcao.upcase!
     self.obs.upcase!
-    self.pontuacao_final = (self.total_trabalhado + self.total_titulacao);
   end
 
   after_create :log_cadastro

@@ -4,7 +4,8 @@ class Log < ActiveRecord::Base
 
   def verifica_existe
     if !(professor_id).nil? && (regiao_id).nil? && (unidade_id).nil? && (titulacao_id).nil?
-      if (professor_id).nil?
+      @professor = Professor.find(:all, :conditions => ["id = ?",professor_id])
+      if ((professor_id).nil? or (@professor.empty?))
         return "Não foi possivel determinar nada"
       else
         @apagado = Log.find_all_by_professor_id(professor_id)
