@@ -4,7 +4,7 @@ set :repository, "alexandre@192.168.0.99:~/repos/pontuacao.git"
 
 set :user, "administrador"
 set :use_sudo, false
-set :deploy_to, "/home/#{user}/pon"
+set :deploy_to, "/home/#{user}/pontuacao_2009"
 
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
