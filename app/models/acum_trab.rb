@@ -22,7 +22,7 @@ belongs_to :professor
             self.tot_geral_rede = self.tot_acum_rede + ant.dias_rede + atual.dias_rede
             self.tot_geral_unid = self.tot_acum_unid + ant.dias_unidade + atual.dias_unidade
             self.valor_trab = (self.pont_base_trab * (self.tot_acum_trab + ant.dias_trab + atual.dias_trab))
-            self.valor_efet = (self.pont_base_efet * (self.tot_acum_efet + ant.dias_efetivos + atual.dias_trab))
+            self.valor_efet = (self.pont_base_efet * (self.tot_acum_efet + ant.dias_efetivos + atual.dias_efetivos))
             self.valor_rede = (self.pont_base_rede * (self.tot_acum_rede + ant.dias_rede + atual.dias_rede))
             self.valor_unid = (self.pont_base_unid * (self.tot_acum_unid + ant.dias_unidade + atual.dias_unidade))
             self.tot_acum_trab = self.tot_acum_trab + ant.dias_trab + atual.dias_trab

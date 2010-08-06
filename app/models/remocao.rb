@@ -78,7 +78,7 @@ def finalizar_remocao
           #atualiza_ac_t.tot_geral_unid = atualiza_ac_t.tot_geral_unid + self.tot_acum_unid
           #atualiza_ac_t.tot_acum_unid = self.tot_acum_unid
           #atualiza_ac_t.tot_geral_unid = self.tot_acum_unid
-          atualiza_ac_t.tot_acum_ant_unid = atualiza_ac_t.tot_acum_ant_unid + self.tot_geral_unid
+          atualiza_ac_t.tot_acum_ant_unid = atualiza_ac_t.tot_acum_ant_unid + self.tot_acum_unid
           $remocao = 1
           atualiza_ac_t.save
         end

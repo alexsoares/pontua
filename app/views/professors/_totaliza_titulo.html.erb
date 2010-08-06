@@ -38,7 +38,7 @@ display: none;
        </th>
      </tr>
 <%for tp1 in @tp1%>
-  <% if (tp1.dt_titulo.strftime("%Y")) == Time.current.strftime("%Y") %>
+  
      <tr>
       <td width="25%" align="left">
         <%= $numero %> -
@@ -74,7 +74,7 @@ display: none;
 
    </tr>
 <%$numero= $numero +1%>
-<%end%>
+
   <%end%>
 <tr>
   <th width="80%" colspan="5" align="left">SUB-TOTAL  (Titulação Anual)</th>
