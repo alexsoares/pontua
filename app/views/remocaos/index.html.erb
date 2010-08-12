@@ -1,12 +1,16 @@
   <br/>
 <div class="botao">
   <div id="conteudo">
-    <h1 align="center">Marcar / Desmarcar professores para remoção</h1>
-    <hr>
-    <br/>
-    <table border ="1">
+<table>
+    <tr>
+      <td colspan="5">
+        <h1 align="center">Marcar / Desmarcar professores para remoção</h1>
+      <hr>    
+      </td>
+    </tr>
+    <br/>    
       <tr>
-        <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao')then%>
+        <% if current_user.has_role?('admin') or current_user.has_role?('supervisao')then%>
           <td>| <%= link_to_remote('Professores Aguardando Remocao',:update => "remocao", :url => { :action => "remocao_sim"}) %></td>
         <%end%>
         <td>| <%= link_to_remote('Professores que Solicitaram  Remocao',:update => "remocao", :url => { :action => "lista_remocao"}) %></td>
@@ -14,13 +18,9 @@
         <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('direcao') then%>
           <td>| <%= link_to_remote('Ficha Remoção', :url => { :action => "relato_remocao"}) %></td>
         <%end%>
-        <td>| <%= link_to 'Voltar', root_path %> |</td>
       </tr>
     </table>
-   <table>
-    <tr><td><div id="remocao">aki</div></td></tr>
-  </table>
-
+          <div id="remocao"></div>
  </div>
  
  </div>

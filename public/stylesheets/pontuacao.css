@@ -47,11 +47,6 @@ margin:25px;
    top: 400px;
    }
 
-#remocao {
-   position: absolute;
-   left: 360px;
-   top: 250px;
-   }
 
 
 #calcular {
@@ -91,7 +86,7 @@ border-right: double;
     background-image:url(Imagens/fundo_rodape.jpg);
     margin:25px;
   	position:relative;
-    top: 589px;
+    top: 560px;
     width:96%;
     color:white;
     text-align:center;
@@ -235,7 +230,7 @@ color: green;
 .menu-hv li:hover ul ul, .menu-hv li.over ul ul { visibility: hidden;}
 .menu-hv ul ul li:hover ul, .menu-hv ul ul li.over ul { visibility: visible;}
  /* visual */
-.menu-hv {  background:black repeat-x top;width: 1233px;  margin: 0 0 0 0; height: 28px;}
+.menu-hv {  background:black repeat-x top;width: 1090px;  margin: 0 0 0 0; height: 28px;}
 .menu-hv a { font-weight: bold;  text-decoration: none; color: #FFF; padding: 0 10px; line-height: 23px;}
 .menu-hv a:hover { text-decoration:  underline; background-color: #000; color: #FFF;}
 .menu-hv ul li ul {  background-color: #B0C4DE; border: 1px solid #000; }

@@ -6,9 +6,19 @@ before_filter :professor_unidade
   
   def index
     if (params[:search].nil? || params[:search].empty?)
-      @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['status = 0'], :order => "professor_id")
+      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+        @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['acum_trabs.status = 0'])
+      else
+        #      @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['status = 0'], :order => "professor_id")
+        @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['acum_trabs.status = 0 and (professors.sede_id = ? or professors.sede_id = 54)',current_user.regiao_id], :order => "professor_id")
+      end
     else
-      @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['status = 0 and professors.matricula = ?',params[:search]], :order => "professor_id")
+      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+        @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['acum_trabs.status = 0 and professors.matricula = ?',params[:search]], :order => "professor_id")
+      else
+        @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['acum_trabs.status = 0 and (professors.sede_id = ? or professors.sede_id = 54) and professors.matricula = ?',current_user.regiao_id,params[:search]], :order => "professor_id")
+      end
+#      @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['status = 0 and professors.matricula = ?',params[:search]], :order => "professor_id")
     end
     respond_to do |format|
       format.html # index.html.erb

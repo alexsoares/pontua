@@ -26,12 +26,21 @@ require_role ["supervisao","admin"], :for => :destroy # don't allow contractors 
 
   def index
     if (params[:search].nil? || params[:search].empty?)
-      @professors = Professor.find(:all, :order =>  'nome ASC')
+      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+        @professors = Professor.find(:all, :conditions => [''],:order =>  'nome ASC')
+      else
+        @professors = Professor.find(:all, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'nome ASC')
+      end
       #@professors = Professor.paginate(:page => params[:page], :per_page => 30)
     else
+      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+        @professors = Professor.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"])
+      else
+        @professors = Professor.find(:all, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => 'nome ASC')
+      end
       #@professors = Professor.find(:all, :conditions => ["matricula = ?",params[:search]])
       #@professors = Professor.paginate(:page => params[:page], :per_page => 30,:conditions => ["matricula = ?",params[:search]])
-       @professors = Professor.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"])
+      #@professors = Professor.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"])
     end
     respond_to do |format|
       format.html # index.html.erb

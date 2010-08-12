@@ -15,14 +15,22 @@
         <td><%= f.text_field :nome, :size => 32 %></td>
      </tr>
      <tr>
+     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') then%>
         <td> <%= f.label :dt_atual, 'Data Ingresso:' %>
         <td><%= f.date_select(:dt_ingresso,:order => [:day, :month, :year], :start_year => (Date.today.year), :end_year => (Date.today.year - 50)) %></td>
+     <%else%>
+        <td>Data de Ingresso:</td>
+        <td><%= @professor.dt_ingresso %></td>
+     <%end%>
     </tr>
       <tr>
-
+     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') then%>
         <td><%= f.label :sede_id, 'Sede: ' %></td>
         <td><%= f.collection_select :sede_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %>
-
+     <%else%>
+        <td>Sede:</td>
+        <td><%= Unidade.find(@professor.sede_id).nome %></td>
+     <%end%>
       </tr>
      <tr>
         <td><%= f.label :endres, 'Endereço Res:' %></td>

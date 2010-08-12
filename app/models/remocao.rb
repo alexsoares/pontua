@@ -58,8 +58,8 @@ def finalizar_remocao
       @ac_t = AcumTrab.find(:all, :conditions => 'professor_id = ' + (self.professor_id).to_s)
 
     	if remocao_efetivada == 1 then
-        self.flag_remocao_finalizada = 1;
-        self.status = 0;
+        self.flag_remocao_finalizada = 1
+        self.status = 0
 
         @sede_pro = Professor.find(:all, :conditions => 'id = ' + (self.professor_id).to_s)
         for sede_ant in @sede_pro

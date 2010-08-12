@@ -16,16 +16,17 @@
       </tr>
     </table>
   </div>
-<div id="login2">
+
   <fieldset>
      <legend><font size=5> <u>Professores aguardando efetivação dos cálculos</u></font></legend>
      <br/>
-     <table border="1" frame="box" rules="all">
+     <table border="1">
         <tr>
         </tr>
         <tr>
           <th>Matricula</th>
           <th>Professor</th>
+          <th>Sede</th>
         </tr>
       
       <% for acum_trab in @listagem %>
@@ -37,18 +38,18 @@
         <tr>
           <td><%= acum_trab.professor.matricula %></td>
           <td><%= acum_trab.professor.nome %></td>
+          <td><%= Unidade.find(acum_trab.professor.sede_id).nome %></td>
           <%if $contador == 2 then%>
             <td>| <%= link_to 'Salvar', edit_acum_trab_path(acum_trab) %> |</td>
           <%else%>
-             <td>| Preenchimento tempo de serviço não completo |</td>
+             <td>| Aguardando preenchimento |</td>
           <%end%>
-        <%end%>
-        <%=  @listagem.count %>
+        <%end%>        
         </tr>
-    </table>
+    </table>    
   </fieldset>
   <br />
-</div>
+  Existem <b><%=  @listagem.count %></b> professores disponiveis para este usuário.
 </div>
 
 

@@ -47,7 +47,9 @@ display: none;
     <td><center><%=h professor.funcao %></center></td>
     <td><%= link_to 'Exibir', professor %></td>
     <td><%= link_to 'Alterar', edit_professor_path(professor) %></td>
+<%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') then%>
     <td><%= link_to 'Apagar', professor, :confirm => 'Tem certeza?', :method => :delete %></td>
+<%end%>
   </tr>
 <% end %>
 
