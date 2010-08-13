@@ -111,6 +111,9 @@ class TituloProfessorsController < ApplicationController
   # POST /titulo_professors.xml
   def create
     @titulo_professor = TituloProfessor.new(params[:titulo_professor])
+    @log = Log.new
+    @log.log(current_user.id, @titulo_professor.professor_id, "Cadastrado Titulo do professor.")
+
     respond_to do |format|
       if @titulo_professor.save
         flash[:notice] = 'TITULAÇÂO CADASTRADA COM SUCESSO.'
@@ -128,7 +131,7 @@ class TituloProfessorsController < ApplicationController
   def update
     @titulo_professor = TituloProfessor.find(params[:id])
     @at_log = Log.new
-    @at_log.acumtrab_id = @titulo_professor.id
+    @at_log.titulacao_id = @titulo_professor.id
     @at_log.obs = "Atualizado"
     @at_log.professor_id = @titulo_professor.professor_id
     @at_log.user_id = current_user.id
@@ -150,6 +153,12 @@ class TituloProfessorsController < ApplicationController
   def destroy
     $r =TituloProfessor.find(params[:id])
     @titulo_professor = TituloProfessor.find(params[:id])
+    @at_log = Log.new
+    @at_log.titulacao_id = @titulo_professor.id
+    @at_log.obs = "Atualizado"
+    @at_log.professor_id = @titulo_professor.professor_id
+    @at_log.user_id = current_user.id
+    @at_log.save
     @titulo_professor.destroy
 
     respond_to do |format|

@@ -83,6 +83,9 @@ require_role ["supervisao","admin"], :for => :destroy # don't allow contractors 
   def create
     @professor = Professor.new(params[:professor])
     @professor.log_user = current_user.id
+    @log = Log.new
+    @log.log(current_user.id, @professor.id, "Cadastrado dados do professor: #{@professor.id}")
+    @log.save!
     respond_to do |format|
       if @professor.save
         flash[:notice] = 'PROFESSOR CADASTRADO COM SUCESSO.'
@@ -100,8 +103,8 @@ require_role ["supervisao","admin"], :for => :destroy # don't allow contractors 
   def update
     @professor = Professor.find(params[:id])
     @log = Log.new
-    @log.log(current_user, @professor.id, "Atualizado dados do professor: #{@professor.id}")
-
+    @log.log(current_user.id, @professor.id, "Atualizado dados do professor: #{@professor.id}")
+    @log.save!
     respond_to do |format|
       if @professor.update_attributes(params[:professor])
           flash[:notice] = 'PROFESSOR ATUALIZADO COM SUCESSO.'
@@ -133,8 +136,8 @@ require_role ["supervisao","admin"], :for => :destroy # don't allow contractors 
     end
 
     @log = Log.new
-    @log.log(current_user, @professor.id, "Excluído o professor:#{@professor.id} - #{@professor.nome} ")
-
+    @log.log(current_user.id, @professor.id, "Excluído o professor:#{@professor.id} - #{@professor.nome} ")
+    @log.save!
     @professor.destroy
 
     respond_to do |format|

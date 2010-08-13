@@ -105,8 +105,8 @@ class TrabalhadosController < ApplicationController
       @trabalhado.unidade = 0      
     end
     @log = Log.new
-    @log.log(current_user, @trabalhado.professor_id, "Criado tempo de serviço.Ano:#{@trabalhado.ano} - Ano letivo: #{@trabalhado.ano_letivo}")
-
+    @log.log(current_user.id, @trabalhado.professor_id, "Criado tempo de serviço.Ano:#{@trabalhado.ano} - Ano letivo: #{@trabalhado.ano_letivo}")
+    @log.save!
     respond_to do |format|
       if @trabalhado.save
         flash[:notice] = 'TEMPO DE SERVIÇO CADASTRADO COM SUCESSO.'
@@ -126,7 +126,7 @@ class TrabalhadosController < ApplicationController
     @trabalhado.flag = 0
     @trabalhado.call_back = 0
     @log = Log.new
-    @log.log(current_user, @trabalhado.professor_id, "Atualizado tempo de serviço. Ano :#{@trabalhado.ano} - Ano letivo: #{@trabalhado.ano_letivo}")
+    @log.log(current_user.id, @trabalhado.professor_id, "Atualizado tempo de serviço. Ano :#{@trabalhado.ano} - Ano letivo: #{@trabalhado.ano_letivo}")
     respond_to do |format|
       if @trabalhado.update_attributes(params[:trabalhado])
         flash[:notice] = 'TEMPO DE SERVIÇO ATUALIZADO COM SUCESSO'
@@ -151,7 +151,7 @@ class TrabalhadosController < ApplicationController
     @trabalhado.call_back = false
     @trabalhado.destroy
     @log = Log.new
-    @log.log(current_user, @trabalhado.professor_id, "Excluído um tempo de serviço. Ano :#{@trabalhado.ano} - Ano letivo: #{@trabalhado.ano_letivo}")
+    @log.log(current_user.id, @trabalhado.professor_id, "Excluído um tempo de serviço. Ano :#{@trabalhado.ano} - Ano letivo: #{@trabalhado.ano_letivo}")
 
     respond_to do |format|
       format.html { redirect_to(trabalhados_url) }

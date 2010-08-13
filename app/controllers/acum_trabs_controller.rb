@@ -10,7 +10,7 @@ before_filter :professor_unidade
         @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['acum_trabs.status = 0'])
       else
         #      @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['status = 0'], :order => "professor_id")
-        @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['acum_trabs.status = 0 and (professors.sede_id = ? or professors.sede_id = 54)',current_user.regiao_id], :order => "professor_id")
+        @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['acum_trabs.status = 0 and (professors.sede_id = ? or professors.sede_id = 54)',current_user.regiao_id], :order => "professors.sede_id,professors.nome")
       end
     else
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
@@ -59,7 +59,7 @@ before_filter :professor_unidade
   def create
     @acum_trab = AcumTrab.new(params[:acum_trab])
     @log = Log.new
-    @log.log(current_user, @acum_trab.professor_id, "Criado valores acumulados para o professor:#{@acum_trab.professor_id}")
+    @log.log(current_user.id, @acum_trab.professor_id, "Criado valores acumulados para o professor:#{@acum_trab.professor_id}")
 
     respond_to do |format|
       if @acum_trab.save
@@ -78,7 +78,7 @@ before_filter :professor_unidade
   def update
     @acum_trab = AcumTrab.find(params[:id])
     @log = Log.new
-    @log.log(current_user, @acum_trab.professor_id, "Realizado calculo dos novos valores para o professor:#{@acum_trab.professor_id}")
+    @log.log(current_user.id, @acum_trab.professor_id, "Realizado calculo dos novos valores para o professor:#{@acum_trab.professor_id}")
      @acum_trab.verifica =0
      $update = 1
     respond_to do |format|
@@ -98,7 +98,7 @@ before_filter :professor_unidade
   def destroy
     @acum_trab = AcumTrab.find(params[:id])
     @log = Log.new
-    @log.log(current_user, @acum_trab.professor_id, "Deletado valores acumulados.Para o professor:#{@acum_trab.professor_id}")
+    @log.log(current_user.id, @acum_trab.professor_id, "Deletado valores acumulados.Para o professor:#{@acum_trab.professor_id}")
     @acum_trab.destroy
 
     respond_to do |format|
