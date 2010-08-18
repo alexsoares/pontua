@@ -36,6 +36,10 @@ display: none;
                 <%else%>
                   <% if current_user.has_role?('supervisao') %>
                     Acesso de Supervisao
+                  <%else%>
+                    <% if current_user.has_role?('planejamento') %>
+                      Acesso de Planejamento
+                    <%end%>
                   <%end%>
                 <%end%>
               <%end%>
@@ -84,7 +88,7 @@ display: none;
      <li><a>Cadastrar</a>
        <ul>        
          <li><%= link_to "Professores", new_professor_path %></li>
-         <%if current_user.has_role?('admin') or current_user.has_role?('supervisao') then%>
+         <%if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
             <li><%= link_to "Títulos", new_titulacao_path %></li>
             <li><%= link_to "Unidades", new_unidade_path %></li>
             <li><%= link_to "Região", new_regiao_path %></li>
@@ -92,7 +96,7 @@ display: none;
       </ul>
      </li>
     
-    <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') then%>
+    <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
       <li><a>Configuração</a>
         <ul>
           <li><%= link_to 'Verificar Log', logs_path %></li>
@@ -100,7 +104,7 @@ display: none;
       </li>
 <!--      <li><a>Consutas</a>
         <ul>
-           <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin'))%>
+           <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin')) or current_user.has_role?('planejamento') %>
              <li><%= link_to 'Consultas Diversas', consulta_path %></li>
 
              <li><%= link_to_remote('Pontuação Professor Individual', :url => { :controller => "consulta", :action => "consulta_ppu"}) %></li>

@@ -30,7 +30,7 @@ display: none;
 <br/>
 <div class="botao">
 <% $reinicializacao = 1 %>
-<%  if current_user.has_role?('supervisao')%>
+<%  if current_user.has_role?('planejamento')%>
 <%if $zerar == 1 then%>
 <b> Para sua segurança, selecione novamente a matricula:  </b>
       <%= collection_select :zero, :professor_id, @professors, :id, :matricula, :include_blank => ' -- Selecione -- ' %>

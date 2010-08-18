@@ -34,11 +34,9 @@ belongs_to :professor
           end
           ant.flag = 1
           ant.save
-        end
-        
+        end        
           prof.total_trabalhado = (self.valor_trab + self.valor_efet + self.valor_rede + self.valor_unid)
-          prof.save
-                
+          prof.save                
       end
   end
 

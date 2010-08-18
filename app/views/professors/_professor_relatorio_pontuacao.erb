@@ -13,8 +13,6 @@ display: none;
 
 
 <div class="botao">
-<%= link_to_remote('Voltar', :update => "conteudo", :url => {:controller => 'professors', :action => 'relatorio'}) %>
-
      <fieldset>
     <legend><font size=4>Matrícula: <%= text_field :professor, :professor_id, :size => 5 %></font></legend>
     </fieldset>
@@ -35,7 +33,7 @@ display: none;
 <br/>
 <div class="botao">
   <div id="conteudo">
-      <%= link_to_remote('Voltar', :update => "conteudo", :url => {:controller => 'professors', :action => 'relatorio'}) %>
+      
    </div>
 </div>
 </div>

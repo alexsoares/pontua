@@ -33,7 +33,11 @@
         <%if Role.find(role_user.role_id).name == 'direcao' then%>
           <td align="center">Usuário pertencente ao grupo dos(as) Diretores(as). Direito de inserçao,alteraçao e execução dos calculos.</td>
         <%else%>
-          <td align="center">Usuário pertencente ao grupo dos(as) Secretários(as). Direito apenas de cadastrar dados.</td>
+          <%if Role.find(role_user.role_id).name == 'planejamento' then%>
+            <td align="center">Usuário pertencente ao grupo doPlanejamento. Direito de inserçao,alteraçao e execução dos calculos e reinicialização dos valores.</td>
+          <%else%>
+            <td align="center">Usuário pertencente ao grupo dos(as) Secretários(as). Direito apenas de cadastrar dados.</td>
+          <%end%>
         <%end%>
       <%end%>
     <%end%>
