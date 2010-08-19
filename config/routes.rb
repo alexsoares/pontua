@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :mensagems, :collection => { :saida => :get, :entrada => :get}
+
   map.resources :logs
 
   map.resources :visaos

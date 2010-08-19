@@ -14,7 +14,7 @@
         </p>
         <p>
           <b>Em (Data e Hora):</b>
-          <%=h @log.data %>
+          <%=h @log.data.strftime("%d/%m/%Y %H:%M") %>
         </p>
          <p>
           <b>Criança afetada:</b>

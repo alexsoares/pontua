@@ -1,0 +1,23 @@
+<div id="conteudo">
+  <h1 align="center">Caixa de Saída</h1><br/>
+  <%= button_to 'Nova Mensagem', new_mensagem_path %>
+<br/>
+<br/>
+  <table border="1">
+    <tr bgcolor="white">
+      <th>Para</th>
+      <th colspan="1">Titulo</th>
+      <th>Em</th>
+    </tr>
+  <% for mensagem in @mensagems %>
+    <tr>
+      <td width="40%" align="center"><%=h User.find(mensagem.para).login %></td>
+      <td width="40%" align="center"><%=h mensagem.titulo %></td>
+      <td width="20%" align="center"><%=h mensagem.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+      <td><%= link_to 'Exibir', mensagem %></td>
+      <td><%= link_to 'Deletar', mensagem, :confirm => 'Tem certeza?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+  <br />
+  </div>
