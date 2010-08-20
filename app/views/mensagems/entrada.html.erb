@@ -1,23 +1,34 @@
 <div id="conteudo">
-  <h1 align="center">Caixa de Entrada</h1><br/>
+  <div class="cx">
   <%= button_to 'Nova Mensagem', new_mensagem_path %>
+  <br/>
+  <br/> 
+  <center><b> Caixa de Entrada</b></center>
+  <br/>
+  <br/>
 <br/>
 <br/>
-  <table border="1">
-    <tr bgcolor="white">
+  <table>
+    <tr>
+      <th></th>
       <th>De</th>
       <th colspan="1">Titulo</th>
       <th>Em</th>
     </tr>
-  <% for mensagem in @mensagems %>
-    <tr>
-      <td width="40%" align="center"><%=h mensagem.user.login %></td>
-      <td width="40%" align="center"><%=h mensagem.titulo %></td>
-      <td width="20%" align="center"><%=h mensagem.created_at.strftime("%d/%m/%Y %H:%M") %></td>
-      <td><%= link_to 'Exibir', mensagem %></td>
-      <td><%= link_to 'Deletar', mensagem, :confirm => 'Tem certeza?', :method => :delete %></td>
-    </tr>
-  <% end %>
+  <% form_tag message_read_mensagems_path, :method => :put do %>      
+    <% for mensagem in @mensagems %>
+      <tr>
+        <td width="10%" align="center"><%= check_box_tag "message_ids[]",mensagem.id %></td>
+        <td width="30%" align="center"><%=h mensagem.user.login %></td>
+        <td width="40%" align="center"><%=h mensagem.titulo %></td>
+        <td width="20%" align="center"><%=h mensagem.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+        <td><%= link_to 'Exibir', mensagem %></td>
+        <td><%= link_to 'Deletar', mensagem, :confirm => 'Tem certeza?', :method => :delete %></td>
+      </tr>
+    <% end %>
+    <%= submit_tag "Marcar Mensagem como lida"  %>
+  <%end%>
   </table>
   <br />
+  </div>
   </div>

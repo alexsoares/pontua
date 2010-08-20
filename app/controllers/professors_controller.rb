@@ -379,7 +379,79 @@ require_role ["supervisao","admin"], :for => :destroy # don't allow contractors 
  end
 end
 
-  def efetiva
+
+ def efetiva
+    @reinicia_tbltrabalhados = Trabalhado.find_all_by_professor_id($prof_zerar)
+    @reinicia_tblacum_trabs = AcumTrab.find_by_professor_id($prof_zerar)
+    @reinicia_titulo_professors = TituloProfessor.find_all_by_professor_id($prof_zerar)
+    if !@reinicia_tblacum_trabs.nil? then
+      @reinicia_tblacum_trabs = AcumTrab.find_by_professor_id($prof_zerar).id
+      @reinicia_tblacum_trabs = AcumTrab.find(@reinicia_tblacum_trabs)
+          @atualiza_log = Log.new
+          @atualiza_log.user_id = current_user.id
+          @atualiza_log.obs = "Reiniciado valores acumulados dos funcionários, através de reinicializacao geral"
+          @atualiza_log.data = (Time.now().strftime("%d/%m/%y %H:%M")).to_s
+          @atualiza_log.professor_id = @reinicia_tblacum_trabs.professor_id
+          @atualiza_log.acumtrab_id = @reinicia_tblacum_trabs.id
+          @atualiza_log.save
+      @reinicia_tblacum_trabs.destroy
+    end
+    if !@reinicia_titulo_professors.nil? then
+      for titulos in @reinicia_titulo_professors
+              @atualiza_log = Log.new
+              @atualiza_log.user_id = current_user.id
+              @atualiza_log.obs = "Exclusão de titulo através de reinicialização geral"
+              @atualiza_log.data = (Time.now().strftime("%d/%m/%y %H:%M")).to_s
+              @atualiza_log.professor_id = titulos.professor_id
+              @atualiza_log.titulacao_id = titulos.id
+              @atualiza_log.save
+
+        @reinicia_titulo_professors = (titulos).id
+        @reinicia_titulo_professors = TituloProfessor.find(@reinicia_titulo_professors)
+        titulos.destroy
+      end
+    end
+    if !@reinicia_tbltrabalhados.nil? or !@reinicia_tbltrabalhados.empty?  then
+      for trabalhos in @reinicia_tbltrabalhados
+        @reinicia_tbltrabalhados = (trabalhos).id
+        @reinicia_tbltrabalhados = Trabalhado.find(@reinicia_tbltrabalhados)
+              @atualiza_log = Log.new
+              @atualiza_log.user_id = current_user.id
+              @atualiza_log.obs = "Exclusão do tempo trabalhado através de reinicialização geral"
+              @atualiza_log.data = (Time.now().strftime("%d/%m/%y %H:%M")).to_s
+              @atualiza_log.professor_id = trabalhos.professor_id
+              @atualiza_log.titulacao_id = trabalhos.id
+              @atualiza_log.save
+
+
+        trabalhos.destroy
+      end
+    end
+
+    @reinicia_tblprof = Professor.find($prof_zerar)
+    @reinicia_tblprof.total_titulacao = 0
+    @reinicia_tblprof.pontuacao_final = @reinicia_tblprof.pontuacao_final - @reinicia_tblprof.total_trabalhado
+    @reinicia_tblprof.total_trabalhado = 0
+    @reinicia_tblprof.log_user = current_user.id
+    @reinicia_tblprof.save
+
+    @atualiza_log = Log.new
+    @atualiza_log.user_id = current_user.id
+    @atualiza_log.obs = "Reiniciado valores dos funcionários, através de reinicializacao geral"
+    @atualiza_log.data = (Time.now().strftime("%d/%m/%y %H:%M")).to_s
+    @atualiza_log.professor_id = @reinicia_tblprof.id
+    @atualiza_log.save
+
+    if $reinicializacao == 1 then
+      $reinicializacao = 0
+      flash[:notice] = 'DADOS DO PROFESSOR REINICIADO.'
+      redirect_to professors_path
+    end
+    $prof_zerar = 0
+  end
+
+
+  def efetiva_zerar_trabalhado
 
 #===============================================================================
 #Alterar valores da tabela acum_trabs
@@ -405,7 +477,7 @@ end
         @reinicia_tblacum_trabs.status = 0
           @atualiza_log = Log.new
           @atualiza_log.user_id = current_user.id
-          @atualiza_log.obs = "Reiniciado valores acumulados dos funcionários. Valores Retornados ao inicio"
+          @atualiza_log.obs = "Reiniciado valores acumulados dos funcionários. Valores Retornados ao ano anterior"
           @atualiza_log.data = (Time.now().strftime("%d/%m/%y %H:%M")).to_s
           @atualiza_log.professor_id = @reinicia_tblacum_trabs.professor_id
           @atualiza_log.acumtrab_id = @reinicia_tblacum_trabs.id
@@ -424,7 +496,7 @@ end
         @reinicia_tbltrabalhados = Trabalhado.find(@reinicia_tbltrabalhados)
               @atualiza_log = Log.new
               @atualiza_log.user_id = current_user.id
-              @atualiza_log.obs = "Exclusão do tempo trabalhado através de reinicialização geral"
+              @atualiza_log.obs = "Exclusão do tempo trabalhado através de tempo de servico"
               @atualiza_log.data = (Time.now().strftime("%d/%m/%y %H:%M")).to_s
               @atualiza_log.professor_id = trabalhos.professor_id
               @atualiza_log.titulacao_id = trabalhos.id
@@ -441,7 +513,7 @@ end
 
     @atualiza_log = Log.new
     @atualiza_log.user_id = current_user.id
-    @atualiza_log.obs = "Reiniciado valores dos funcionários"
+    @atualiza_log.obs = "Reiniciado valores dos funcionários para o ano letivo anterior"
     @atualiza_log.data = (Time.now().strftime("%d/%m/%y %H:%M")).to_s
     @atualiza_log.professor_id = @reinicia_tblprof.id
     @atualiza_log.save
@@ -463,7 +535,7 @@ end
 
   def efetiva_tit
 
-   @reinicia_titulo_professors = TituloProfessor.find_all_by_professor_id($prof_zerar)
+   @reinicia_titulo_professors = TituloProfessor.find_all_by_professor_id($prof_zerar, :conditions => ['ano_letivo = ? or titulo_id in (1,2,3,4,5)', Time.current.strftime("%Y")])
    if !@reinicia_titulo_professors.nil? then
       for titulos in @reinicia_titulo_professors
         @reinicia_titulo_professors = (titulos).id
@@ -486,11 +558,14 @@ end
     @reinicia_tblprof.save
     if $reinicializacao == 1 then
       $reinicializacao = 0
-      flash[:notice] = 'DADOS TITULAÇÂO DO PROFESSOR REINICIADO.'
-      redirect_to professors_path
+      
+      render :update do |page|
+        page.replace_html 'conteudo', :text => 'DADOS TITULAÇÂO DO PROFESSOR REINICIADO.'
+      end
+    else
+      render :nothing => true
     end
 	$prof_zerar = 0
-  render :nothing => true
   end
 
   def reiniciar

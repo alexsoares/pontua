@@ -19,7 +19,7 @@ class MensagemsController < ApplicationController
   end
 
   def entrada
-    @mensagems = Mensagem.all(:conditions => ['para = ?', current_user.id])
+    @mensagems = Mensagem.all(:conditions => ['para = ? and lido = 0', current_user.id])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @mensagems }
@@ -100,6 +100,12 @@ class MensagemsController < ApplicationController
     end
   end
 
+
+  def message_read
+    Mensagem.update_all(["lido = ?",true], :id => params[:message_ids])
+    redirect_to entrada_mensagems_path
+
+  end
   private
 
   def load_users

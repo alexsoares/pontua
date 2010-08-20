@@ -18,6 +18,9 @@
        <th>
         Pontuação Obtida
        </th>
+       <th>
+         Data do Título
+       </th>
      </tr>
 
     <%for tp in @titulo_busca%>
@@ -36,6 +39,10 @@
         <%= tp.pontuacao_titulo %>
         <% $subtot_perm = $subtot_perm + (tp.pontuacao_titulo).to_f %>
       </td>
+      <td align="center">
+        <%= tp.dt_titulo.strftime("%d/%m/%Y") %>
+      </td>
+
       </tr>
     <tr>
       <td><%= link_to '|Apagar|', tp, :confirm => 'Confirma?', :method => :delete %></td><td></td>

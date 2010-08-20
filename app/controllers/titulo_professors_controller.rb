@@ -257,7 +257,7 @@ class TituloProfessorsController < ApplicationController
   end
 
  def titulos_busca
-        @titulo_busca = TituloProfessor.find_by_sql("SELECT * FROM titulo_professors where professor_id = " + params[:altera_professor_id] + " and ano_letivo = " + Time.current.strftime("%Y") )
+        @titulo_busca = TituloProfessor.find_by_sql("SELECT * FROM titulo_professors where professor_id = " + params[:altera_professor_id] + " and (ano_letivo = " + Time.current.strftime("%Y") + " or titulo_id in (1,2,3,4,5))" )
       render :update do |page|
         page.replace_html 'alteracao', :partial => 'alterar'
       end

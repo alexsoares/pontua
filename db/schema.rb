@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100818170308) do
+ActiveRecord::Schema.define(:version => 20100819181136) do
 
   create_table "acum_trabs", :force => true do |t|
     t.integer  "professor_id"
@@ -63,10 +63,11 @@ ActiveRecord::Schema.define(:version => 20100818170308) do
   create_table "mensagems", :force => true do |t|
     t.integer  "user_id"
     t.string   "titulo"
-    t.string   "from"
+    t.string   "para"
     t.string   "texto"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "lido"
   end
 
   create_table "professors", :force => true do |t|
