@@ -3,7 +3,7 @@ class MensagemsController < ApplicationController
   # GET /mensagems
   # GET /mensagems.xml
   def index
-    @mensagems = Mensagem.all(:conditions => ['para = ?', current_user.id])
+    @mensagems = Mensagem.all(:conditions => ['para = ? and lido = 0', current_user.id])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @mensagems }
@@ -11,7 +11,7 @@ class MensagemsController < ApplicationController
   end
 
   def saida
-    @mensagems = Mensagem.all(:conditions => ['user_id = ?', current_user.id])
+    @mensagems = Mensagem.all(:conditions => ['para = ? and lido = 1', current_user.id])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @mensagems }
