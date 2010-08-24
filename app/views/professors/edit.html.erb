@@ -8,14 +8,18 @@
     <table>
      <tr>
         <td>Matrícula:</td>
+     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+        <td><%= f.text_field :matricula, :size => 10 %></td>
+     <%else%>
         <td><%= @professor.matricula %></td>
+     <%end%>
      </tr>
      <tr>
         <td><%= f.label :nome, 'Nome:' %></td>
         <td><%= f.text_field :nome, :size => 32 %></td>
      </tr>
      <tr>
-     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') then%>
+     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
         <td> <%= f.label :dt_atual, 'Data Ingresso:' %>
         <td><%= f.date_select(:dt_ingresso,:order => [:day, :month, :year], :start_year => (Date.today.year), :end_year => (Date.today.year - 50)) %></td>
      <%else%>
@@ -24,7 +28,7 @@
      <%end%>
     </tr>
       <tr>
-     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') then%>
+     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
         <td><%= f.label :sede_id, 'Sede: ' %></td>
         <td><%= f.collection_select :sede_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %>
      <%else%>
@@ -86,7 +90,11 @@
      </tr>
      <tr>
         <td><%= f.label :funcao, 'Função:' %></td>
-        <td><%= @professor.funcao %></td>
+        <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+          <td><%= f.text_field :funcao, :size => 10 %></td>
+        <%else%>
+          <td><%= @professor.funcao %></td>
+        <%end%>
         
      </tr>
      <tr>
