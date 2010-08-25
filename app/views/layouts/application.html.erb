@@ -20,38 +20,16 @@ display: none;
 <p style="color: red"><%= flash[:notice] %></p>
 <div id="topo">
     
-    <h2 align="right">   Sistema de Pontuação de Professores - Secretaria de Educação</h2>
+    <h2 align="right">   Pontuação de Professores - SEDUC - AM</h2>
     <h4 align="right"> <font   color="#ff0000"> P O N T U A --  Ver.2.0       . </font></h4>
 </div>
      <table width="100%">
-    <%if logged_in? then%>
-      <td width="55%">
-          Usuário: <font size="4" color="green"><%= link_to h(current_user.login.capitalize), user_path(current_user) %> - </font>
-            <% if current_user.has_role?('admin') %>
-              Acesso de Administrador do Sistema
-            <%else%>
-              <% if current_user.has_role?('secretaria') %>
-               Acesso de Secretário(a)
-              <%else%>
-                <% if current_user.has_role?('direcao') %>
-                  Acesso de Diretor(a)
-                <%else%>
-                  <% if current_user.has_role?('supervisao') %>
-                    Acesso de Supervisao
-                  <%else%>
-                    <% if current_user.has_role?('planejamento') %>
-                      Acesso de Planejamento
-                    <%end%>
-                  <%end%>
-                <%end%>
-              <%end%>
-            <%end%>
-
-      </td>
-
-    <%else%>
-      <td><%= link_to '|Entrar|', login_path %></td>
-    <%end%>
+       <%if logged_in? then%>
+         <td width="100%" align="right">
+           <font size="4" color="green"><%= link_to h(current_user.login.capitalize), user_path(current_user) %> </font>
+       <%else%>
+         <td><%= link_to '|Entrar|', login_path %></td>
+       <%end%>
     </table>
 
 
@@ -59,184 +37,82 @@ display: none;
 <span class="preload2"></span>
 
 <ul id="nav">
-	<li class="top"><a href="#nogo1" class="top_link"><span>Home</span></a></li>
-	<li class="top"><a href="#nogo2" id="products" class="top_link"><span class="down">Products</span><!--[if gte IE 7]><!--></a><!--<![endif]-->
+    <li class="top"><a href="#nogo53" id="shop" class="top_link"><span class="down">Arquivo</span><!--[if gte IE 7]><!--></a><!--<![endif]-->
 		<!--[if lte IE 6]><table><tr><td><![endif]--><ul class="sub">
-			<li><b>Cameras</b></li>
-			<li><a href="#nogo3" class="fly">Cameras<!--[if gte IE 7]><!--></a><!--<![endif]-->
-					<!--[if lte IE 6]><table><tr><td><![endif]--><ul>
-						<li><a href="#nogo4">Nikon</a></li>
-						<li><a href="#nogo5">Minolta</a></li>
-						<li><a href="#nogo6">Pentax</a></li>
-					</ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
-			</li>
-			<li><a href="#nogo7" class="fly">Lenses<!--[if gte IE 7]><!--></a><!--<![endif]-->
-					<!--[if lte IE 6]><table><tr><td><![endif]--><ul>
-						<li><a href="#nogo8">Wide Angle</a></li>
-						<li><a href="#nogo9">Standard</a></li>
-						<li><a href="#nogo15">Mirror</a></li>
-						<li><a href="#nogo10">Telephoto</a></li>
-						<li><b>Zoom</b></li>
-						<li><a href="#nogo12">35mm to 125mm</a></li>
-						<li><a href="#nogo13">50mm to 250mm</a></li>
-						<li><a href="#nogo14">125mm to 500mm</a></li>
-						<li><b>Non standard</b></li>
-						<li><a href="#nogo17">Bayonet mount</a></li>
-						<li><a href="#nogo18">Screw mount</a></li>
-					</ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
-			</li>
-			<li><b>Accessories</b></li>
-			<li><a href="#nogo19">Flash Guns</a></li>
-			<li><a href="#nogo20">Tripods</a></li>
-			<li><a href="#nogo21">Filters</a></li>
+			<!-- <li> <%= link_to ' Serviço de mensagens' , mensagems_path %></li> !-->
+            <li> <%= link_to ' Início' , root_path %></li>
+            <li><%= link_to 'Sair', logout_path,:confirm => "Tem certeza que deseja fazer logout?" %></li>
 		</ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	</li>
-	<li class="top"><a href="#nogo22" id="services" class="top_link"><span class="down">Services</span><!--[if gte IE 7]><!--></a><!--<![endif]-->
-		<!--[if lte IE 6]><table><tr><td><![endif]--><ul class="sub">
-			<li><a href="#nogo23">Printing</a></li>
-			<li><a href="#nogo24">Photo Framing</a></li>
-			<li><a href="#nogo25">Retouching</a></li>
-			<li><a href="#nogo26">Archiving</a></li>
-		</ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
-	</li>
-	<li class="top"><a href="#nogo27" id="contacts" class="top_link"><span class="down">Contacts</span><!--[if gte IE 7]><!--></a><!--<![endif]-->
-		<!--[if lte IE 6]><table><tr><td><![endif]--><ul class="sub">
-			<li><a href="#nogo28">Support</a></li>
-			<li><a href="#nogo29" class="fly">Sales<!--[if gte IE 7]><!--></a><!--<![endif]-->
-				<!--[if lte IE 6]><table><tr><td><![endif]--><ul>
-					<li><b>European</b></li>
-					<li><a href="#nogo34" class="fly">British<!--[if gte IE 7]><!--></a><!--<![endif]-->
-						<!--[if lte IE 6]><table><tr><td><![endif]--><ul>
-							<li><b>City</b></li>
-							<li><a href="#nogo35">London</a></li>
-							<li><a href="#nogo36">Liverpool</a></li>
-							<li><a href="#nogo37">Glasgow</a></li>
-							<li><a href="#nogo38" class="fly">Bristol<!--[if gte IE 7]><!--></a><!--<![endif]-->
-								<!--[if lte IE 6]><table><tr><td><![endif]--><ul>
-									<li><b>District</b></li>
-									<li><a href="#nogo39">Redland</a></li>
-									<li><a href="#nogo40">Hanham</a></li>
-									<li><a href="#nogo41">Eastville</a></li>
-								</ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
-							</li>
-							<li><a href="#nogo42">Cardiff</a></li>
-							<li><a href="#nogo43">Belfast</a></li>
-						</ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
-					</li>
-					<li><a href="#nogo44">French</a></li>
-					<li><a href="#nogo45">German</a></li>
-					<li><a href="#nogo46">Spanish</a></li>
-					<li><b>Worldwide</b></li>
-					<li><a href="#nogo30">USA</a></li>
-					<li><a href="#nogo31">Canadian</a></li>
-					<li><a href="#nogo32">South American</a></li>
-					<li><a href="#nogo47">Australian</a></li>
-					<li><a href="#nogo48">Asian</a></li>
+    	<li class="top"><a href="#nogo27" id="contacts" class="top_link"><span class="down">Executar</span><!--[if gte IE 7]><!--></a><!--<![endif]-->
+		<!--[if lte IE 6]><table><tr><td><![endif]-->
+        <ul class="sub">
+			<li><a href="#nogo29" class="fly">Pontuação<!--[if gte IE 7]><!--></a><!--<![endif]-->
+				<!--[if lte IE 6]><table><tr><td><![endif]-->
+                <ul>
+					<li><%= link_to 'Tempo Serviço', new_trabalhado_path%></li>
+					<li><%= link_to 'Títulos',new_titulo_professor_path %></li>
+					<li><%= link_to_remote('Pontuação', :url => { :action => "relato_prof", :controller => "professors"}) %></li>
 				</ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
 			</li>
-			<li><a href="#nogo49">Buying</a></li>
-			<li><a href="#nogo50">Photographers</a></li>
-			<li><a href="#nogo51">Stockist</a></li>
-			<li><a href="#nogo52">General</a></li>
+              <li><%= link_to "Gerar Remoção", remocaos_path %></li>
+            <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin'))%>
+              <li><%= link_to('Consultas', consulta_path) %></li>
+            <%end%>
 		</ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	</li>
-	<li class="top"><a href="#nogo53" id="shop" class="top_link"><span class="down">Shop</span><!--[if gte IE 7]><!--></a><!--<![endif]-->
-		<!--[if lte IE 6]><table><tr><td><![endif]--><ul class="sub">
-			<li><a href="#nogo54">Online</a></li>
-			<li><a href="#nogo55">Catalogue</a></li>
-			<li><a href="#nogo56">Mail Order</a></li>
-		</ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	<li class="top"><a href="#nogo2" id="products" class="top_link"><span class="down">Cadastrar</span><!--[if gte IE 7]><!--></a><!--<![endif]-->
+		<!--[if lte IE 6]><table><tr><td><![endif]-->
+        <ul class="sub">
+			<li><b>Primário</b></li>
+              <li><%= link_to "Professores", new_professor_path %></li>
+			<li><b>Secundários</b></li>
+              <%if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+                <li><%= link_to "Títulos", new_titulacao_path %></li>
+                <li><%= link_to "Unidades", new_unidade_path %></li>
+                <li><%= link_to "Região", new_regiao_path %></li>
+              <%end%>
+        </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
 	</li>
-	<li class="top"><a href="#nogo57" id="privacy" class="top_link"><span>Privacy Policy</span></a></li>
-</ul>
 
-
-
-
-
- <div class="menu-hv">
-  <ul>
-    <li><a>Arquivo</a>
-      <ul>
-        <!-- <li> <%= link_to ' Serviço de mensagens' , mensagems_path %></li> !-->
-        <li> <%= link_to ' Início' , root_path %></li>
-        <li><%= link_to 'Sair', logout_path,:confirm => "Tem certeza que deseja fazer logout?" %></li>
-        
-      </ul>
-    </li>
-    <li><a>Executar</a>
-      <ul>
-          <li><a>Pontuação ----------></a>
-            <ul>
-              <li><%= link_to 'Tempo de Serviço', new_trabalhado_path%></li>
-              <li><%= link_to 'Títulos',new_titulo_professor_path %></li>
-              <li><%= link_to_remote('Pontuação', :url => { :action => "relato_prof", :controller => "professors"}) %></li>
-           </ul>
-
-        <%  if current_user.has_role?('admin') then%>
-          <li><%= link_to_remote('Gerenciar Usuários', :url => { :action => "gen_user", :controller => 'home'}) %></li>
-          <li><%= link_to('Novo Ano', iniciar_ano_path) %></li>
-          <li><%= link_to('Arrumar Titulos', arrumar_titulos_path) %></li>
-        <%end%>
-          <li><%= link_to "Gerar Remoção", remocaos_path %></li>
-
-        <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin'))%>
-          <li><%= link_to('Consultas', consulta_path) %></li>
-        <%end%>
-
-      </ul>
-    </li>
-
-
-
-     <li><a>Cadastrar</a>
-       <ul>        
-         <li><%= link_to "Professores", new_professor_path %></li>
-         <%if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
-            <li><%= link_to "Títulos", new_titulacao_path %></li>
-            <li><%= link_to "Unidades", new_unidade_path %></li>
-            <li><%= link_to "Região", new_regiao_path %></li>
-         <%end%>
-      </ul>
-     </li>
-    
     <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
-      <li><a>Configuração</a>
-        <ul>
-          <li><%= link_to 'Verificar Log', logs_path %></li>
-        </ul>
-      </li>
-<!--      <li><a>Consutas</a>
-        <ul>
-           <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin')) or current_user.has_role?('planejamento') %>
-             <li><%= link_to 'Consultas Diversas', consulta_path %></li>
-
-             <li><%= link_to_remote('Pontuação Professor Individual', :url => { :controller => "consulta", :action => "consulta_ppu"}) %></li>
-             <li><%= link_to_remote('Pontuação por Unidade', :url => {  :controller => "consulta", :action => "consulta_pu"}) %></li>
-             <li><%= link_to_remote('Titulação Professor', :url => {  :controller => "consulta", :action => "consulta_pt"}) %></li>
-             <li><%= link_to_remote('Pontuacao Geral Professor', :url => { :controller => "consulta", :action => "consulta_geral"}) %></li>
-
-
-           <%end%>
-        </ul>
-      </li>  !-->
+    	<li class="top"><a href="#nogo22" id="services" class="top_link"><span class="down">Configuração</span><!--[if gte IE 7]><!--></a><!--<![endif]-->
+          <!--[if lte IE 6]><table><tr><td><![endif]-->
+          <ul class="sub">
+              <li><%= link_to 'Verificar Log', logs_path %></li>
+              <%  if current_user.has_role?('admin') then%>
+                <li><%= link_to_remote('Usuários', :url => { :action => "gen_user", :controller => 'home'}) %></li>
+                <li><%= link_to('Novo Ano', iniciar_ano_path) %></li>
+                <li><%= link_to('Arrumar Titulos', arrumar_titulos_path) %></li>
+              <%end%>
+          </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+        </li>
      <%end%>
-      <li><a>Relatórios</a>
-        <ul>
-          <li><%= link_to "Professores", professors_path %></li>
-          <li><%= link_to "Títulos", titulacaos_path %></li>
-          <li><%= link_to "Unidades", unidades_path %></li>
-          <li><%= link_to "Região", regiaos_path %></li>
-          <li><%= link_to "Professor por Titulos", relatorio_por_titulacao_path %></li>
-          <li><%= link_to "Professor por Função", relatorio_por_funcao_path %></li>
-          <li><%= link_to "Titulos anuais invalidados", relatorio_titulos_anuais_invalidos_path %></li>
-          <li><%= link_to "Professor por Titulos (busca por descrição)", relatorio_por_descricao_titulo_path %></li>
-        </ul>
-      </li>
+	<li class="top"><a href="#nogo2" id="relatorios" class="top_link"><span class="down">Relatórios</span><!--[if gte IE 7]><!--></a><!--<![endif]-->
+		<!--[if lte IE 6]><table><tr><td><![endif]-->
+        <ul class="sub">
+			<li><b>Professores por</b></li>
+              <li><%= link_to "Professores", professors_path %></li>
+              <li><%= link_to "Por Função", relatorio_por_funcao_path %></li>
+    			<li><a href="#nogo29" class="fly">Titulação<!--[if gte IE 7]><!--></a><!--<![endif]-->
+        			<!--[if lte IE 6]><table><tr><td><![endif]-->
+                  <ul>
+                    <li><%= link_to "Titulos invalidados", relatorio_titulos_anuais_invalidos_path %></li>
+                    <li><%= link_to "Por Titulos", relatorio_por_titulacao_path %></li>
+                    <li><%= link_to "Titulos (descrição)", relatorio_por_descricao_titulo_path %></li>
+                  </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                </li>
+			<li><b>Secundários</b></li>
+              <%if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+                <li><%= link_to "Títulos", titulacaos_path %></li>
+                <li><%= link_to "Unidades", unidades_path %></li>
+                <li><%= link_to "Região", regiaos_path %></li>
+              <%end%>
 
-     </ul>
-  </div>
+        </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	</li>
 
+</ul>
 </div>
 </div>
     <div id="contents"><%= yield  %></div>

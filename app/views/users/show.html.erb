@@ -3,7 +3,7 @@
 <p>
     <h2 align="center">   Criação de Senha de Acesso    .</h2>
 <br/>
-<div id="loginnn">
+<div id="log">
 <fieldset>
    <%= error_messages_for :user %>
      <h2>Usuário: <%=h @user.login %></h2>
@@ -29,7 +29,7 @@
 
     <p>Adicionado em: <%= @user.created_at.to_s(:long) %></p>
 
-   |<%=  link_to 'Voltar', professors_path%>|
+   |<%=  link_to 'Voltar', root_path%>|
 </fieldset>
 </div>
 </div>
