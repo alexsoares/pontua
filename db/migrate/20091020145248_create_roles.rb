@@ -15,6 +15,7 @@ class CreateRoles < ActiveRecord::Migration
     Role.create :name => "supervisao"
     Role.create :name => "direcao"
     Role.create :name => "secretaria"
+    Role.create :name => "planejamento"
 
     RolesUser.create :role_id => 1, :user_id => 1
 

@@ -3,7 +3,7 @@ class TrabalhadosController < ApplicationController
   # GET /trabalhados.xml
   before_filter :load_professors
   before_filter :professor_unidade
-  require_role ["supervisao","admin","direcao"], :for => [:destroy]
+  require_role ["supervisao","admin","direcao","planejamento"], :for => [:destroy]
   
   def professor_unidade
     if current_user.regiao_id == 53 or current_user.regiao_id == 52 then

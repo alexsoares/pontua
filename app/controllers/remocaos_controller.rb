@@ -3,7 +3,7 @@ class RemocaosController < ApplicationController
   before_filter :load_prof
   before_filter :load_uni
   before_filter :load_unidades
-  require_role ["supervisao","admin"], :for => [:update,:destroy] # don't allow contractors to destroy
+  require_role ["supervisao","admin","planejamento"], :for => [:update,:destroy] # don't allow contractors to destroy
   # GET /remocaos
   # GET /remocaos.xml
 

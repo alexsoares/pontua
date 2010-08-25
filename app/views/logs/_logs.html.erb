@@ -23,8 +23,8 @@ display: none;
           <td width="16%"><center><%=h log.user.login %></center></td>
           <td width="16%" ><center><%=h log.obs %></center></td>
           <td width="16%" ><center><%=h log.area_afetada %></center></td>
-          <td width="16%"><center><%=h log.data.strftime("%d/%m/%Y %H:%M") %></center></td>
-          <td width="16%"><center><%=h log.verifica_existe %></center></td>
+          <td width="16%"><center><%=h log.data %></center></td>
+                    <td width="16%"><center><%=h log.verifica_existe %></center></td>
         </tr>
         <tr>
           <td bgcolor="#cccccc"><%= link_to 'Exibir', log %></td>

@@ -1,5 +1,5 @@
 class RegiaosController < ApplicationController
-  require_role ["supervisao","admin"]
+  require_role ["supervisao","admin","planejamento"]
   
   # GET /regiaos
   # GET /regiaos.xml

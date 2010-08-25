@@ -10,8 +10,8 @@ before_filter :load_regiaos
 before_filter :load_calculos
 before_filter :load_funcao
 before_filter :login_required
-require_role ['direcao',"supervisao","admin"], :for => :update # don't allow contractors to destroy
-require_role ["supervisao","admin"], :for => :destroy # don't allow contractors to destroy
+require_role ['direcao',"supervisao","admin","planejamento"], :for => :update # don't allow contractors to destroy
+require_role ["supervisao","admin","planejamento"], :for => :destroy # don't allow contractors to destroy
   # GET /professors
   # GET /professors.xml
 
