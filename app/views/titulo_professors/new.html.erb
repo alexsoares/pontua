@@ -3,16 +3,14 @@
   <h1 align="center">Cadastro dos Títulos dos Professores</h1>
 <br/>
 <br/>
-<div id="menu">
-<div id="menu_principal">
+<div id ="menu">
 <legend>
-
-| <%= link_to_remote('Incluir Títulos',:update => "prof_pontua", :url => { :action => "pontua_prof", :controller => "professors"}) %> |
-  <%= link_to 'Alterar Títulos', titulo_professors_path %> |
- </legend>
+  <div class="botao3d"><%= link_to 'Novo', new_titulo_professor_path %></div>
+  <div class="botao3d"><%= link_to 'Alterar', titulo_professors_path %></div>
+</legend>
+</div>
 <hr align="left" width="17%" color=#9C9C9C size="3">
-</div>
-</div>
+
 <fieldset><legend><font size=5>Cadastro Titulação</font></legend>
 <% form_for(@titulo_professor) do |f| %>
   <%= f.error_messages %>
@@ -31,7 +29,7 @@
      </tr>     
      <tr>
         <td><%= f.label :titulo_id, 'Titulo: ' %></td>      
-        <td><%= f.collection_select :titulo_id, @titulacaos, :id, :descricao, :include_blank => ' -- Selecione -- ' %>
+        <td><%= f.collection_select :titulo_id, @titulacaos, :id, :descricao, :include_blank => ' -- Selecione -- ', :size => 5 %>
          <%= observe_field 'titulo_professor_titulo_id',
          :frequency => 0.5,
          :with => :titulo_professor_titulo_id,
@@ -46,7 +44,7 @@
       </div>
     <tr>
        <td><%= f.label :obs, 'Descrição do Título:' %>
-       <td><%= f.text_field :obs, :size => 50 %></td>
+       <td><%= f.text_area :obs, :size => "50x1"   %></td>
     </tr>
 
      <tr>
@@ -92,7 +90,5 @@
 </table>
   <br/>
     <% end %>
-</fieldset>
-  | <%= link_to 'Voltar', new_titulo_professor_path %> |
-
+</fieldset>  
 </div>

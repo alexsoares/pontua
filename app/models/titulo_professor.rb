@@ -3,9 +3,9 @@ class TituloProfessor < ActiveRecord::Base
   validates_presence_of :professor_id, :message => ' -  PROFESSOR - PREENCHIMENTO OBRIGATÓRIO'
   validates_presence_of :titulo_id, :message => ' -  TITULO - PREENCHIMENTO OBRIGATÓRIO'
   validates_numericality_of :quantidade,:if => :verify_qtd?, :message => ' - Acima de 30 hrs'
-  
+
   belongs_to :professor
-  belongs_to :titulacao
+  belongs_to :titulacao, :foreign_key => "titulo_id"
   DTA = Date.today
 
 

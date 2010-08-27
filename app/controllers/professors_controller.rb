@@ -27,20 +27,17 @@ require_role ["supervisao","admin","planejamento"], :for => :destroy # don't all
   def index
     if (params[:search].nil? || params[:search].empty?)
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-        @professors = Professor.find(:all, :conditions => [''],:order =>  'nome ASC')
+        @professors = Professor.find(:all, :conditions => [''],:order =>  'nome ASC', :include => "unidade")
       else
-        @professors = Professor.find(:all, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'nome ASC')
+        @professors = Professor.find(:all, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'nome ASC', :include => "unidade")
       end
       #@professors = Professor.paginate(:page => params[:page], :per_page => 30)
     else
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-        @professors = Professor.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"])
+        @professors = Professor.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :include => "unidade")
       else
-        @professors = Professor.find(:all, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => 'nome ASC')
+        @professors = Professor.find(:all, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => 'nome ASC', :include => "unidade")
       end
-      #@professors = Professor.find(:all, :conditions => ["matricula = ?",params[:search]])
-      #@professors = Professor.paginate(:page => params[:page], :per_page => 30,:conditions => ["matricula = ?",params[:search]])
-      #@professors = Professor.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"])
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -102,6 +99,7 @@ require_role ["supervisao","admin","planejamento"], :for => :destroy # don't all
   # PUT /professors/1.xml
   def update
     @professor = Professor.find(params[:id])
+    @professor.funcao
     @log = Log.new
     @log.log(current_user.id, @professor.id, "Atualizado dados do professor: #{@professor.id}")
     @log.save!
@@ -293,10 +291,9 @@ require_role ["supervisao","admin","planejamento"], :for => :destroy # don't all
      $professor_mat = ''
      $professor_mat = params[:professor_professor_id]
      if !($professor_mat).nil? or !($professor_mat).empty? or !($professor_mat == '')
-
       if !(Professor.find_by_matricula($professor_mat)).nil? then
       $professor = Professor.find_by_matricula($professor_mat).id.to_s
-    # =======================================
+# =======================================
 #|| Inicio Calculos de Tempo de Serviço  ||
 # =======================================
 
@@ -789,7 +786,6 @@ end
      $ano_atual_dias_rede = 0
      $ano_atual_dias_unid = 0
 
-
      $acum_dias_trab_ano = 0
      $acum_dias_efet_ano = 0
      $acum_dias_rede_ano = 0
@@ -818,7 +814,6 @@ end
     end
   end
 
-
   def executar
     render :partial => 'executar'
   end
@@ -830,6 +825,122 @@ end
   def impressao
     @professors = Professor.all
     render :partial => 'relatorio_professors'
+  end
+
+
+  def busca_ficha
+    @ficha = Professor.find_by_matricula(params[:ficha])
+    
+unless @ficha.nil?
+  # =======================================
+  #|| Inicio Calculos de Tempo de Serviço  ||
+  # =======================================
+
+    @acum = AcumTrab.find(:all, :conditions => ['professor_id = ?', @ficha.id])
+    for tot_dias in @acum
+       anterior_dias_trab = tot_dias.tot_acum_trab.to_i
+       anterior_dias_efet = tot_dias.tot_acum_efet.to_i
+       anterior_dias_rede = tot_dias.tot_acum_rede.to_i
+       anterior_dias_unid = tot_dias.tot_acum_unid.to_i
+       acum_dias_trab_ano = tot_dias.tot_acum_trab.to_i
+       acum_dias_efet_ano = tot_dias.tot_acum_efet.to_i
+       acum_dias_rede_ano = tot_dias.tot_acum_rede.to_i
+       acum_dias_unid_ano = tot_dias.tot_acum_unid.to_i
+    end
+     @dias_trab_anterior = Trabalhado.find(:all, :conditions => ['ano = ? and professor_id = ? and flag = 0 and ano_letivo = ?',$data2.to_s,@ficha.id,$data.to_s])
+     if @dias_trab_anterior.empty?
+       ano_anterior_dias_trab = 0
+       ano_anterior_dias_efet = 0
+       ano_anterior_dias_rede = 0
+       ano_anterior_dias_unid = 0
+     end
+      for ano_anterior in @dias_trab_anterior
+       ano_anterior.dias_trab
+         if ano_anterior.dias_trab.nil?
+           ano_anterior_dias_trab = 0
+         else
+          ano_anterior_dias_trab = (ano_anterior.dias_trab).to_i
+         end 
+         if ano_anterior.dias_efetivos.nil?
+           ano_anterior_dias_efet = 0
+         else
+          ano_anterior_dias_efet = (ano_anterior.dias_efetivos).to_i
+         end
+         if ano_anterior.dias_rede.nil?
+           ano_anterior_dias_rede = 0
+         else
+           ano_anterior_dias_rede = (ano_anterior.dias_rede).to_i
+         end
+         if ano_anterior.dias_unidade.nil?
+          ano_anterior_dias_unid = 0
+         else
+          ano_anterior_dias_unid = (ano_anterior.dias_unidade).to_i
+         end
+       end
+      @dias_trab_atual = Trabalhado.find(:all, :conditions => ['ano = ? and professor_id = ? and flag = 0 and ano_letivo = ?', $data.to_s,@ficha.id,$data.to_s])
+     if @dias_trab_atual.empty?
+       ano_atual_dias_trab = 0
+       ano_atual_dias_efet = 0
+       ano_atual_dias_rede = 0
+       ano_atual_dias_unid = 0
+     end
+
+      for ano_atual in @dias_trab_atual
+        if ano_atual.dias_trab.nil?
+          ano_atual_dias_trab = 0
+        else
+          ano_atual_dias_trab = (ano_atual.dias_trab).to_i
+        end
+        if ano_atual.dias_efetivos.nil?
+          ano_atual_dias_efet = 0
+        else
+          ano_atual_dias_efet = (ano_atual.dias_efetivos).to_i
+        end
+        if ano_atual.dias_rede.nil?
+          ano_atual_dias_rede = 0
+        else
+          ano_atual_dias_rede = (ano_atual.dias_rede).to_i
+        end
+        if ano_atual.dias_unidade.nil?
+          ano_atual_dias_unid = 0
+        else
+          ano_atual_dias_unid = (ano_atual.dias_unidade).to_i
+        end
+       end
+
+        total_trab_g = acum_dias_trab_ano + ano_anterior_dias_trab + ano_atual_dias_trab
+        total_efet_g = acum_dias_efet_ano + ano_anterior_dias_efet + ano_atual_dias_efet
+        total_rede_g = acum_dias_rede_ano + ano_anterior_dias_rede + ano_atual_dias_rede
+        total_unid_g = acum_dias_unid_ano + ano_anterior_dias_unid + ano_atual_dias_unid
+
+      @acum_pont = AcumTrab.find(:all, :conditions => ['professor_id = ?',@ficha.id])
+       for pontuacao in @acum_pont
+        pont_trab = pontuacao.pont_base_trab
+        pont_efet = pontuacao.pont_base_efet
+        pont_rede = pontuacao.pont_base_rede
+        pont_unid = pontuacao.pont_base_unid
+       end
+        total_trab = pont_trab * total_trab_g
+        total_efet = pont_efet * total_efet_g
+        total_rede = pont_rede * total_rede_g
+        total_unid = pont_unid * total_unid_g
+# =======================================
+#|| Fim Calculos de Tempo de Serviço     ||
+# =======================================
+
+    @professors = Professor.find(:all, :conditions => ['id = ?',@ficha.id ])
+    #@trabalho1 = Trabalhado.find_by_sql("SELECT * FROM trabalhados WHERE professor_id = ? and ano_letivo = ?", @ficha.id, $data.to_s)
+    @trabalho = Trabalhado.find_all_by_professor_id(@ficha.id, :conditions => ['ano_letivo = ?', $data.to_s])
+    #@t = Trabalhado.find_by_sql("SELECT * FROM trabalhados WHERE professor_id = ? and ano_letivo = ?",@ficha.id, $data.to_s)
+    @nome_professor = Professor.find_by_id(@ficha.id)
+
+    #@tp = TituloProfessor.find_by_professor_id(@ficha.id,:include => 'titulacao')
+    @tp = TituloProfessor.find_by_sql("SELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id = " + (@ficha.id).to_s + " and t.tipo = 'PERMANENTE'")
+    
+      @tp1 = TituloProfessor.find_by_sql("SELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id = " + (@ficha.id).to_s + " and t.tipo = 'ANUAL' and tp.ano_letivo = + " + $data.to_s)
+    #@tp1 = TituloProfessor.find_by_professor_id(@ficha.id,:conditions => ['ano_letivo = ?',$data.to_s], :include => 'titulacao')
+    $zerar = 1
+  end
   end
 protected
 
@@ -853,11 +964,9 @@ protected
     @regiaos = Regiao.find(:all, :order => "nome")
   end
 
-
   def load_unidades
     @unidades = Unidade.find(:all, :order => "nome", :include => "regiao")
   end
-
 
   def sede_unidade
     if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
@@ -870,7 +979,6 @@ protected
   def load_calculos
   end
 
-
   def load_trabalhados
     @trabalhados = Trabalhado.find(:all)
 
@@ -880,7 +988,6 @@ protected
     @titulo_professor = TituloProfessor.find(:all)
   end
 
-
   def load_titulacao
     @titulacaos = Titulacao.find(:all)
   end
@@ -888,7 +995,5 @@ protected
   def load_acum_trab
     @acum_trab = AcumTrab.find(:all, :include => "professor")
   end
-
-
 
 end

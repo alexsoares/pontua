@@ -15,6 +15,7 @@ display: none;
 
 </div>
 <br/>
+<div class="relatorios">
 <table border ="1" cellpadding="1" cellspacing="1" width="100%" frame="box" rules="rows">
   <tr><td align="center" width="100%" colspan="10"><h3>Professores alocados na unidade:  <%=  $sede %></h3></td></tr>
    <table border ="1" cellpadding="1" cellspacing="1" width="100%">
@@ -46,13 +47,14 @@ display: none;
 <% end %>
 </table>  
 </table>
+</div>
 <tr>
  <font size=3 color="green">Consulta realizada, <%=h $teste %> registro(s) encontado(s)</font>
 </tr>
 <div class="botao">
 <table width="100%">
     <tr>
-      <td>|<%= link_to_remote('Voltar', :url => { :action => "consulta"}) %>  |</td>
+      <td><div class="botao3d"><%= link_to_remote('Voltar', :url => { :action => "consulta"}) %></div></td>
       <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
     </tr>
   </table>

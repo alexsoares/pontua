@@ -7,7 +7,7 @@
 
 <tr><th width="100%" colspan="6" align="center"><hr/>Títulos Permanentes<hr/></th></tr>
 
-     <tr>
+     <tr style="font-size:10px">
        <th>
         Título
        </th>
@@ -23,24 +23,23 @@
      </tr>
      <% if !((@tp.nil?) or (@tp.empty?)) %>
 <%for tp in @tp%>
-
+  
      <tr>
       <td align="center">
-        <%= Titulacao.find_by_id(tp.titulo_id).descricao %>
+        <font size="2"><%= Titulacao.find_by_id(tp.titulo_id).descricao %></font>
       </td>
       <td align="center">
-        <%= tp.quantidade %>
+        <font size="2"><%= tp.quantidade %></font>
       </td>
       <td align="center">
-        <%= tp.valor %>
+        <font size="2"><%= tp.valor %></font>
       </td>
       <td align="center" colspan="2">
-        <%= tp.pontuacao_titulo %>
+        <font size="2"><%= tp.pontuacao_titulo %></font>
         <% $subtot_perm = $subtot_perm + (tp.pontuacao_titulo).to_f %>
       </td>
-
-
    </tr>
+   
   <%end%>
   <%end%>
 <tr>

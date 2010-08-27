@@ -10,7 +10,7 @@ display: none;
 </style>
 
 <br/>
-
+<div class="relatorios">
 <table border ="1" cellpadding="1" cellspacing="1" width="100%" >
   <tr>
     <center><th bgcolor="#cccccc">Matrícula</th></center>
@@ -101,8 +101,8 @@ display: none;
   <table width="100%">
     <tr>
       <td>
-      | <%= link_to 'Dados Pessoais', professor %>
-      | <%= link_to_remote('Pontuação', :url => { :action => "relatorio_indiv"}) %> |</td>
+       <div class="botao3d"><%= link_to 'Dados Pessoais', professor %></div>
+       <div class="botao3d"><%= link_to_remote('Pontuação', :url => { :action => "relatorio_indiv"}) %></div> </td>
       
       <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
 
@@ -114,5 +114,5 @@ display: none;
 
 
 <br/>
-
+</div>
 

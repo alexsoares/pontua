@@ -31,7 +31,8 @@ display: none;
   <input type="Button" Value="Imprimir" onclick="Imprimir()">
    <br/>
   <br/>
-  </div>
+</div>
+<div class="relatorios">
   <fieldset>
    <legend><font size=4>Unidades</font></legend>
    <table border ="1" cellpadding="5" cellspacing="1" width="100%"  >
@@ -53,9 +54,9 @@ display: none;
           <td><center><%=h unidade.nome %></center></td>
           <td><center><%=h unidade.nome_tipo %></center></td>
           <div class="botao">
-            <td bgcolor="#cccccc"><%= link_to 'Exibir', unidade %></td>
-            <td bgcolor="#cccccc"><%= link_to 'Alterar', edit_unidade_path(unidade) %></td>
-            <td bgcolor="#cccccc"><%= link_to 'Apagar', unidade, :confirm => 'Tem certeza?', :method => :delete %></td>
+            <td bgcolor="#cccccc"><div class="botao3d"><%= link_to 'Exibir', unidade %></div></td>
+            <td bgcolor="#cccccc"><div class="botao3d"><%= link_to 'Alterar', edit_unidade_path(unidade) %></div></td>
+            <td bgcolor="#cccccc"><div class="botao3d"><%= link_to 'Apagar', unidade, :confirm => 'Tem certeza?', :method => :delete %></div></td>
           </div>
          </tr>
       <% end %>
@@ -65,5 +66,6 @@ display: none;
 <div class="botao">
   <br/>
  <input type="Button" Value="Imprimir" onclick="Imprimir()">  
+</div>
 </div>
 </div>

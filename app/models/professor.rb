@@ -57,4 +57,12 @@ validates_numericality_of :RD, :only_integer => true, :message =>  ' - SOMENTE N
     
   end
 
+  def self.pontuacao_final(id)
+    Professor.find(id).pontuacao_final
+  end
+
+  def self.insercao_completa(id)
+    Trabalhado.find_all_by_professor_id(id)
+  end
+
 end

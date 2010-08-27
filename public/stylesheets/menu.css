@@ -26,7 +26,7 @@ way to fit your requirements.
 {background:url(Imagens/menu/six_1.gif) no-repeat right top;}
 #nav li:hover a.top_link span.down,
 #nav a.top_link:hover span.down
-{background:url(Imagens/menu/six_1a.gif) no-repeat right top; padding-bottom:3px;}
+{background:url(Imagens/menu/six_1a.gif) no-repeat top; padding-bottom:3px;}
 
 #nav table {border-collapse:collapse; padding:0; margin:0; position:absolute; left:0; top:0;}
 

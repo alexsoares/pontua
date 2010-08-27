@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :trabalhados
 
-  map.resources :professors
+  map.resources :professors, :collection => { :busca_ficha => :get}
 
   # The priority is based upon order of creation: first created -> highest priority.
 
