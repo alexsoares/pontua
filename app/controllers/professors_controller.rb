@@ -830,8 +830,19 @@ end
 
   def busca_ficha
     @ficha = Professor.find_by_matricula(params[:ficha])
-    
-unless @ficha.nil?
+    unless @ficha.nil?
+      @fichas = Ficha.new
+      @fichas.professor_id = @ficha.id
+      @fichas.acum_trab_id = AcumTrab.find_by_professor_id(@ficha.id).id
+      @fichas.trabalhado_anterior_id = Trabalhado.find_by_professor_id(@ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, (($data.to_i) -1).to_s]).id
+      @fichas.trabalhado_atual_id = Trabalhado.find_by_professor_id(@ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, $data]).id
+      @fichas.total_geral = Professor.find(@ficha.id).pontuacao_final
+      @fichas.total_titulacao = Professor.find(@ficha.id).total_titulacao
+      @fichas.total_trabalhado = Professor.find(@ficha.id).total_trabalhado
+      @fichas.save
+
+
+
   # =======================================
   #|| Inicio Calculos de Tempo de Serviço  ||
   # =======================================
@@ -942,6 +953,8 @@ unless @ficha.nil?
     $zerar = 1
   end
   end
+
+
 protected
 
   def load_funcao

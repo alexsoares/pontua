@@ -195,6 +195,7 @@ font-size: large;
 		font-weight: bold;
 		text-align: center;
 		text-decoration: none;
+        display:inline
 		}
 
 .botao3d:hover	{
@@ -203,6 +204,7 @@ font-size: large;
 		left: 1px;
     	background: url(Imagens/menu/six_1.gif);
         text-decoration: none;
+
 		}
 #contents{
     margin:0 auto;
@@ -228,7 +230,7 @@ font-size: large;
 .relatorios td {
     background-color:#fbf5b5;
     padding:inherit;
-    font-size:14px;
+    font-size:10px;
 }
 
 .relatorios tr:hover {
@@ -247,7 +249,7 @@ font-size: large;
 #separator
 {
     float:right;
-    height:15px;
+    height:50px;
     width:950px;
     background-color:#c4c4c4;
     font-size:10px;

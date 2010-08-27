@@ -1,0 +1,16 @@
+#ficha{
+    float:right;
+    height:500px;
+    width:950px;
+    background-color:white;
+    font-size:8px;
+}
+
+#principal{
+    float:right;
+    height:1250px;
+    width:950px;
+    background-color:#efebe8;
+    font-size:8px;
+    
+}

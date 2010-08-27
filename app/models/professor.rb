@@ -1,7 +1,8 @@
 class Professor < ActiveRecord::Base
 has_one :acum_trab, :dependent => :destroy
 belongs_to :unidade,:foreign_key => "sede_id"
-has_many :trabalhado, :dependent => :destroy
+has_many :trabalhados, :dependent => :destroy
+has_many :fichas
 has_and_belongs_to_many :titulacaos,
                         :join_table => "titulo_professors", :association_foreign_key => "titulo_id"
 

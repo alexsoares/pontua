@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100819181136) do
+ActiveRecord::Schema.define(:version => 20100827132201) do
 
   create_table "acum_trabs", :force => true do |t|
     t.integer  "professor_id"
@@ -45,6 +45,19 @@ ActiveRecord::Schema.define(:version => 20100819181136) do
     t.string  "funcao",    :null => false
   end
 
+  create_table "fichas", :force => true do |t|
+    t.integer  "professor_id"
+    t.integer  "acum_trab_id"
+    t.integer  "trabalhado_anterior_id"
+    t.integer  "trabalhado_atual_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "total_geral",            :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "total_titulacao",        :precision => 10, :scale => 3, :default => 0.0
+    t.decimal  "total_trabalhado",       :precision => 10, :scale => 3, :default => 0.0
+    t.integer  "ano_letivo"
+  end
+
   create_table "logs", :force => true do |t|
     t.integer  "user_id"
     t.string   "obs"
@@ -63,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20100819181136) do
   create_table "mensagems", :force => true do |t|
     t.integer  "user_id"
     t.string   "titulo"
-    t.string   "para"
+    t.string   "from"
     t.string   "texto"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,6 +1,6 @@
 class AcumTrab < ActiveRecord::Base
 belongs_to :professor
-
+has_many :fichas
   def before_update
   
     @trab_ant = Trabalhado.find(:all, :conditions => 'professor_id = ' + (self.professor_id).to_s + ' and ano = ' + $data2.to_s + ' and ano_letivo = ' + $data.to_s + ' and flag = 0')

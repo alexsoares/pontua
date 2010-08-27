@@ -1,5 +1,6 @@
 class Trabalhado < ActiveRecord::Base
-belongs_to :professor;
+belongs_to :professor
+has_many :fichas
 
   validates_presence_of :ano, :message => ' -  ANO CORRESPONDENTE - ANO JÁ CADASTRADO NA BASE'
   validates_presence_of :professor_id, :message => ' -  TITULO - PREENCHIMENTO OBRIGATÓRIO'

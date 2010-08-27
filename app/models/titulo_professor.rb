@@ -5,7 +5,7 @@ class TituloProfessor < ActiveRecord::Base
   validates_numericality_of :quantidade,:if => :verify_qtd?, :message => ' - Acima de 30 hrs'
 
   belongs_to :professor
-  belongs_to :titulacao, :foreign_key => "titulo_id"
+  belongs_to :titulacao, :class_name => "Titulacao",:foreign_key => "titulo_id"
   DTA = Date.today
 
 
