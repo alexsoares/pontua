@@ -56,11 +56,15 @@ window.print();
                        <%if !(@ficha.nil?)%>
                         <li><a  href="#nogo29" class="fly">Gerar Ficha</a>
                           <ul>
+                              <li><%= link_to('Voltar', :back) %></li>
                               <li><%= link_to('Export to PDF', "#{@ficha.id}.pdf") %></li>
                               <li><a class="botao3d" href="javascript:window.print();">Imprimir</a></li>
                           </ul>
                          </li>
+                       <%else%>
+                          <li><%= link_to 'Gerar Ficha',gerar_ficha_professors_path %></li>
                        <%end%>
+
                       <%end%>
                         <li><a href="#nogo29" class="fly">Pontuação</a>
                         <ul>
