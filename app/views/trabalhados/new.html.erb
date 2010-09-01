@@ -46,10 +46,7 @@
                   :frequency => 0.5,
                   #:update => "professor_id",
                   :with => :trabalhado_ano,
-                  :url => { :action => 'verifica_ano' } %>
-
-     
-
+                  :url => { :action => 'verifica_ano' } %>     
         </td>
 <!--                    <%= observe_field 'trabalhado_ano',
                :frequency => 0.5,
@@ -75,12 +72,12 @@
        <td>   <%= f.text_field :outro_trab, :size => 3 %></td>
      </tr>
      <tr>
-       <td><%= f.label :f_abonada, 'Faltas Abonadas' %></td/>
+       <td><%= f.label :f_abonada, 'Faltas Abonadas' %></td>
        <td> <%= f.text_field :f_abonada, :size => 3 %></td>
      </tr>
      <tr>
        <td><%= f.label :atestado, 'Atestado Médico' %></td>
-       <td>  <%= f.text_field :atestado,:size => 3, :id => 'teste' %></td>
+       <td><%= f.text_field :atestado,:size => 3 %></td>
      </tr>
      <tr>
        <td><%= f.label :f_justif, 'Faltas Justif.' %></td>

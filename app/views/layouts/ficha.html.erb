@@ -52,6 +52,16 @@ window.print();
                     </li>
                     <li class="top"><a href="#nogo27" id="executar" class="top_link"><span class="down">Executar</span></a>
                     <ul class="sub">
+                      <% if (current_user.has_role?('admin'))  or (current_user.has_role?('planejamento'))%>
+                       <%if !(@ficha.nil?)%>
+                        <li><a  href="#nogo29" class="fly">Gerar Ficha</a>
+                          <ul>
+                              <li><%= link_to('Export to PDF', "#{@ficha.id}.pdf") %></li>
+                              <li><a class="botao3d" href="javascript:window.print();">Imprimir</a></li>
+                          </ul>
+                         </li>
+                       <%end%>
+                      <%end%>
                         <li><a href="#nogo29" class="fly">Pontuação</a>
                         <ul>
                           <li><%= link_to 'Tempo Serviço', new_trabalhado_path%></li>
@@ -59,10 +69,19 @@ window.print();
                           <li><%= link_to_remote('Pontuação', :url => { :action => "relato_prof", :controller => "professors"}) %></li>
                         </ul>
                       </li>
+                        <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin'))  or (current_user.has_role?('planejamento'))%>
+                          <li><a href="#nogo29" class="fly">Consultas</a>
+                            <ul>
+                              <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin')) or current_user.has_role?('planejamento') %>
+                                <li><%= link_to_remote('Profº Individual', :url => { :controller => "consulta", :action => "consulta_ppu"}) %></li>
+                                <li><%= link_to_remote('Unidade', :url => {  :controller => "consulta", :action => "consulta_pu"}) %></li>
+                                <li><%= link_to_remote('Titulação', :url => {  :controller => "consulta", :action => "consulta_pt"}) %></li>
+                                <li><%= link_to_remote('Geral', :url => { :controller => "consulta", :action => "consulta_geral"}) %></li>
+                              <%end%>
+                            </ul>
+                          </li>
+                        <%end%>
                       <li><%= link_to "Gerar Remoção", remocaos_path %></li>
-                      <%  if current_user.has_role?('direcao') or (current_user.has_role?('supervisao')) or (current_user.has_role?('admin'))%>
-                        <li><%= link_to('Consultas', consulta_path) %></li>
-                      <%end%>
                     </ul>
                   </li>
                   <li class="top"><a href="#nogo2" id="cadastrar" class="top_link"><span class="down">Cadastrar</span></a>
@@ -77,18 +96,22 @@ window.print();
                     <%end%>
                   </ul>
                 </li>
+                
                 <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
                   <li class="top"><a href="#nogo22" id="config" class="top_link"><span class="down">Configuração</span></a>
                     <ul class="sub">
+                      <li><b>Gerencial</b></li>
                       <li><%= link_to 'Verificar Log', logs_path %></li>
                       <%  if current_user.has_role?('admin') then%>
                         <li><%= link_to_remote('Usuários', :url => { :action => "gen_user", :controller => 'home'}) %></li>
+                        <li><b>Anual</b></li>
                         <li><%= link_to('Novo Ano', iniciar_ano_path) %></li>
                         <li><%= link_to('Arrumar Titulos', arrumar_titulos_path) %></li>
                       <%end%>
                     </ul>
                   </li>
                 <%end%>
+                
                 <li class="top"><a href="#nogo2" id="relatorios" class="top_link"><span class="down">Relatórios</span></a>
                 <ul class="sub">
                   <li><b>Professores por</b></li>

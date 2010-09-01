@@ -1,18 +1,22 @@
-<h1>Fichas Geradas</h1>
+<h1>Fichas Geradas - Profº <%= @professor.nome %></h1>
+<br>
+  <br>
+    <br>
 
-<table>
+<table align="center" border="1" >
   <tr>
-    <th>Professor</th>
     <th>Ano Letivo</th>
   </tr>
 
 <% for ficha in @fichas %>
   <tr>
-    <td><%=h ficha.professor.nome %></td>
-    <td><%=h ficha.ano_letivo %></td>
-    <td><%= link_to 'Exibir', [@professor,ficha] %></td>
-    <td><%= link_to 'Destroy', [@professor,ficha], :confirm => 'Tem Certeza?', :method => :delete %></td>
+    <td colspan="2"><%=h ficha.ano_letivo %></td>
+    <td class="botao3d"><%= link_to 'Exibir', [@professor,ficha] %></td>
+    <td class="botao3d"><%= link_to 'Apagar', [@professor,ficha], :confirm => 'Tem Certeza?', :method => :delete %></td>
+
   </tr>
+  
+  
 <% end %>
 </table>
 

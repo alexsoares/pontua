@@ -154,27 +154,13 @@ before_filter :load_titulos
 
   def consulta_geral
   $tipo_con = 10
-  @professor_rel_geral = Professor.find(:all, :order => 'pontuacao_final DESC')
+  @professor_rel_geral = Professor.find(:all, :order => 'pontuacao_final DESC', :include => 'unidade')
 
     render :update do |page|
       page.replace_html 'tempo', :text => ''
-      page.replace_html 'prof_pontua', :partial => 'relatorio_geral_pontuacao'
+      page.replace_html 'conteudo', :partial => 'relatorio_geral_pontuacao'
     end
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
  protected
   def sede_unidade

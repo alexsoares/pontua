@@ -6,12 +6,12 @@
   <div class="botao">
     <table width="100%">
       <tr>
-          <% form_tag busca_ficha_professors_path, :method => 'get' do %>
+          <% form_tag gerar_ficha_professors_path, :method => 'get' do %>
            <p>
             <tr>
                 <td align="right"> Matricula:
                  <%= text_field_tag :ficha, params[:ficha] %>
-                 <%= submit_tag "Filtrar", :name => nil %></td>
+                 <%= submit_tag "Gerar", :name => nil %></td>
               </tr>
            </p>
           <% end %>
@@ -20,3 +20,4 @@
   </div>
 </div>
 <div id="separator"></div>
+<div id="mensagem">Digite a matricuula</div>

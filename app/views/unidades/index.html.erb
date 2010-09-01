@@ -35,29 +35,28 @@ display: none;
 <div class="relatorios">
   <fieldset>
    <legend><font size=4>Unidades</font></legend>
-   <table border ="1" cellpadding="5" cellspacing="1" width="100%"  >
+   <table border ="1" cellpadding="5" cellspacing="1" width="100%"  frame="box" rules="all">
       <tr>
-        <td colspan="8">
+        <td colspan="14">
           <h1 align="center">Relatório de Unidades</h1>
         </td>
       </tr>
       <tr>
-        <th bgcolor="#cccccc">Localização</th>
-        <th bgcolor="#cccccc">Nome</th>
-        <th bgcolor="#cccccc">Tipo de Ensino</th>
-        <th bgcolor="#cccccc" colspan="3"></th>
+        <th colspan="4" >Localização</th>
+        <th colspan="4" >Nome</th>
+        <th colspan="3" >Tipo de Ensino</th>
+        <th colspan="3"></th>
       </tr>
       <% for unidade in @unidades %>
 
         <tr>
-          <td><center><%=h unidade.regiao.nome %></center></td>
-          <td><center><%=h unidade.nome %></center></td>
-          <td><center><%=h unidade.nome_tipo %></center></td>
-          <div class="botao">
-            <td bgcolor="#cccccc"><div class="botao3d"><%= link_to 'Exibir', unidade %></div></td>
-            <td bgcolor="#cccccc"><div class="botao3d"><%= link_to 'Alterar', edit_unidade_path(unidade) %></div></td>
-            <td bgcolor="#cccccc"><div class="botao3d"><%= link_to 'Apagar', unidade, :confirm => 'Tem certeza?', :method => :delete %></div></td>
-          </div>
+          <td colspan="4"><center><%=h unidade.regiao.nome %></center></td>
+          <td colspan="4"><center><%=h unidade.nome %></center></td>
+          <td colspan="3"><center><%=h unidade.nome_tipo %></center></td>
+            <td colspan="1" align="CENTER" ><%= link_to 'Exibir', unidade,:class => 'botao3d'%></td>
+            <td align="CENTER"><%= link_to 'Alterar', edit_unidade_path(unidade),:class => 'botao3d' %>
+            <td align="CENTER"><%= link_to 'Apagar', unidade, :confirm => 'Tem certeza?', :method => :delete, :class => 'botao3d' %></td>
+
          </tr>
       <% end %>
     </table>

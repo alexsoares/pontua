@@ -6,7 +6,7 @@ root {
     display: block;
 }
 a { color: white;
-    font-size: 15px;
+    
     }
 a:visited { color: white; }
 
@@ -185,27 +185,6 @@ font-size: large;
     text-decoration:none;
 }
 
-.botao3d 	{
-		display: block;
-		width: 100px;
-		padding: 0px;
-		background: url(Imagens/menu/six_0.gif);
-		font-family: Verdana;
-		font-size: 11px;
-		font-weight: bold;
-		text-align: center;
-		text-decoration: none;
-        display:inline
-		}
-
-.botao3d:hover	{
-		position: relative;
-		top: 1px;
-		left: 1px;
-    	background: url(Imagens/menu/six_1.gif);
-        text-decoration: none;
-
-		}
 #contents{
     margin:0 auto;
     padding:0;
@@ -237,6 +216,7 @@ font-size: large;
     background-color:blue;
 }
 
+
 #busca_ficha
 {
     float:right;
@@ -262,5 +242,29 @@ font-size: large;
     width:950px;
     background-color:#c4c4c4;
     font-size:10px;
-
+    
+}
+  .botao3d{
+        font-size:14px;
+        font-family:Verdana,Helvetica;
+        font-weight:bold;
+        color:white;
+        background:#181a1b;
+        border:0px;
+        width:80px;
+        height:19px;
+        text-decoration:none;
+        display:inline;
+       }
+.botao3d:hover{
+        font-size:14px;
+        font-family:Verdana,Helvetica;
+        font-weight:bold;
+        color:white;
+        background:#646566;
+        border:0px;
+        width:100px;
+        height:19px;
+        text-decoration:none;
+        display:inline;
 }

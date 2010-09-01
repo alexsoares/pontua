@@ -808,7 +808,6 @@ end
 
     else
     render :update do |page|
-
       page.replace_html 'tempo', :partial => 'exibicao_pontuatempservico'
     end
     end
@@ -828,7 +827,7 @@ end
   end
 
 
-  def busca_ficha
+  def gerar_ficha
     @ficha = Professor.find_by_matricula(params[:ficha])
     unless @ficha.nil?
       @fichas = Ficha.new
@@ -839,9 +838,10 @@ end
       @fichas.total_geral = Professor.find(@ficha.id).pontuacao_final
       @fichas.total_titulacao = Professor.find(@ficha.id).total_titulacao
       @fichas.total_trabalhado = Professor.find(@ficha.id).total_trabalhado
+      @fichas.ano_letivo = $data
       @fichas.save
 
-
+      redirect_to(professor_fichas_path(@ficha.id))
 
   # =======================================
   #|| Inicio Calculos de Tempo de Serviço  ||
@@ -954,6 +954,10 @@ end
   end
   end
 
+
+  def status
+    @status = AcumTrab.all(:include =>['professor'],:conditions => ['status = 0'], :order => 'professors.sede_id' )
+  end
 
 protected
 

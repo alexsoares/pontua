@@ -282,7 +282,7 @@ uses_mocha "FormOptionsHelperTest" do
       @post = Post.new
       @post.category = ""
       assert_dom_equal(
-        "<select id=\"post_category\" name=\"post[category]\"><option value=\"\">\Escolha opção</option>\n<option value=\"abe\">abe</option>\n<option value=\"&lt;mus&gt;\">&lt;mus&gt;</option>\n<option value=\"hest\">hest</option></select>",
+        "<select id=\"post_category\" name=\"post[category]\"><option value=\"\">Please select</option>\n<option value=\"abe\">abe</option>\n<option value=\"&lt;mus&gt;\">&lt;mus&gt;</option>\n<option value=\"hest\">hest</option></select>",
         select("post", "category", %w( abe <mus> hest), :prompt => true)
       )
     end
@@ -309,7 +309,7 @@ uses_mocha "FormOptionsHelperTest" do
       @post = Post.new
       @post.category = ""
       assert_dom_equal(
-        "<select id=\"post_category\" name=\"post[category]\"><option value=\"\">Escolha opção</option>\n<option value=\"\"></option>\n<option value=\"abe\">abe</option>\n<option value=\"&lt;mus&gt;\">&lt;mus&gt;</option>\n<option value=\"hest\">hest</option></select>",
+        "<select id=\"post_category\" name=\"post[category]\"><option value=\"\">Please select</option>\n<option value=\"\"></option>\n<option value=\"abe\">abe</option>\n<option value=\"&lt;mus&gt;\">&lt;mus&gt;</option>\n<option value=\"hest\">hest</option></select>",
         select("post", "category", %w( abe <mus> hest), :prompt => true, :include_blank => true)
       )
     end

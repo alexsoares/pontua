@@ -1,6 +1,6 @@
 class Unidade < ActiveRecord::Base
   belongs_to :regiao
-  has_one :professor
+  has_many :professors
   def nome_tipo
 
     if tipo == 1 then

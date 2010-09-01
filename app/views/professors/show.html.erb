@@ -62,12 +62,12 @@
   </fieldset>
 
 
-<div class="botao3d"><%= link_to 'Alterar', edit_professor_path(@professor) %></div>
-<div class="botao3d"><%= link_to 'Cadastrar', new_professor_path %></div>
+<%= link_to 'Alterar', edit_professor_path(@professor),:class => 'botao3d' %>
+<%= link_to 'Cadastrar', new_professor_path,:class => 'botao3d' %>
 <%if $consulta == 1 then%>
-<div class="botao3d"><%= link_to_remote('Voltar', :url => { :action => "consulta"}) %> </div>
+  <%= link_to_remote('Voltar', :url => { :action => "consulta"},:class => 'botao3d') %>
 <%else%>
-<div class="botao3d"><%= link_to 'Voltar', professors_path %></div>
+  <%= link_to 'Voltar', professors_path, :class => 'botao3d' %>
 <%end%>
 </div>
 </div>
