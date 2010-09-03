@@ -60,6 +60,7 @@ window.print();
 
                         <li><a href="#nogo29" class="fly">Pontuação</a>
                           <ul>
+                            <li><%= link_to 'Status', status_professors_path_path%></li>
                             <li><%= link_to 'Tempo Serviço', new_trabalhado_path%></li>
                             <li><%= link_to 'Títulos',new_titulo_professor_path %></li>
                             <li><%= link_to_remote('Pontuação', :url => { :action => "relato_prof", :controller => "professors"}) %></li>
