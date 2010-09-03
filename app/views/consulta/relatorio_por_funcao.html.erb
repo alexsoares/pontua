@@ -8,7 +8,7 @@ display: none;
 <br/>
 <hr/>
 <div class="botao">
-  <%= form_tag({ :method => 'get', :action => 'search' }, :id => 'graph-unit-form')%>
+  <%= form_tag relatorio_por_funcao_path, :method => :get%>
     <%= error_messages_for 'contact' %>
    <table width="100%">
     <div class="botao">
@@ -17,7 +17,7 @@ display: none;
           <div class="botao">
            Função:
           <%= select_tag :funcao, options_for_select(CARGO)%>
-          <%= submit_tag 'Filtrar' %></div>
+          <%= submit_tag 'Filtrar', :name => nil %></div>
         </td>
       </tr>
     </div>
@@ -53,10 +53,12 @@ display: none;
         <tr>
         </tr>
     <% end %>
-  <%end%>
+<%= will_paginate @relatorio_funcao %>
+<%end%>
 
 </table>
 <br/>
+
 <div class="botao">
   <input type="Button" Value="Imprimir" onclick="Imprimir()">
 </div>

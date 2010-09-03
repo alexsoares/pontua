@@ -52,9 +52,9 @@ display: none;
        <tr>
         <td colspan="2" width="85%"><%=h regiao.nome %></td>
         <div class="botao">
-          <td bgcolor="#cccccc" width="5%"><%= link_to 'Exibir', regiao %></td>
-          <td bgcolor="#cccccc"width="5%"><%= link_to 'Alterar', edit_regiao_path(regiao) %></td>
-          <td bgcolor="#cccccc"width="5%"><%= link_to 'Apagar', regiao, :confirm => 'Tem certeza?', :method => :delete %></td>
+          <td bgcolor="#cccccc" width="5%"><%= link_to 'Exibir', regiao, :class => 'botao3d' %></td>
+          <td bgcolor="#cccccc"width="5%"><%= link_to 'Alterar', edit_regiao_path(regiao), :class => 'botao3d' %></td>
+          <td bgcolor="#cccccc"width="5%"><%= link_to 'Apagar', regiao, :confirm => 'Tem certeza?', :method => :delete, :class => 'botao3d' %></td>
         </div>
        </tr>
       <% end %>

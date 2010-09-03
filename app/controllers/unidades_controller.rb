@@ -10,9 +10,9 @@ class UnidadesController < ApplicationController
 
  def index
    if (params[:search].nil? || params[:search].empty?)
-      @unidades = Unidade.find(:all, :order =>  'nome ASC')
+      @unidades = Unidade.paginate(:all,:page=>params[:page],:per_page =>20, :order =>  'nome ASC')
    else
-      @unidades = Unidade.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"])
+      @unidades = Unidade.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"])
    end
     respond_to do |format|
       format.html # index.html.erb

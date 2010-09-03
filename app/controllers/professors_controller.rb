@@ -27,16 +27,18 @@ require_role ["supervisao","admin","planejamento"], :for => :destroy # don't all
   def index
     if (params[:search].nil? || params[:search].empty?)
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-        @professors = Professor.find(:all, :conditions => [''],:order =>  'nome ASC', :include => "unidade")
+        @professors = Professor.paginate(:page=>params[:page],:per_page =>20, :conditions => [''],:order =>  'nome ASC', :include => "unidade")
+#          find(:all, :conditions => [''],:order =>  'nome ASC', :include => "unidade")
       else
-        @professors = Professor.find(:all, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'nome ASC', :include => "unidade")
+        @professors = Professor.paginate(:page=>params[:page],:per_page =>20, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'nome ASC', :include => "unidade")
       end
       #@professors = Professor.paginate(:page => params[:page], :per_page => 30)
     else
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-        @professors = Professor.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :include => "unidade")
+        @professors = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :include => "unidade")
+          #find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :include => "unidade")
       else
-        @professors = Professor.find(:all, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => 'nome ASC', :include => "unidade")
+        @professors = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => 'nome ASC', :include => "unidade")
       end
     end
     respond_to do |format|
@@ -956,8 +958,39 @@ end
 
 
   def status
+    @unidade = Unidade.paginate(:all,:page=>params[:page],:per_page =>25)
     @status = AcumTrab.all(:include =>['professor'],:conditions => ['status = 0'], :order => 'professors.sede_id' )
   end
+
+  def to_print
+
+    if (params[:search].nil? || params[:search].empty?)
+      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+        @to_print = Professor.all( :conditions => [''],:order =>  'nome ASC', :include => "unidade")
+      else
+        @to_print = Professor.all( :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'nome ASC', :include => "unidade")
+      end
+    else
+      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+        @to_print = Professor.all( :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :include => "unidade")
+      else
+        @to_print = Professor.all( :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => 'nome ASC', :include => "unidade")
+      end
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.pdf {
+        html = render_to_string(:layout => false , :action => "to_print.html.haml")
+        kit = PDFKit.new(html)
+        kit.stylesheets << "#{Rails.root}/public/stylesheets/ficha.css"
+        send_data(kit.to_pdf, :filename => "#{@to_print}.pdf", :type => 'application/pdf')
+        return # to avoid double render call
+        }
+
+    end
+  end
+
+  
 
 protected
 

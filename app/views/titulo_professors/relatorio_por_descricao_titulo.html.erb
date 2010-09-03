@@ -8,8 +8,8 @@ display: none;
 <br/>
 <hr/>
 <div class="botao">
-  <%= form_tag({ :method => 'get', :action => 'search_by_desc' })%>
-    <%= error_messages_for 'contact' %>
+  <%= form_tag relatorio_por_descricao_titulo_titulo_professors_path, :method => :get%>
+    
    <table width="100%">
     <div class="botao">
       <tr>
@@ -60,10 +60,12 @@ display: none;
         </tr>
 
     <% end %>
-
+    <%= will_paginate @relatorio_por_descricao_titulo %>
   <%end%>
 
 </table>
+<br/>
+
 <%if !(@relatorio_por_descricao_titulo == "Descreva o titulo para filtragem")%>
   <b><%= @relatorio_por_descricao_titulo.count() %> registros encontrados.</b>
 <%end%>

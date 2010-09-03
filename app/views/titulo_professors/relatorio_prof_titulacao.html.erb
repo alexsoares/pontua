@@ -8,7 +8,7 @@ display: none;
 <br/>
 <hr/>
 <div class="botao">
-  <%= form_tag({ :method => 'get', :action => 'search' }, :id => 'graph-unit-form')%>
+  <%= form_tag  relatorio_prof_titulacao_titulo_professors_path, :method => 'get'%>
     <%= error_messages_for 'contact' %>
    <table width="100%">
     <div class="botao">
@@ -20,8 +20,8 @@ display: none;
         <td width="80%" align="right">
           <div class="botao">
           Titulo:
-          <%= collection_select :contact, :titulo_id, Titulacao.all, :id, :descricao, :prompt => true%>
-          <%= submit_tag 'Filtrar' %></div>
+          <%= collection_select :titulo_id, :titulo_id, Titulacao.all, :id, :descricao, :prompt => true%>
+          <%= submit_tag 'Filtrar', :name => nil %></div>
         </td>
       </tr>
     </div>
@@ -52,9 +52,9 @@ display: none;
     <%else%>
       <!-- rtp = relatorio titulo professor !-->
       <%if !(params[:accept]).present? %>
-        <h3 align="center">Professores que possuem o Titulo de: <%= Titulacao.find(params[:contact][:titulo_id]).descricao %></h3>
+        <h3 align="center">Professores que possuem o Titulo de: <%= Titulacao.find(params[:titulo_id][:titulo_id]).descricao %></h3>
       <%else%>
-        <h3 align="center">Professores que NÃO possuem o Titulo de: <%= Titulacao.find(params[:contact][:titulo_id]).descricao %></h3>
+        <h3 align="center">Professores que NÃO possuem o Titulo de: <%= Titulacao.find(params[:titulo_id][:titulo_id]).descricao %></h3>
       <%end%>
       <% for rtp in @relatorio_tit_prof %>
         <tr>
@@ -69,10 +69,11 @@ display: none;
         </tr>
     <% end %>
 <b><%= @relatorio_tit_prof.count %> registros encontrados.</b>
+<br/>
+<%= will_paginate @relatorio_tit_prof %>
 <%end%>
 
 </table>
-
 <br/>
 
 <div class="botao">

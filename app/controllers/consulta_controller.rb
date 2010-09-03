@@ -7,14 +7,17 @@ before_filter :load_titulos
 
 
   def search
-   if (params[:funcao]).present?
-      @relatorio_funcao = Professor.find(:all, :conditions => ["funcao like ?","%" + params[:funcao] + "%"], :order => 'nome ASC')
-   end
-    render :action => 'relatorio_por_funcao'
   end
 
   def relatorio_por_funcao
-    @relatorio_funcao = "Selecione uma função"
+   if (params[:funcao]).present?
+      @relatorio_funcao = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ["funcao like ?","%" + params[:funcao] + "%"], :order => 'nome ASC')
+   else
+      @relatorio_funcao = "Selecione uma função"
+   end
+    render :action => 'relatorio_por_funcao'
+
+
   end
 
   def consulta_ppu

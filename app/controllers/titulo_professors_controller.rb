@@ -2,27 +2,27 @@ class TituloProfessorsController < ApplicationController
   before_filter :load_titulacao
   before_filter :load_professors
   before_filter :professor_unidade
-  require_role ["supervisao","planejamento"], :for_all_except => [:search,:search_by_desc,:search_by_professor_titulos_anuais,:relatorio_titulos_anuais_invalidos,:relatorio_por_descricao_titulo, :relatorio_prof_titulacao,:update, :titulos_busca, :destroy, :index, :new, :create, :sel_prof, :busca_prof, :guarda_valor1, :guarda_valor, :nome_professor]
+  require_role ["supervisao","planejamento","administrador"], :for_all_except => [:search,:search_by_desc,:search_by_professor_titulos_anuais,:relatorio_titulos_anuais_invalidos,:relatorio_por_descricao_titulo, :relatorio_prof_titulacao,:update, :titulos_busca, :destroy, :index, :new, :create, :sel_prof, :busca_prof, :guarda_valor1, :guarda_valor, :nome_professor]
   # GET /titulo_professors
   # GET /titulo_professors.xml
 
   #Relatorio por tiulos
 
   def relatorio_prof_titulacao
-    @relatorio_tit_prof = "Selecione um titulo para filtragem"
-  end
-
-  def search
-   if (params[:contact][:titulo_id]).present?
+    if (params[:titulo_id]).present?
     if (params[:accept]).present?
-      @relatorio_tit_prof = TituloProfessor.find(:all, :conditions => ["titulo_id <> ?",params[:contact][:titulo_id]], :include => ['professor'],:order => 'professors.nome')
+      @relatorio_tit_prof = TituloProfessor.paginate(:all, :page=>params[:page],:per_page =>20,:conditions => ["titulo_id <> ?",params[:titulo_id][:titulo_id]], :include => ['professor'],:order => 'professors.nome')
     else
-      @relatorio_tit_prof = TituloProfessor.find(:all, :conditions => ["titulo_id = ?", params[:contact][:titulo_id]], :include => ['professor'],:order => 'professors.nome')
-    end    
+      @relatorio_tit_prof = TituloProfessor.paginate(:all, :page=>params[:page],:per_page =>20,:conditions => ["titulo_id = ?", params[:titulo_id][:titulo_id]], :include => ['professor'],:order => 'professors.nome')
+    end
    else
      @relatorio_tit_prof = "Selecione um titulo para filtragem"
    end
     render :action => 'relatorio_prof_titulacao'
+
+  end
+
+  def search
   end
 
 #=====================================================================================================================================================================
@@ -30,19 +30,19 @@ class TituloProfessorsController < ApplicationController
 # Relatorio pela descrição do titulo
 
   def relatorio_por_descricao_titulo
-    @relatorio_por_descricao_titulo = "Descreva o titulo para filtragem"
-  end
 
-  def search_by_desc
-   
    if (params[:titulo]).present?
      #@relatorio_por_descricao_titulo = TituloProfessor.obs_like(params[:titulo])
-     @relatorio_por_descricao_titulo = TituloProfessor.all(:conditions => ["obs like ? and titulo_id = 1",params[:titulo]])
+     @relatorio_por_descricao_titulo = TituloProfessor.paginate(:all,:page=>params[:page],:per_page =>20,:conditions => ["obs like ? and titulo_id = 1",params[:titulo]])
    else
      @relatorio_por_descricao_titulo = "Descreva o titulo para filtragem"
    end
     render :action => 'relatorio_por_descricao_titulo'
 
+
+  end
+
+  def search_by_desc
   end
 
 
@@ -50,32 +50,30 @@ class TituloProfessorsController < ApplicationController
 # Relatorio titulos anuais invalidos
 
   def relatorio_titulos_anuais_invalidos
-    @relatorio_tit_prof = "Selecione o professor"
-  end
-
-  def search_by_professor_titulos_anuais
-   
-   if (params[:titulos_anuais][:professor_id]).present?
-     @relatorio_tit_prof = TituloProfessor.all(:conditions => ["professor_id = ? and (titulo_id = 6 or titulo_id = 7 or titulo_id = 8) and ano_letivo <> ?",params[:titulos_anuais][:professor_id], Time.current.strftime("%Y")])
+    if (params[:professor_id]).present?
+     @relatorio_tit_prof = TituloProfessor.paginate(:all,:page=>params[:page],:per_page =>20,:conditions => ["professor_id = ? and (titulo_id = 6 or titulo_id = 7 or titulo_id = 8) and ano_letivo <> ?",params[:professor_id][:professor_id], Time.current.strftime("%Y")])
    else
      @relatorio_tit_prof = "Selecione o professor"
    end
     render :action => 'relatorio_titulos_anuais_invalidos'
+  end
 
+  def search_by_professor_titulos_anuais
+  
   end
 
 #====================================================================================================================================================================
 
   def professor_unidade
     if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-      @professor_sede = Professor.find(:all, :order => 'matricula')
+      @professor_sede = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :order => 'matricula')
     else
-      @professor_sede = Professor.find(:all, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'matricula')
+      @professor_sede = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'matricula')
     end
   end
 
   def index
-    @titulo_professors = TituloProfessor.find(:all, :conditions => ['professor_id = ' + $teacher.to_s])
+    @titulo_professors = TituloProfessor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ['professor_id = ' + $teacher.to_s])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @titulo_professors }
@@ -257,7 +255,8 @@ class TituloProfessorsController < ApplicationController
   end
 
  def titulos_busca
-        @titulo_busca = TituloProfessor.find_by_sql("SELECT * FROM titulo_professors where professor_id = " + params[:altera_professor_id] + " and (ano_letivo = " + Time.current.strftime("%Y") + " or titulo_id in (1,2,3,4,5))" )
+        #@titulo_busca = TituloProfessor.find_by_sql("SELECT * FROM titulo_professors where professor_id = " + params[:altera_professor_id] + " and (ano_letivo = " + Time.current.strftime("%Y") + " or titulo_id in (1,2,3,4,5))" )
+        @titulo_busca = TituloBusca.paginate(:all,:page=>params[:page],:per_page =>20,:conditions =>['professor_id = ? and (ano_letivo = ? or titulo_id in (1,2,3,4,5))',params[:altera_professor_id],Time.current.strftime("%Y")])
       render :update do |page|
         page.replace_html 'alteracao', :partial => 'alterar'
       end

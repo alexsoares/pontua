@@ -26,8 +26,6 @@ window.print();
         
           <p style="color: red"><%= flash[:notice] %></p>
           <div id="topo">
-            <h2 align="right">   Pontuação de Professores - SEDUC - AM</h2>
-            <h4 align="right"> <font   color="#ff0000"> P O N T U A --  Ver.2.0       . </font></h4>
           </div>
           <%if logged_in? then%>
             <td width="100%" align="right">
@@ -51,9 +49,15 @@ window.print();
                     </li>
                     <li class="top"><a href="#nogo27" id="executar" class="top_link"><span class="down">Executar</span></a>
                     <ul class="sub">
-                      <% if (current_user.has_role?('admin'))  or (current_user.has_role?('planejamento'))%>
-                        <li><%= link_to 'Gerar Ficha',gerar_ficha_professors_path %></li>
-                      <%end%>
+                        <li><a href="#nogo29" class="fly">Gerar Ficha</a>
+                          <ul>
+                          <% if (current_user.has_role?('admin'))  or (current_user.has_role?('planejamento'))%>
+                            <li><%= link_to 'Unitário',gerar_ficha_professors_path %></li>
+                            <li><%= link_to 'Geral',ficha_automatica_path %></li>
+                          <%end%>
+                          </ul>
+                        </li>
+
                         <li><a href="#nogo29" class="fly">Pontuação</a>
                           <ul>
                             <li><%= link_to 'Tempo Serviço', new_trabalhado_path%></li>
@@ -73,7 +77,18 @@ window.print();
                             </ul>
                           </li>
                         <%end%>
-                      <li><%= link_to "Gerar Remoção", remocaos_path %></li>
+                        <li><a href="#nogo29" class="fly">Remoção</a>
+                          <ul>
+                            <li><%= link_to 'Solicitar', new_remocao_path, {:title => 'Antes de Cadastrar a remocao de um professor, verifique na listagem ao lado se a mesma ja não esta criada'} %></li>
+                            <% if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+                              <li><%= link_to_remote('Aguardando',:update => "remocao", :url => { :action => "remocao_sim"}) %></li>
+                            <%end%>
+                            <li><%= link_to_remote('Solicitada',:update => "remocao", :url => { :action => "lista_remocao"}) %></li>
+                            <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('direcao') or current_user.has_role?('planejamento') then%>
+                              <li><%= link_to_remote('Ficha', :url => { :action => "relato_remocao"}) %></li>
+                            <%end%>
+                         </ul>
+                     </li>
                     </ul>
                   </li>
 
@@ -110,9 +125,9 @@ window.print();
                     <li><%= link_to "Função", relatorio_por_funcao_path %></li>
                     <li><a href="#nogo29" class="fly">Titulação</a>
                     <ul>
-                      <li><%= link_to "Invalidados", relatorio_titulos_anuais_invalidos_path %></li>
-                      <li><%= link_to "Titulação", relatorio_por_titulacao_path %></li>
-                      <li><%= link_to "Por descrição", relatorio_por_descricao_titulo_path %></li>
+                      <li><%= link_to "Invalidados", relatorio_titulos_anuais_invalidos_titulo_professors_path %></li>
+                      <li><%= link_to "Titulação", relatorio_prof_titulacao_titulo_professors_path %></li>
+                      <li><%= link_to "Por descrição", relatorio_por_descricao_titulo_titulo_professors_path %></li>
                     </ul>
                   </li>
           	      <li><b>Secundários</b></li>

@@ -1,5 +1,5 @@
-<br/>
-<div id="conteudo">
+
+  <div id="busca_ficha">
     <div class="botao">
     <table width="100%">
       <tr>
@@ -15,12 +15,15 @@
           <% end %>
       </tr>
     </table>
-  </div>
-
+    </div>
+    </div>
+<div id="conteudo" class="relatorios">
+  <br/>
+  <br/>
   <fieldset>
      <legend><font size=5> <u>Professores aguardando efetivação dos cálculos</u></font></legend>
      <br/>
-     <table border="1">
+     <table border="1" align="center">
         <tr>
         </tr>
         <tr>
@@ -40,15 +43,16 @@
           <td><%= acum_trab.professor.nome %></td>
           <td><%= Unidade.find(acum_trab.professor.sede_id).nome %></td>
           <%if $contador == 2 then%>
-            <td>| <%= link_to 'Salvar', edit_acum_trab_path(acum_trab) %> |</td>
+            <td><%= link_to 'Salvar', edit_acum_trab_path(acum_trab), :class => 'botao3d' %></td>
           <%else%>
-             <td>| Aguardando preenchimento |</td>
+             <td>Aguardando preenchimento </td>
           <%end%>
         <%end%>        
         </tr>
     </table>    
   </fieldset>
   <br />
+  <%= will_paginate @listagem %>
   Existem <b><%=  @listagem.count %></b> professores disponiveis para este usuário.
 </div>
 

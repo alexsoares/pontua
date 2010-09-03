@@ -1,0 +1,21 @@
+<h2>Professores que possuem fichas geradas para 2010</h2>
+     <table border="1" class="relatorios" align="center" rules="all" frame="box">
+        <tr>
+          <th>Matricula</th>
+          <th>Professor</th>
+          <th>Sede</th>
+        </tr>
+          <% @professor_com_ficha.each do |ficha| %>
+            <tr>
+              <td><%=h ficha.professor.matricula %></td>
+              <td><%=h ficha.professor.nome %></td>
+              <td><%=h ficha.professor.unidade.nome %></td>
+              <td><%= link_to 'Visualizar', [ficha.professor,ficha] %></td>
+            </tr>
+          <%end%>
+          <tr>
+            <td colspan="5">
+              <%= will_paginate @professor_com_ficha %>
+            </td>
+          </tr>
+    </table>

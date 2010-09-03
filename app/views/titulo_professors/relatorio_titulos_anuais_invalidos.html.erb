@@ -8,21 +8,22 @@ display: none;
 <br/>
 <hr/>
 <div class="botao">
-  <%= form_tag({ :method => 'get', :action => 'search_by_professor_titulos_anuais' })%>
-    <%= error_messages_for 'titulos_anuais' %>
+  <%= form_tag relatorio_titulos_anuais_invalidos_titulo_professors_path, :method => :get%>
+    
    <table width="100%">
     <div class="botao">
       <tr>
         <td width="80%" align="right">
           <div class="botao">
           Professor:
-          <%= collection_select :titulos_anuais, :professor_id, Professor.all, :id, :nome, :prompt => true%>
+          <%= collection_select :professor_id,:professor_id, Professor.all, :id, :nome, :prompt => true%>
           <%= submit_tag 'Filtrar' %></div>
         </td>
       </tr>
     </div>
     </table>
 </div>
+
 <hr/>
 <br/>
 <br/>

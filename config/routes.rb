@@ -19,7 +19,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :acum_trabs
 
-  map.resources :titulo_professors
+  map.resources :titulo_professors, :collection => { :relatorio_prof_titulacao => :get, :relatorio_titulos_anuais_invalidos => :get, :relatorio_por_descricao_titulo => :get}
 
   map.resources :titulacaos
 
@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :trabalhados
 
-  map.resources :professors, :has_many=>:fichas, :collection => { :gerar_ficha => :get, :status => :get}
+  map.resources :professors, :has_many=>:fichas, :collection => { :gerar_ficha => :get, :status => :get, :to_print => :get}
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -82,10 +82,11 @@ map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.root :controller => "home"
   map.calculo_dias '/calculo_dias', :controller => 'calculos', :action => 'calcula_pontuacao'
   map.consulta '/consulta', :controller => 'consulta'  
-  map.relatorio_por_titulacao '/relatorio_por_titulacao', :controller => 'titulo_professors', :action => 'relatorio_prof_titulacao'
-  map.relatorio_por_descricao_titulo '/relatorio_por_descricao_titulo', :controller => 'titulo_professors', :action => 'relatorio_por_descricao_titulo'
-  map.relatorio_titulos_anuais_invalidos   '/relatorio_titulos_anuais', :controller => 'titulo_professors', :action => 'relatorio_titulos_anuais_invalidos'
   map.relatorio_por_funcao '/relatorio_por_funcao', :controller => 'consulta', :action => 'relatorio_por_funcao'
   map.arrumar_titulos '/calculos/arrumar_titulos', :controller => 'calculos', :action => 'arrumar_titulos'
   map.iniciar_ano '/calculos/iniciar_ano', :controller => 'calculos', :action => 'iniciar_ano'
+  map.ficha_automatica '/calculos/ficha_automatica', :controller => 'calculos', :action => 'ficha_automatica'
+  map.relatorio_ficha '/calculos/relatorio_ficha', :controller => 'calculos', :action => 'relatorio_ficha'
+  
+
 end

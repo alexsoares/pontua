@@ -2,10 +2,6 @@ class CalculosController < ApplicationController
   before_filter :load_professors
   require_role "admin"
 
-  def load_professors
-    @professors = Professor.find(:all, :order => "matricula")
-  end
-
   def calcula_pontuacao
       # se o método é get, o formulário ainda não foi enviado, mostramos o form vazio
     if request.get?
@@ -54,5 +50,42 @@ class CalculosController < ApplicationController
     end
     render :action => 'arrumar_titulos'
   end
+
+  def ficha_automatica    
+  end
+
+  def efetivar_ficha_automatica
+    @professor= Professor.all
+    for ficha in @professor
+      @existe = Trabalhado.find_all_by_professor_id(ficha.id, :conditions => ['ano_letivo = ?',$data])
+      if @existe.count == 2 then
+        @fichas = Ficha.new
+          @fichas.professor_id = ficha.id
+          @fichas.acum_trab_id = AcumTrab.find_by_professor_id(ficha.id).id
+          @fichas.trabalhado_anterior_id = Trabalhado.find_by_professor_id(ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, (($data.to_i) -1).to_s]).id
+          @fichas.trabalhado_atual_id = Trabalhado.find_by_professor_id(ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, $data]).id
+          @fichas.total_geral = Professor.find(ficha.id).pontuacao_final
+          @fichas.total_titulacao = Professor.find(ficha.id).total_titulacao
+          @fichas.total_trabalhado = Professor.find(ficha.id).total_trabalhado
+          @fichas.ano_letivo = $data
+        @fichas.save
+      end
+    end    
+    @professor_com_ficha = Ficha.paginate(:all,:page=>params[:page],:per_page =>25,:conditions => ['ano_letivo = ?', $data])
+    redirect_to(relatorio_ficha_path)
+
+  end
+  
+  def relatorio_ficha
+    @professor_com_ficha = Ficha.paginate(:all,:page=>params[:page],:per_page =>25,:conditions => ['ano_letivo = ?', $data])
+  end
+
+  protected
+
+  def load_professors
+    @professors = Professor.find(:all, :order => "matricula")
+    @professor = Professor.find(:all, :include => :fichas)
+  end
+
 
 end

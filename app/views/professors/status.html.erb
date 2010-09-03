@@ -1,1 +1,27 @@
-<h4 align="center">Ainda existem <%= @status.count %> professores a efetivarem os calculos.</h4>  
+<h2 align="center">Ainda existem <%= @status.count %> professores a efetivarem os calculos.</h2>
+<table border="1" align="center" class="relatorios">
+      <tr>
+        <th>Unidade</th>
+        <th>Porcentagem</th>
+      </tr>
+      <% @unidade.each do |unidade| %>
+       <tr>
+        <td>
+          <%= unidade.nome  %>:
+          <% quantidade = 0 %>
+          <%@status.each do |status|%>
+            <% if status.professor.unidade.nome == unidade.nome%>
+              <% quantidade = quantidade.to_i + 1%>
+            <%end%>
+          <%end%>
+          <%= quantidade%><br/>
+          <%  $total = Professor.all(:conditions => ['sede_id = ?',unidade]).count %>
+        </td>
+        <td align="center"><%=  quantidade %> / <%= $total %></td>
+       </tr>
+      <%end%>
+      <tr>
+        <td colspan="2" align="center"><%= will_paginate @unidade %></td
+      </tr>
+
+</table>
