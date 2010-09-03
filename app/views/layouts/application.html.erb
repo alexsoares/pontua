@@ -60,7 +60,7 @@ window.print();
 
                         <li><a href="#nogo29" class="fly">Pontuação</a>
                           <ul>
-                            <li><%= link_to 'Status', status_professors_path_path%></li>
+                            <li><%= link_to 'Status', status_professors_path%></li>
                             <li><%= link_to 'Tempo Serviço', new_trabalhado_path%></li>
                             <li><%= link_to 'Títulos',new_titulo_professor_path %></li>
                             <li><%= link_to_remote('Pontuação', :url => { :action => "relato_prof", :controller => "professors"}) %></li>
@@ -103,6 +103,8 @@ window.print();
                       <li><%= link_to "Unidades", new_unidade_path %></li>
                       <li><%= link_to "Região", new_regiao_path %></li>
                     <%end%>
+                    <li><b>Secundários</b></li>
+                    <li><%= link_to "Lista fichas", relatorio_ficha_path %></li>
                   </ul>
                 </li>
                 <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
