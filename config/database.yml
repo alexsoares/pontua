@@ -25,3 +25,11 @@ test:
   password: s3inf0
   socket: /var/run/mysqld/mysqld.sock
 
+anterior:
+  adapter: mysql
+  encoding: utf8
+  database: bd_2009
+  pool: 5
+  username: root
+  password: s3inf0
+  socket: /var/run/mysqld/mysqld.sock

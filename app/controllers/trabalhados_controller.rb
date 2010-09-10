@@ -4,7 +4,14 @@ class TrabalhadosController < ApplicationController
   before_filter :load_professors
   before_filter :professor_unidade
   require_role ["supervisao","admin","direcao","planejamento"], :for => [:destroy]
-  
+  layout :dri
+
+  def dri
+    if current_user.login == 'dri'
+      current_user.layout
+    end
+  end
+
   def professor_unidade
     if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
       @professor_sede = Professor.find(:all, :order => 'matricula')

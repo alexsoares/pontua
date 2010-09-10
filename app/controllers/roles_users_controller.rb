@@ -4,6 +4,11 @@ class RolesUsersController < ApplicationController
   before_filter :load_role
   # GET /role_users
   # GET /role_users.xml
+  layout :dri
+
+  def dri
+      current_user.layout
+  end
 
   def load_user
     @users = User.find_by_sql("SELECT login,id FROM users where id not in (select user_id from roles_users)")

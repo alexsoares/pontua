@@ -2,9 +2,14 @@ class TitulacaosController < ApplicationController
 #require_role "supervisao", :for => :destroy # don't allow contractors to destroy
 require_role ["supervisao","direcao","admin","planejamento"], :for => :update # don't allow contractors to destroy
 before_filter :login_required
-  before_filter :load_titulos
+before_filter :load_titulos
   # GET /titulacaos
   # GET /titulacaos.xml
+layout :dri
+
+  def dri
+      current_user.layout
+  end
 
 
   def index

@@ -1,6 +1,11 @@
 class RegiaosController < ApplicationController
   require_role ["supervisao","admin","planejamento"]
-  
+  layout :dri
+
+  def dri
+      current_user.layout
+  end
+
   # GET /regiaos
   # GET /regiaos.xml
   def index

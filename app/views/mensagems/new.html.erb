@@ -10,7 +10,7 @@
   </p>
   <p>
     <%= f.label :para, 'Para: ' %>
-    <%= f.collection_select :para ,@user_para,:id,:login %>
+    <%= f.collection_select :para ,@user_para,:id,:login, :prompt => 'TODOS'%>
   </p>
   <p>
     <%= f.label :titulo,'Titulo:' %>

@@ -3,6 +3,11 @@ class AcumTrabsController < ApplicationController
 before_filter :professor_unidade
   # GET /acum_trabs
   # GET /acum_trabs.xml
+ layout :dri
+
+  def dri
+      current_user.layout
+  end
   
   def index
     if (params[:search].nil? || params[:search].empty?)

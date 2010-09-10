@@ -1,6 +1,11 @@
 class UnidadesController < ApplicationController
   
   before_filter :load_regiaos
+  layout :dri
+
+  def dri
+      current_user.layout
+  end
 
   # GET /unidades
   # GET /unidades.xml

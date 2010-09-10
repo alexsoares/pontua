@@ -1,6 +1,12 @@
 class CalculosController < ApplicationController
   before_filter :load_professors
-  require_role "admin"
+  require_role "admin", :except => ['relatorio_ficha']
+
+  layout :dri
+
+  def dri
+      current_user.layout
+  end
 
   def calcula_pontuacao
       # se o método é get, o formulário ainda não foi enviado, mostramos o form vazio
@@ -57,18 +63,46 @@ class CalculosController < ApplicationController
   def efetivar_ficha_automatica
     @professor= Professor.all
     for ficha in @professor
+      @log = Log.new
+      @log.log(current_user.id, ficha.id, "Criado a ficha de pontuacao via ficha automática para : #{ficha.id} - #{ficha.professor.nome}")
+      @log.save!
+
       @existe = Trabalhado.find_all_by_professor_id(ficha.id, :conditions => ['ano_letivo = ?',$data])
-      if @existe.count == 2 then
-        @fichas = Ficha.new
-          @fichas.professor_id = ficha.id
-          @fichas.acum_trab_id = AcumTrab.find_by_professor_id(ficha.id).id
-          @fichas.trabalhado_anterior_id = Trabalhado.find_by_professor_id(ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, (($data.to_i) -1).to_s]).id
-          @fichas.trabalhado_atual_id = Trabalhado.find_by_professor_id(ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, $data]).id
-          @fichas.total_geral = Professor.find(ficha.id).pontuacao_final
-          @fichas.total_titulacao = Professor.find(ficha.id).total_titulacao
-          @fichas.total_trabalhado = Professor.find(ficha.id).total_trabalhado
-          @fichas.ano_letivo = $data
-        @fichas.save
+      @possui_ficha = Ficha.find_all_by_professor_id(ficha.id,:conditions =>['ano_letivo = ?',$data])
+      @contagem_finalizada = AcumTrab.find_all_by_professor_id(ficha.id, :conditions => ['status = 1'])
+
+      if @contagem_finalizada.present?
+        if !@possui_ficha.present?
+          if @existe.count == 2 then
+            @fichas = Ficha.new
+              @fichas.professor_id = ficha.id
+              @acum_trab_ficha = AcumTrab.find_by_professor_id(ficha.id)
+              @fichas.acum_trab_id = @acum_trab_ficha.id
+              @fichas.tot_acum_ant_trab = @acum_trab_ficha.tot_acum_ant_trab
+              @fichas.tot_acum_ant_efet = @acum_trab_ficha.tot_acum_ant_efet
+              @fichas.tot_acum_ant_rede = @acum_trab_ficha.tot_acum_ant_rede
+              @fichas.tot_acum_ant_unid = @acum_trab_ficha.tot_acum_ant_unid
+              @fichas.tot_acum_trab = @acum_trab_ficha.tot_acum_trab
+              @fichas.tot_acum_efet = @acum_trab_ficha.tot_acum_efet
+              @fichas.tot_acum_rede = @acum_trab_ficha.tot_acum_rede
+              @fichas.tot_acum_unid = @acum_trab_ficha.tot_acum_unid
+              @fichas.tot_geral_trab = @acum_trab_ficha.tot_geral_trab
+              @fichas.tot_geral_efet = @acum_trab_ficha.tot_geral_efet
+              @fichas.tot_geral_rede = @acum_trab_ficha.tot_geral_rede
+              @fichas.tot_geral_unid = @acum_trab_ficha.tot_geral_unid
+              @fichas.valor_trab = @acum_trab_ficha.valor_trab
+              @fichas.valor_efet = @acum_trab_ficha.valor_efet
+              @fichas.valor_rede = @acum_trab_ficha.valor_rede
+              @fichas.valor_unid = @acum_trab_ficha.valor_unid
+              @fichas.trabalhado_anterior_id = Trabalhado.find_by_professor_id(ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, (($data.to_i) -1).to_s]).id
+              @fichas.trabalhado_atual_id = Trabalhado.find_by_professor_id(ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, $data]).id
+              @fichas.total_geral = Professor.find(ficha.id).pontuacao_final
+              @fichas.total_titulacao = Professor.find(ficha.id).total_titulacao
+              @fichas.total_trabalhado = Professor.find(ficha.id).total_trabalhado
+              @fichas.ano_letivo = $data
+            @fichas.save
+          end
+        end
       end
     end    
     @professor_com_ficha = Ficha.paginate(:all,:page=>params[:page],:per_page =>25,:conditions => ['ano_letivo = ?', $data])
@@ -77,7 +111,11 @@ class CalculosController < ApplicationController
   end
   
   def relatorio_ficha
-    @professor_com_ficha = Ficha.paginate(:all,:page=>params[:page],:per_page =>25,:conditions => ['ano_letivo = ?', $data])
+      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+        @professor_com_ficha = Ficha.paginate(:all,:page=>params[:page],:per_page =>25,:conditions => ['ano_letivo = ?', $data])
+      else
+        @professor_com_ficha = Ficha.paginate(:all,:page=>params[:page],:per_page =>25,:conditions => ['ano_letivo = ? and (sede_id = ? or sede_id = 54)', $data, current_user.regiao_id])
+      end
   end
 
   protected

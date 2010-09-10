@@ -27,6 +27,7 @@ validates_numericality_of :RD, :only_integer => true, :message =>  ' - SOMENTE N
 
   after_create :log_cadastro
 
+
   def log_cadastro
     @atualiza_log = Log.new
     @atualiza_log.user_id = self.log_user

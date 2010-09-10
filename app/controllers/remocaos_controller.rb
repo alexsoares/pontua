@@ -6,6 +6,11 @@ class RemocaosController < ApplicationController
   require_role ["supervisao","admin","planejamento"], :for => [:update,:destroy] # don't allow contractors to destroy
   # GET /remocaos
   # GET /remocaos.xml
+  layout :dri
+
+  def dri
+      current_user.layout
+  end
 
   def load_uni
     @uni_rem = Unidade.find(:all, :order => "nome")

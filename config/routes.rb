@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :mensagems, :collection => { :saida => :get, :entrada => :get, :message_read => :put}
+    
+  map.resources :mensagems, :collection => { :saida => :get, :entrada => :get, :message_read => :put, :lidas => :get,:message_unread => :put}
 
   map.resources :logs
 
@@ -28,6 +29,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :trabalhados
 
   map.resources :professors, :has_many=>:fichas, :collection => { :gerar_ficha => :get, :status => :get, :to_print => :get}
+
+  map.resource :password
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -87,6 +90,6 @@ map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.iniciar_ano '/calculos/iniciar_ano', :controller => 'calculos', :action => 'iniciar_ano'
   map.ficha_automatica '/calculos/ficha_automatica', :controller => 'calculos', :action => 'ficha_automatica'
   map.relatorio_ficha '/calculos/relatorio_ficha', :controller => 'calculos', :action => 'relatorio_ficha'
-  
+  map.reset_password '/reset_password/:id', :controller => 'passwords', :action => 'edit'
 
 end

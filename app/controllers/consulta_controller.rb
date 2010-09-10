@@ -1,6 +1,12 @@
 class ConsultaController < ApplicationController
 before_filter :sede_unidade
 before_filter :load_titulos
+layout :dri
+
+  def dri
+      current_user.layout
+  end
+
   def index
 
   end
@@ -25,7 +31,7 @@ before_filter :load_titulos
     $v = 1
     render :update do |page|
       page.replace_html 'tempo', :text => ''
-      page.replace_html 'prof_pontua', :partial => 'consultas'
+      page.replace_html 'contents', :partial => 'consultas'
     end
   end
 
@@ -34,7 +40,7 @@ before_filter :load_titulos
     $v = 1
     render :update do |page|
       page.replace_html 'tempo', :text => ''
-      page.replace_html 'prof_pontua', :partial => 'consultas'
+      page.replace_html 'contents', :partial => 'consultas'
     end
  end
 
@@ -109,10 +115,9 @@ before_filter :load_titulos
     if logged_in?
         $reg_prof = current_user.regiao_id
         if $reg_prof == 53 or $reg_prof == 52 then
-          @professors = Professor.find(:all, :conditions => ['id=' + $professor.to_s])
+          @professors = Professor.find(:all, :conditions => ['id= ?', $professor.to_s])
         else
-         #@professors = Professor.find(:all, :conditions => ['id=' + $professor,'regiao_id = ' + $reg_prof])
-         @professors = Professor.find_by_sql("SELECT * FROM professors where id = " + $professor.to_s + " and (sede_id = " + $reg_prof.to_s + " or sede_id = 54)")
+         @professors = Professor.find(:all, :conditions => ['id = ? and (sede_id = ? and sede_id = 54)',$professor.to_s,$reg_prof.to_s])
         end
     end
     render :update do |page|
@@ -127,7 +132,7 @@ before_filter :load_titulos
   $tipo_con = 4
   render :update do |page|
     page.replace_html 'tempo', :text => ''
-    page.replace_html 'prof_pontua', :partial => 'busca_titulacao'
+    page.replace_html 'contents', :partial => 'busca_titulacao'
   end
  end
 
@@ -148,7 +153,7 @@ before_filter :load_titulos
      end
      @professorstitulo = TituloProfessor.find(:all, :conditions => ['titulo_id=' + $titulo.to_s])
     render :update do |page|
-      page.replace_html 'consultas', :partial => 'lista_consulta_tituloprofessor'
+      page.replace_html 'contents', :partial => 'lista_consulta_tituloprofessor'
       page.replace_html 'tempo', :text => ''
       page.replace_html 'nome_consulta', :text => 'Professores por Titulação'
     end
@@ -161,7 +166,7 @@ before_filter :load_titulos
 
     render :update do |page|
       page.replace_html 'tempo', :text => ''
-      page.replace_html 'conteudo', :partial => 'relatorio_geral_pontuacao'
+      page.replace_html 'contents', :partial => 'relatorio_geral_pontuacao'
     end
   end
 

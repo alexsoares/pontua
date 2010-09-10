@@ -1,5 +1,6 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
+  LAYOUT = %w(application alternative)
   has_one :roles_user, :dependent => :delete
   
   
@@ -30,12 +31,15 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 4..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :login,    :within => 3..40
-    validates_uniqueness_of   :login
+  validates_uniqueness_of   :login, :message => "Nome de usuario já existe teste outro"
+  validates_presence_of :regiao_id
+
+
   before_save :encrypt_password
   before_create :make_activation_code 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :password, :password_confirmation, :regiao_id
+  attr_accessible :login, :password, :password_confirmation, :regiao_id, :email, :layout
 
   # Activates the user in the database.
   def activate
@@ -95,6 +99,31 @@ class User < ActiveRecord::Base
     save(false)
   end
 
+  def forgot_password
+    @forgotten_password = true
+    self.make_password_reset_code
+  end
+
+  def reset_password
+    # First update the password_reset_code before setting the
+    # reset_password flag to avoid duplicate email notifications.
+    update_attribute(:password_reset_code, nil)
+    @reset_password = true
+  end
+
+  #used in user_observer
+  def recently_forgot_password?
+    @forgotten_password
+  end
+
+  def recently_reset_password?
+    @reset_password
+  end
+
+  def self.find_for_forget(email)
+    find :first, :conditions => ['email = ? and activated_at IS NOT NULL', email]
+  end
+
   # Returns true if the user has just been activated.
   def recently_activated?
     @activated
@@ -122,5 +151,7 @@ class User < ActiveRecord::Base
       self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
     end
 
-
+	  def make_password_reset_code
+	    self.password_reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+  	end
 end

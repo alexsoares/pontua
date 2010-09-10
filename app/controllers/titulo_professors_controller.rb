@@ -5,6 +5,12 @@ class TituloProfessorsController < ApplicationController
   require_role ["supervisao","planejamento","administrador"], :for_all_except => [:search,:search_by_desc,:search_by_professor_titulos_anuais,:relatorio_titulos_anuais_invalidos,:relatorio_por_descricao_titulo, :relatorio_prof_titulacao,:update, :titulos_busca, :destroy, :index, :new, :create, :sel_prof, :busca_prof, :guarda_valor1, :guarda_valor, :nome_professor]
   # GET /titulo_professors
   # GET /titulo_professors.xml
+  layout :dri
+
+  def dri
+      current_user.layout
+  end
+
 
   #Relatorio por tiulos
 

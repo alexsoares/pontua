@@ -6,7 +6,11 @@
 <%if @mensagem.user_id == current_user.id%>
   <p>
     <b>Enviada para:</b>
-    <%=h User.find(@mensagem.para).login %>
+    <%if @mensagem.para == 0%>
+      TODOS
+    <%else%>
+      <%=h User.find(@mensagem.para).login %>
+    <%end%>
   </p>
 <%else%>
   <p>

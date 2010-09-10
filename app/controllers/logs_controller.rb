@@ -2,6 +2,11 @@ class LogsController < ApplicationController
   # GET /logs
   # GET /logs.xml
   before_filter :load_users
+  layout :dri
+
+  def dri
+      current_user.layout
+  end
 
    def log_user
     $log_user = params[:log_user_id]

@@ -21,6 +21,10 @@
        <p><label for="password_confirmation">Confirmação Senha:</label><br/>
        <%= f.password_field :password_confirmation %></p>
 
+       <p><label for="email">Email:</label><br/>
+       <%= f.text_field :email %></p>
+
+
        <p><label for="regiao_id">Unidade:</label><br/>
                <%= f.collection_select :regiao_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %></p>
              <%= observe_field :user_regiao_id,

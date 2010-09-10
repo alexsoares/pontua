@@ -14,6 +14,11 @@ require_role ['direcao',"supervisao","admin","planejamento"], :for => :update # 
 require_role ["supervisao","admin","planejamento"], :for => :destroy # don't allow contractors to destroy
   # GET /professors
   # GET /professors.xml
+layout :dri
+
+  def dri    
+      current_user.layout
+  end
 
   def login
     if !logged_in? then

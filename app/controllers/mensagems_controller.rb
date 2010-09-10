@@ -2,8 +2,17 @@ class MensagemsController < ApplicationController
   before_filter :load_users
   # GET /mensagems
   # GET /mensagems.xml
+  layout :dri
+
+  def dri
+      current_user.layout
+  end
+
+
   def index
-    @mensagems = Mensagem.all(:conditions => ['para = ? and lido = 0', current_user.id])
+    @entrada = Mensagem.paginate(:all,:page=>params[:page],:per_page =>10,:conditions => ['((para = ? and geral = 1)) and lido = 0', current_user.id])
+    @saida = Mensagem.all(:conditions => ['user_id = ? and para is not null', current_user.id])
+    @lidas = Mensagem.paginate(:all,:page=>params[:page],:per_page =>10,:conditions => ['((para = ? and geral = 1)) and lido = 1', current_user.id])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @mensagems }
@@ -11,15 +20,19 @@ class MensagemsController < ApplicationController
   end
 
   def saida
-    @mensagems = Mensagem.all(:conditions => ['para = ? and lido = 1', current_user.id])
+    @mensagems = Mensagem.paginate(:all,:page=>params[:page],:per_page =>10,:conditions => ['user_id = ? and para is not null', current_user.id])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @mensagems }
     end
   end
 
+  def lidas
+    @lidas = Mensagem.paginate(:all,:page=>params[:page],:per_page =>10,:conditions => ['((para = ? and geral = 1)) and lido = 1', current_user.id])
+  end
+
   def entrada
-    @mensagems = Mensagem.all(:conditions => ['para = ? and lido = 0', current_user.id])
+    @mensagems = Mensagem.paginate(:all,:page=>params[:page],:per_page =>10,:conditions => ['((para = ? and geral = 1)) and lido = 0', current_user.id])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @mensagems }
@@ -31,6 +44,7 @@ class MensagemsController < ApplicationController
   # GET /mensagems/1.xml
   def show
     @mensagem = Mensagem.find(params[:id])
+    Mensagem.update_all(["lido = ?",true], :id => params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @mensagem }
@@ -58,7 +72,20 @@ class MensagemsController < ApplicationController
   def create
     @mensagem = Mensagem.new(params[:mensagem])
     @mensagem.user_id = current_user.id
-    teste = @mensagem.created_at
+    if @mensagem.para.nil?
+      @users = User.all
+      @users.each do |mensagem|
+        @msg = Mensagem.new
+          @msg.user_id = current_user
+          @msg.geral = 1
+          @msg.para = mensagem.id
+          @msg.titulo = @mensagem.titulo
+          @msg.texto = @mensagem.texto
+        @msg.save
+      end
+      flash[:notice] = 'Mensagem enviada para todos usuários.'
+      redirect_to(@msg)
+    else
     respond_to do |format|
       if @mensagem.save
         flash[:notice] = 'Mensagem was successfully created.'
@@ -69,6 +96,7 @@ class MensagemsController < ApplicationController
         format.xml  { render :xml => @mensagem.errors, :status => :unprocessable_entity }
       end
     end
+   end
   end
 
   # PUT /mensagems/1
@@ -104,8 +132,14 @@ class MensagemsController < ApplicationController
   def message_read
     Mensagem.update_all(["lido = ?",true], :id => params[:message_ids])
     redirect_to entrada_mensagems_path
-
   end
+
+  def message_unread
+    Mensagem.update_all(["lido = ?",false], :id => params[:message_ids])
+    redirect_to lidas_mensagems_path
+  end
+
+
   private
 
   def load_users

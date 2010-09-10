@@ -50,8 +50,8 @@ margin:25px;
 
 #obs {
    position: absolute;
-   left: 600px;
-   top: 360px;
+   left: 498px;
+   top: 180px;
    }
 
 #topo {
@@ -276,3 +276,23 @@ font-size: large;
         border-left: #FF8585 1px solid;
 
     }
+
+.corpo{
+    height:500px;
+    width:900px;
+    background-color:white;
+    font-size:10px;
+
+}
+#email{
+    height:400px;
+    width:800px;
+    background-image:url(Imagens/email.jpg);
+    border-color:black;
+    border-left: double;
+    border-bottom: double;
+    border-top: double;
+    border-right: double;
+
+    
+}

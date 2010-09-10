@@ -3,26 +3,43 @@ class UsersController < ApplicationController
   
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
-  layout 'login'
 
-  def exporta_xls
-       resultado << "<table><tr><th>ID</th><th>Nome</th></tr>"
-       User.all(:order => :id).each do |o|
-         resultado << "<tr><td>#{o.id}</td><td>#{o.login}<td></tr>"
-       end
-       resultado << "</table>"
-       send_data(resultado, :filename=>"relatorio.xls",:type=>"text/xls")
- end
+  layout :dri
+
+  def dri
+      current_user.layout
+  end
+
 
   def logged?
     layout 'application'
   end
+
   def load_unidades
     @unidades = Unidade.find(:all, :order => "nome")
   end
   def index
-
   end
+
+  def edit
+    @user = current_user
+  end
+
+    def update
+    @user = current_user
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        flash[:notice] = 'Usuario was successfully updated.'
+        format.html { redirect_to(@user) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+
 
   def aviso
       render :update do |page|
@@ -48,8 +65,7 @@ class UsersController < ApplicationController
     # uncomment at your own risk
     # reset_session
     @user = User.new(params[:user])
-    
-    $teste66 = @user.regiao_id
+    Notificador.deliver_notificar(@user)
     @user.save
     if @user.errors.empty?
       self.current_user = @user
