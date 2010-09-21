@@ -15,7 +15,7 @@ require_role ["supervisao","admin","planejamento"], :for => :destroy # don't all
   # GET /professors
   # GET /professors.xml
 layout :define_layout
-
+helper_method :sort_column, :sort_direction
   def define_layout    
       current_user.layout
   end
@@ -33,16 +33,18 @@ layout :define_layout
     if (params[:search].nil? || params[:search].empty?)
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
         @search = Professor.search(params[:search])
-        @professors = @search.paginate(:all,:page=>params[:page],:per_page =>20, :include => 'unidade')        
+        @professors = @search.paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade', :order => sort_column + " " + sort_direction)
       else
-        @professors = Professor.paginate(:page=>params[:page],:per_page =>20, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'nome ASC', :include => "unidade")
+        @search = Professor.search(params[:search])
+        @professors = @search.paginate(:page=>params[:page],:per_page =>15, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => sort_column + " " + sort_direction, :include => "unidade")
       end
     else
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
         @search = Professor.search(params[:search])
-        @professors = @search.paginate(:all,:page=>params[:page],:per_page =>20, :include => 'unidade')
+        @professors = @search.paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade', :order => sort_column + " " + sort_direction)
       else
-        @professors = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => 'nome ASC', :include => "unidade")
+        @search = Professor.search(params[:search])
+        @professors = @search.paginate(:all,:page=>params[:page],:per_page =>15, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => sort_column + " " + sort_direction, :include => "unidade")
       end
     end
     respond_to do |format|
@@ -1002,7 +1004,15 @@ end
     end
   end
 
-  
+private
+
+  def sort_column
+    Professor.column_names.include?(params[:sort]) ? params[:sort] : "nome"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 
 protected
 

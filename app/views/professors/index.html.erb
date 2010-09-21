@@ -3,91 +3,73 @@
     <table width="100%">
       <tr>
         <% form_for @search do |f| %>
-          <td align="right">
-            <%= f.label :matricula_equals, "Matricula" %>
-            <%= f.text_field :matricula_equals, :size => 10 %>
-          </td>
-       </tr>
-       <tr><td align="right">OU</td></tr>
-       <tr>
-          <td align="right">
-            <%= f.label :nome_like, "Nome" %>
-            <%= f.text_field :nome_like, :size => 10 %>
-          </td>
-        <tr>
-          <td align="right">
-            <%= f.submit "Buscar" %>
-          </td>
-        </tr>
+          <tr>
+            <td align="right">
+              <%= f.label :matricula_equals, "Matricula" %>
+              <%= f.text_field :matricula_equals, :size => 10 %>              
+              <%= f.label :nome_like, "Nome" %>
+              <%= f.text_field :nome_like, :size => 10 %>
+            </td>
+            <td align="center" colspan="2">
+              <%= f.submit "Buscar" %>
+            </td>
+          </tr>
         <% end %>
       </tr>
     </table>
   </div>
 
-<div class="relatorios">
-<div class="botao">
-   <input type="Button" Value="Imprimir" onclick="Imprimir()">
-   <br/>
-  <br/>
-</div>
-  <fieldset>
-    <legend><font size=5>Professor</font></legend>
-   <table border ="1" cellpadding="5" cellspacing="1" width="100%" frame="box" rules="all" >
-      <tr>
-        <td colspan="14">
-          <h1 align="center">Relatório de Professores</h1>
-        </td>
-      </tr>
-    <tr>
-      <th colspan="3" bgcolor="#cccccc">Nome</th>
-      <th colspan="1" bgcolor="#cccccc">Matrícula</th>
-      <th colspan="2" bgcolor="#cccccc">Data Ingresso</th>
-      <th colspan="1" bgcolor="#cccccc">Sede</th>
-      <th colspan="3" bgcolor="#cccccc">Função</th>
-      <th colspan="4" bgcolor="#cccccc"></th>
-
-
-    </tr>
-
-<% for professor in @professors %>
-
-  <tr>
-    <td colspan="3"><center><%=h professor.nome.upcase %></center></td>
-    <td colspan="1"><center><%=h professor.matricula %></center></td>
-    <%if professor.dt_ingresso.nil? then %>
-      <td colspan="2"><center><%=h professor.dt_ingresso %></center></td>
-    <%else%>
-      <td colspan="2"><center><%=h professor.dt_ingresso.strftime("%d/%m/%y") %></center></td>
-    <%end%>
-    <td colspan="1"><center><%=h professor.unidade.nome %></center></td>
-    <td colspan="3"><center><%=h professor.funcao %></center></td>
-    <td><div class="botao3d"><%= link_to 'Ficha', professor_fichas_path(professor) %></div></td>
-    <td><div class="botao3d"><%= link_to 'Exibir', professor %></div></td>
-    <td><div class="botao3d"><%= link_to 'Alterar', edit_professor_path(professor) %></div></td>
-<%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
-    <td><div class="botao3d"><%= link_to 'Apagar', professor, :confirm => 'Tem certeza?', :method => :delete %></div></td>
-<%end%>
-  </tr>
-<% end %>
-
-
-<p>
-  Sort by:
-  <%= order @search, :by => :nome %> |
-  <%= order @search, :by => :matricula %>
-</p>
-    </table>
-
-  </fieldset>
- <br />
-   <b><%=  @professors.count %> registros encontrados nesta pagina</b>
-
-
-  <div class="botao">
+  <div class="relatorios">
+    <div class="botao">
+      <input type="Button" Value="Imprimir" onclick="Imprimir()">
+      <br/>
+      <br/>
+    </div>
+    <fieldset>
+      <legend><font size=5>Professor</font></legend>
+      <table border ="1" cellpadding="5" cellspacing="1" width="100%" frame="box" rules="all" >
+        <tr>
+          <td colspan="14">
+            <h1 align="center">Relatório de Professores</h1>
+          </td>
+        </tr>
+        <tr>
+          <th colspan="3" bgcolor="#cccccc"><%= sortable "nome" %></th>
+          <th colspan="1" bgcolor="#cccccc"><%= sortable "matricula" %></th>
+          <th colspan="2" bgcolor="#cccccc"><%= sortable "dt_ingresso" %></th>
+          <th colspan="1" bgcolor="#cccccc"><%= sortable "sede_id"%></th>
+          <th colspan="3" bgcolor="#cccccc"><%= sortable "funcao"%></th>
+          <th colspan="4" bgcolor="#cccccc"></th>
+        </tr>
+        <% for professor in @professors %>
+          <tr>
+            <td colspan="3"><center><%=h professor.nome.upcase %></center></td>
+            <td colspan="1"><center><%=h professor.matricula %></center></td>
+            <%if professor.dt_ingresso.nil? then %>
+              <td colspan="2"><center><%=h professor.dt_ingresso %></center></td>
+            <%else%>
+              <td colspan="2"><center><%=h professor.dt_ingresso.strftime("%d/%m/%y") %></center></td>
+            <%end%>
+            <td colspan="1"><center><%=h professor.unidade.nome %></center></td>
+            <td colspan="3"><center><%=h professor.funcao %></center></td>
+            <td><div class="botao3d"><%= link_to 'Ficha', professor_fichas_path(professor) %></div></td>
+            <td><div class="botao3d"><%= link_to 'Exibir', professor %></div></td>
+            <td><div class="botao3d"><%= link_to 'Alterar', edit_professor_path(professor) %></div></td>
+            <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+              <td><div class="botao3d"><%= link_to 'Apagar', professor, :confirm => 'Tem certeza?', :method => :delete %></div></td>
+            <%end%>
+          </tr>
+        <% end %>
+      </table>
+    </fieldset>
+    <%= will_paginate @professors %>
     <br/>
-    <input type="Button" Value="Imprimir" onclick="Imprimir()">
-  </div>
-  <br/>
-  <br/>
+    <b><%=  @professors.count %> registros encontrados nesta pagina</b>
+    <div class="botao">
+      <br/>
+      <input type="Button" Value="Imprimir" onclick="Imprimir()">
+    </div>
+    <br/>
+    <br/>
   </div>
 </div>
