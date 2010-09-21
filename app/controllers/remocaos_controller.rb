@@ -6,9 +6,9 @@ class RemocaosController < ApplicationController
   require_role ["supervisao","admin","planejamento"], :for => [:update,:destroy] # don't allow contractors to destroy
   # GET /remocaos
   # GET /remocaos.xml
-  layout :dri
+  layout :define_layout
 
-  def dri
+  def define_layout
       current_user.layout
   end
 

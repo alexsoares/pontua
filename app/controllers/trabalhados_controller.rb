@@ -1,12 +1,13 @@
 class TrabalhadosController < ApplicationController
   # GET /trabalhados
   # GET /trabalhados.xml
+  before_filter :login_required
   before_filter :load_professors
   before_filter :professor_unidade
   require_role ["supervisao","admin","direcao","planejamento"], :for => [:destroy]
-  layout :dri
+  layout :define_layout
 
-  def dri
+  def define_layout
     if current_user.login == 'dri'
       current_user.layout
     end

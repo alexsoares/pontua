@@ -3,8 +3,7 @@ has_one :acum_trab, :dependent => :destroy
 belongs_to :unidade, :class_name => "Unidade", :foreign_key => "sede_id"
 has_many :trabalhados, :dependent => :destroy
 has_many :fichas, :dependent => :destroy
-has_and_belongs_to_many :titulacaos,
-                        :join_table => "titulo_professors", :association_foreign_key => "titulo_id"
+has_many :titulo_professors
 
 validates_presence_of :matricula, :message => ' -  MATRÍCULA - PREENCHIMENTO OBRIGATÓRIO'
 validates_presence_of :nome, :message => ' -  NOME - PREENCHIMENTO OBRIGATÓRIO'
@@ -55,8 +54,6 @@ validates_numericality_of :RD, :only_integer => true, :message =>  ' - SOMENTE N
   end
 
   def self.calculos
-    
-    
   end
 
   def self.pontuacao_final(id)
@@ -66,6 +63,10 @@ validates_numericality_of :RD, :only_integer => true, :message =>  ' - SOMENTE N
 
   def self.insercao_completa(id)
     Trabalhado.find_all_by_professor_id(id)
+  end
+
+  def self.total(unidade)
+    Professor.find_all_by_sede_id(unidade).count
   end
 
 end

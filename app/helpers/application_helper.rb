@@ -4,4 +4,8 @@ module ApplicationHelper
     value = value.nil? ? hint : value
     text_field_tag name, value, {:onclick => "if($(this).value == '#{hint}'){$(this).value = ''}", :onblur => "if($(this).value == ''){$(this).value = '#{hint}'}" }.update(options.stringify_keys)
   end
+
+  def current_announcement
+    @current_announcements ||= Announcement.current_announcements(session[:announcement_hide_time])
+  end
 end

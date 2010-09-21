@@ -1,8 +1,9 @@
 class RegiaosController < ApplicationController
+  before_filter :login_required
   require_role ["supervisao","admin","planejamento"]
-  layout :dri
+  layout :define_layout
 
-  def dri
+  def define_layout
       current_user.layout
   end
 

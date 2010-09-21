@@ -5,7 +5,7 @@ class TituloProfessor < ActiveRecord::Base
   validates_numericality_of :quantidade,:if => :verify_qtd?, :message => ' - Acima de 30 hrs'
 
   belongs_to :professor
-  belongs_to :titulacao, :class_name => "Titulacao",:foreign_key => "titulo_id"
+  belongs_to :titulo, :class_name => 'Titulacao', :foreign_key => "titulo_id"
   DTA = Date.today
 
 
@@ -73,5 +73,40 @@ protected
     end
   end
 
+  def self.titulo_permanente(professor)
+    TituloProfessor.all(:joins => :titulo, :conditions => ['professor_id = ? and titulacaos.tipo = "PERMANENTE"',professor])
+  end
+
+  def self.titulo_anual(professor)
+    TituloProfessor.all(:joins => :titulo, :conditions => ['professor_id = ? and titulacaos.tipo = "ANUAL"',professor])
+  end
+
+
+  #professor_current busca professores para os usuários "administrador" "planejamento" "supervisao"
+  def self.professor_current(professor)
+    Professor.all(:conditions => ['id= ?', professor])
+  end
+
+  #professor_normal busca professores para os outros usuários
+  def self.professor_normal(professor,regiao)
+    Professor.all(:conditions => ['id = ? and (sede_id = ? and sede_id = 54)',professor,regiao])    
+  end
+
+  def self.professor_consulta_titulo_permanente(titulo,regiao)
+    Professor.all(:joins => :titulo_professors, :conditions =>['titulo_professors.titulo_id = ? and (p.sede_id = ? or p.sede_id = 54)', titulo,regiao],:select => "DISTINCT professors.*")
+  end
+  
+  def self.professor_consulta_titulo_anual(titulo,regiao,ano_letivo)
+    Professor.all(:joins => :titulo_professors, :conditions =>['titulo_professors.titulo_id = ? and titulo_professors.ano_letivo = ? and (p.sede_id = ? or p.sede_id = 54)', titulo,ano_letivo,regiao],:select => "DISTINCT professors.*",:page=>params[:page],:per_page =>2)
+  end
+
+  def self.verify(professor,ano_letivo,titulo)
+    if (titulo == 1 or titulo == 2 or titulo == 3 or titulo == 4 or titulo == 5) then
+      TituloProfessor.find(:all,:joins => :titulo, :conditions => ['titulacaos.id = ? and professor_id = ? and ano_letivo = ?',titulo,professor])
+    else
+      @tp = TituloProfessor.find(:all,:joins => :titulo, :conditions => ['titulacaos.id = ? and professor_id = ? and ano_letivo = ?',titulo,professor,ano_letivo])
+    end
+
+  end
 
 end

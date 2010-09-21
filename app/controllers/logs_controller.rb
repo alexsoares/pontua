@@ -2,9 +2,9 @@ class LogsController < ApplicationController
   # GET /logs
   # GET /logs.xml
   before_filter :load_users
-  layout :dri
+  layout :define_layout
 
-  def dri
+  def define_layout
       current_user.layout
   end
 

@@ -14,9 +14,9 @@ require_role ['direcao',"supervisao","admin","planejamento"], :for => :update # 
 require_role ["supervisao","admin","planejamento"], :for => :destroy # don't allow contractors to destroy
   # GET /professors
   # GET /professors.xml
-layout :dri
+layout :define_layout
 
-  def dri    
+  def define_layout    
       current_user.layout
   end
 
@@ -32,16 +32,15 @@ layout :dri
   def index
     if (params[:search].nil? || params[:search].empty?)
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-        @professors = Professor.paginate(:page=>params[:page],:per_page =>20, :conditions => [''],:order =>  'nome ASC', :include => "unidade")
-#          find(:all, :conditions => [''],:order =>  'nome ASC', :include => "unidade")
+        @search = Professor.search(params[:search])
+        @professors = @search.paginate(:all,:page=>params[:page],:per_page =>20, :include => 'unidade')        
       else
         @professors = Professor.paginate(:page=>params[:page],:per_page =>20, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'nome ASC', :include => "unidade")
       end
-      #@professors = Professor.paginate(:page => params[:page], :per_page => 30)
     else
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-        @professors = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :include => "unidade")
-          #find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :include => "unidade")
+        @search = Professor.search(params[:search])
+        @professors = @search.paginate(:all,:page=>params[:page],:per_page =>20, :include => 'unidade')
       else
         @professors = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => 'nome ASC', :include => "unidade")
       end
@@ -837,17 +836,25 @@ end
   def gerar_ficha
     @ficha = Professor.find_by_matricula(params[:ficha])
     unless @ficha.nil?
-      @fichas = Ficha.new
-      @fichas.professor_id = @ficha.id
-      @fichas.acum_trab_id = AcumTrab.find_by_professor_id(@ficha.id).id
-      @fichas.trabalhado_anterior_id = Trabalhado.find_by_professor_id(@ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, (($data.to_i) -1).to_s]).id
-      @fichas.trabalhado_atual_id = Trabalhado.find_by_professor_id(@ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, $data]).id
-      @fichas.total_geral = Professor.find(@ficha.id).pontuacao_final
-      @fichas.total_titulacao = Professor.find(@ficha.id).total_titulacao
-      @fichas.total_trabalhado = Professor.find(@ficha.id).total_trabalhado
-      @fichas.ano_letivo = $data
-      @fichas.save
-
+      @existe = Trabalhado.find_all_by_professor_id(@ficha.id, :conditions => ['ano_letivo = ?',$data])
+      @possui_ficha = Ficha.find_all_by_professor_id(@ficha.id,:conditions =>['ano_letivo = ?',$data])
+      @contagem_finalizada = AcumTrab.find_all_by_professor_id(@ficha.id, :conditions => ['status = 1'])
+      if @contagem_finalizada.present?
+        if !@possui_ficha.present?
+          if @existe.count == 2 then
+            @fichas = Ficha.new
+            @fichas.professor_id = @ficha.id
+            @fichas.acum_trab_id = AcumTrab.find_by_professor_id(@ficha.id).id
+            @fichas.trabalhado_anterior_id = Trabalhado.find_by_professor_id(@ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, (($data.to_i) -1).to_s]).id
+            @fichas.trabalhado_atual_id = Trabalhado.find_by_professor_id(@ficha.id, :conditions => ['ano_letivo = ? and ano = ?',$data, $data]).id
+            @fichas.total_geral = Professor.find(@ficha.id).pontuacao_final
+            @fichas.total_titulacao = Professor.find(@ficha.id).total_titulacao
+            @fichas.total_trabalhado = Professor.find(@ficha.id).total_trabalhado
+            @fichas.ano_letivo = $data
+            @fichas.save
+          end
+        end
+      end
       redirect_to(professor_fichas_path(@ficha.id))
 
   # =======================================
@@ -964,7 +971,7 @@ end
 
   def status
     @unidade = Unidade.paginate(:all,:page=>params[:page],:per_page =>25)
-    @status = AcumTrab.all(:include =>['professor'],:conditions => ['status = 0'], :order => 'professors.sede_id' )
+    @status = AcumTrab.all(:joins =>:professor,:conditions => ['status = 0'], :order => 'professors.sede_id' )
   end
 
   def to_print

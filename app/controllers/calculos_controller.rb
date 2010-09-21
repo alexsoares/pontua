@@ -2,9 +2,9 @@ class CalculosController < ApplicationController
   before_filter :load_professors
   require_role "admin", :except => ['relatorio_ficha']
 
-  layout :dri
+  layout :define_layout
 
-  def dri
+  def define_layout
       current_user.layout
   end
 

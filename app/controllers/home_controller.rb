@@ -3,9 +3,9 @@ class HomeController < ApplicationController
   
   before_filter :login_required
   before_filter :load_professors
-  layout :dri
+  layout :define_layout
 
-  def dri
+  def define_layout
       current_user.layout
   end
   def index

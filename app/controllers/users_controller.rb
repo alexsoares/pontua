@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
+  before_filter :login_required
   before_filter :load_unidades
   
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
-  layout :dri
+  layout :define_layout
 
-  def dri
+  def define_layout
       current_user.layout
   end
 

@@ -1,11 +1,11 @@
 class AcumTrabsController < ApplicationController
-
+before_filter :login_required
 before_filter :professor_unidade
   # GET /acum_trabs
   # GET /acum_trabs.xml
- layout :dri
+ layout :define_layout
 
-  def dri
+  def define_layout
       current_user.layout
   end
   

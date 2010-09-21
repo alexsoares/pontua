@@ -1,14 +1,13 @@
-class ConsultaController < ApplicationController
+class ConsultasController < ApplicationController
 before_filter :sede_unidade
 before_filter :load_titulos
-layout :dri
+layout :define_layout
 
-  def dri
+  def define_layout
       current_user.layout
   end
 
   def index
-
   end
 
 
@@ -29,10 +28,6 @@ layout :dri
   def consulta_ppu
     $tipo_con = 1
     $v = 1
-    render :update do |page|
-      page.replace_html 'tempo', :text => ''
-      page.replace_html 'contents', :partial => 'consultas'
-    end
   end
 
  def consulta_pu
@@ -50,17 +45,18 @@ layout :dri
       $sede= 'TODAS UNIDADES'
     else
       @professors = Professor.find_all_by_sede_id($sede)
+      @professors = Professor.paginate(:all,:conditions => ['sede_id = ?',$sede],:page=>params[:page],:per_page =>20)
       $professor = Professor.find_all_by_sede_id($sede).object_id
 
     end
   if $tipo_con == 1 then
    if $sede == 'TODAS UNIDADES' then
-      @professorsnome = Professor.find(:all, :order => 'nome')
+      @professorsnome = Professor.paginate(:all, :order => 'nome',:page=>params[:page],:per_page =>20)
     else
      if $sede == 'SELECIONE' then
        @professorsnome = ''
      else
-        @professorsnome = Professor.find_all_by_sede_id($sede, :order => 'nome')
+        @professorsnome = Professor.paginate(:all, :conditions => ['sede_id = ?',$sede], :order => 'nome',:page=>params[:page],:per_page =>20)
      end
     end
       render :update do |page|
@@ -70,12 +66,12 @@ layout :dri
   else
    if $tipo_con == 2 then
     if $sede == 'TODAS UNIDADES' then
-      @professorsnome = Professor.find(:all, :order => 'pontuacao_final DESC')
+      @professorsnome = Professor.paginate(:all, :order => 'pontuacao_final DESC',:page=>params[:page],:per_page =>20)
     else
      if $sede == 'SELECIONE' then
        @professorsnome = ''
      else
-      @professorsnome = Professor.find_all_by_sede_id($sede, :order => 'pontuacao_final DESC')
+      @professorsnome = Professor.paginate(:all,:conditions => ['sede_id = ?',$sede], :order => 'pontuacao_final DESC',:page=>params[:page],:per_page =>20)
      end
     end
 
@@ -88,12 +84,12 @@ layout :dri
    else
    if $tipo_con == 4 then
    if $sede == 'TODAS UNIDADES' then
-      @professorsnome = Professor.find(:all, :order => 'nome')
+      @professorsnome = Professor.paginate(:all, :order => 'nome',:page=>params[:page],:per_page =>20)
     else
      if $sede == 'SELECIONE' then
        @professorsnome = ''
      else
-        @professorsnome = Professor.find_all_by_sede_id($sede, :order => 'nome')
+        @professorsnome = Professor.paginate(:all,:conditions => ['sede_id = ?',$sede], :order => 'nome',:page=>params[:page],:per_page =>20)
      end
     end
       render :update do |page|
@@ -113,13 +109,15 @@ layout :dri
     end
     else
     if logged_in?
-        $reg_prof = current_user.regiao_id
-        if $reg_prof == 53 or $reg_prof == 52 then
-          @professors = Professor.find(:all, :conditions => ['id= ?', $professor.to_s])
+        
+        if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+         @professors = TituloProfessor.professor_current(params[:pro_professor_id]).paginate(:page=>params[:page],:per_page =>20)
         else
-         @professors = Professor.find(:all, :conditions => ['id = ? and (sede_id = ? and sede_id = 54)',$professor.to_s,$reg_prof.to_s])
+         @professor = TituloProfessor.professor_normal(params[:pro_professor_id],current_user.regiao_id).paginate(:page=>params[:page],:per_page =>20)
         end
     end
+    @tp = TituloProfessor.titulo_permanente(params[:pro_professor_id])
+    @tp1 = TituloProfessor.titulo_permanente(params[:pro_professor_id])
     render :update do |page|
       page.replace_html 'consultas', :partial => 'lista_consulta_nomeprofessor'
       page.replace_html 'tempo', :text => ''
@@ -137,32 +135,32 @@ layout :dri
  end
 
  def consulta_titulo
-    $titulo = params[:tit_titulo_id]
-    $teste = $titulo.empty?
-   if $titulo.empty? then
-    render :update do |page|
-      page.replace_html 'tempo', :text => ''
-      page.replace_html 'consultas', :text => ''
-    end
-    else
-      @professorstitulo = TituloProfessor.find_by_sql("SELECT distinct(professor_id),obs,quantidade,titulo_id,pontuacao_titulo,valor,dt_titulo,dt_validade,status FROM titulo_professors where titulo_id = " + $titulo + " order by professor_id")
-     if current_user.regiao_id == 53 then
-      @professors = TituloProfessor.find_by_sql("Select * from titulo_professors tp inner join professors p on tp.professor_id = p.id where titulo_id =" + $titulo.to_s)
+   if (params[:search].nil? || params[:search].empty?)
+      titulo = 0
+   else
+      titulo = params[:search][:search]
+   end
+    if titulo != 0
+     if (current_user.regiao_id == 53 or current_user.regiao_id == 52) then
+      if (params[:search][:search] == 1 or params[:search][:search] == 2 or params[:search][:search] == 3 or params[:search][:search] == 4 or params[:search][:search] == 5) then
+        @professors = Professor.paginate(:all,:joins => :titulo_professors, :conditions =>['titulo_professors.titulo_id = ?', titulo],:select => "DISTINCT professors.*",:page=>params[:page],:per_page =>2)
+      else
+        @professors = Professor.paginate(:all,:joins => :titulo_professors, :conditions =>['titulo_professors.titulo_id = ? and titulo_professors.ano_letivo = ?', titulo,$data],:select => "DISTINCT professors.*",:page=>params[:page],:per_page =>2)
+      end
      else
-      @professors = TituloProfessor.find_by_sql("Select * from titulo_professors tp inner join professors p on tp.professor_id = p.id where titulo_id =" + $titulo.to_s + " and (p.sede_id = " + current_user.regiao_id.to_s + " or p.sede_id = 54)")
+       if (params[:search][:search] == 1 or params[:search][:search] == 2 or params[:search][:search] == 3 or params[:search][:search] == 4 or params[:search][:search] == 5) then
+         @professors = TituloProfessor.professor_consulta_titulo_permanente(params[:search][:search],current_user).paginate(:page=>params[:page],:per_page =>2)
+       else
+         @professors = TituloProfessor.professor_consulta_titulo_anual(params[:search][:search],current_user,$data).paginate(:page=>params[:page],:per_page =>2)
+       end
      end
      @professorstitulo = TituloProfessor.find(:all, :conditions => ['titulo_id=' + $titulo.to_s])
-    render :update do |page|
-      page.replace_html 'contents', :partial => 'lista_consulta_tituloprofessor'
-      page.replace_html 'tempo', :text => ''
-      page.replace_html 'nome_consulta', :text => 'Professores por Titulação'
     end
-    end
- end
+  end
 
   def consulta_geral
   $tipo_con = 10
-  @professor_rel_geral = Professor.find(:all, :order => 'pontuacao_final DESC', :include => 'unidade')
+  @professor_rel_geral = Professor.paginate(:all, :order => 'pontuacao_final DESC', :include => 'unidade',:page=>params[:page],:per_page =>20)
 
     render :update do |page|
       page.replace_html 'tempo', :text => ''

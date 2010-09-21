@@ -1,6 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :announcements
     
   map.resources :mensagems, :collection => { :saida => :get, :entrada => :get, :message_read => :put, :lidas => :get,:message_unread => :put}
+
+  map.resource :consulta, :collection => {:consulta_titulo => :get, :consulta_ppu => :get}
 
   map.resources :logs
 
@@ -84,8 +87,8 @@ map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.connect ':controller/:action/:id.:format'
   map.root :controller => "home"
   map.calculo_dias '/calculo_dias', :controller => 'calculos', :action => 'calcula_pontuacao'
-  map.consulta '/consulta', :controller => 'consulta'  
-  map.relatorio_por_funcao '/relatorio_por_funcao', :controller => 'consulta', :action => 'relatorio_por_funcao'
+  map.consulta '/consulta', :controller => 'consultas'
+  map.relatorio_por_funcao '/relatorio_por_funcao', :controller => 'consultas', :action => 'relatorio_por_funcao'
   map.arrumar_titulos '/calculos/arrumar_titulos', :controller => 'calculos', :action => 'arrumar_titulos'
   map.iniciar_ano '/calculos/iniciar_ano', :controller => 'calculos', :action => 'iniciar_ano'
   map.ficha_automatica '/calculos/ficha_automatica', :controller => 'calculos', :action => 'ficha_automatica'

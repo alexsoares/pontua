@@ -1,10 +1,11 @@
 class MensagemsController < ApplicationController
+  before_filter :login_required
   before_filter :load_users
   # GET /mensagems
   # GET /mensagems.xml
-  layout :dri
+  layout :define_layout
 
-  def dri
+  def define_layout
       current_user.layout
   end
 

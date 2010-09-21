@@ -1,6 +1,6 @@
 class VisaosController < ApplicationController
-  before_filter :login_required
-  before_filter :sede_unidade
+  
+  layout 'login'
   before_filter :load_professors
   # GET /visaos
   # GET /visaos.xml

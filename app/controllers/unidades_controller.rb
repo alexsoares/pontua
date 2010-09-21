@@ -1,9 +1,10 @@
 class UnidadesController < ApplicationController
-  
-  before_filter :load_regiaos
-  layout :dri
 
-  def dri
+  before_filter :login_required
+  before_filter :load_regiaos
+  layout :define_layout
+
+  def define_layout
       current_user.layout
   end
 

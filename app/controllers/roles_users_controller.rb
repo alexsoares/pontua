@@ -4,9 +4,9 @@ class RolesUsersController < ApplicationController
   before_filter :load_role
   # GET /role_users
   # GET /role_users.xml
-  layout :dri
+  layout :define_layout
 
-  def dri
+  def define_layout
       current_user.layout
   end
 

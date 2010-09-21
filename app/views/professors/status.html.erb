@@ -1,8 +1,8 @@
 <h2 align="center">Ainda existem <%= @status.count %> professores a efetivarem os calculos.</h2>
-<table border="1" align="center" class="relatorios">
+<table border="1" align="center" class="relatorios" frame="box" rules="all">
       <tr>
-        <th>Unidade</th>
-        <th>Porcentagem</th>
+        <th>Unidade:</th>
+        <th>Restante/Total</th>
       </tr>
       <% @unidade.each do |unidade| %>
        <tr>
@@ -15,9 +15,8 @@
             <%end%>
           <%end%>
           <%= quantidade%><br/>
-          <%  $total = Professor.all(:conditions => ['sede_id = ?',unidade]).count %>
         </td>
-        <td align="center"><%=  quantidade %> / <%= $total %></td>
+        <td align="center"><%=  quantidade %> / <%= Professor.total(unidade) %></td>
        </tr>
       <%end%>
       <tr>
