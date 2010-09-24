@@ -30,7 +30,7 @@ helper_method :sort_column, :sort_direction
 
 
   def index
-    if (params[:search].nil? || params[:search].empty?)
+    if params[:search].blank?
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
         @search = Professor.search(params[:search])
         @professors = @search.order(sort_column + " " + sort_direction).paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade')

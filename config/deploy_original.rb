@@ -1,10 +1,11 @@
-set :application, "pontuacao.ribeirosoares.com"
-set :repository, "git://github.com/alexsoares/pontua.git"
+set :application, "192.168.0.247"
+set :repository, "alexandre@192.168.0.99:~/repos/pontuacao.git"
 
 
-set :user, "railsapps"
+set :user, "administrador"
 set :use_sudo, false
-set :deploy_to, "/home/#{user}/#{application}"
+set :deploy_to, "/home/#{user}/pon"
+
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
