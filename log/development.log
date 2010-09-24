@@ -330,3 +330,874 @@ Rendering titulo_professors/new
   [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
   [4;36;1mRole Columns (0.7ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
 Completed in 361ms (View: 147, DB: 12) | 200 OK [http://localhost/titulo_professors/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TituloProfessorsController#new (for 127.0.0.1 at 2010-09-24 12:19:14) [GET]
+  [4;35;1mTitulacao Load (0.2ms)[0m   [0mSELECT * FROM `titulacaos` [0m
+  [4;36;1mProfessor Load (2.4ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula ASC[0m
+  [4;35;1mUser Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mProfessor Load (0.2ms)[0m   [0mSELECT * FROM `professors` ORDER BY matricula LIMIT 0, 20[0m
+  [4;36;1mProfessor Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `professors` [0m
+  [4;36;1mTituloProfessor Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `titulo_professors`[0m
+Rendering template within layouts/application
+Rendering titulo_professors/new
+  [4;35;1mTitulacao Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `titulacaos`[0m
+  [4;36;1mAnnouncement Load (0.4ms)[0m   [0;1mSELECT * FROM `announcements` WHERE (updated_at > '2010-09-24 11:28:42') AND (starts_at <= now() AND ends_at >= now()) [0m
+  [4;35;1mroles_users Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.6ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 301ms (View: 122, DB: 11) | 200 OK [http://localhost/titulo_professors/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TituloProfessorsController#new (for 127.0.0.1 at 2010-09-24 12:19:18) [GET]
+  [4;36;1mTitulacao Load (0.2ms)[0m   [0;1mSELECT * FROM `titulacaos` [0m
+  [4;35;1mProfessor Load (3.2ms)[0m   [0mSELECT * FROM `professors` ORDER BY matricula ASC[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mProfessor Load (0.2ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula LIMIT 0, 20[0m
+  [4;35;1mProfessor Columns (2.7ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `professors` [0m
+  [4;35;1mTituloProfessor Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `titulo_professors`[0m
+Rendering template within layouts/application
+Rendering titulo_professors/new
+  [4;36;1mTitulacao Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `titulacaos`[0m
+  [4;35;1mAnnouncement Load (0.4ms)[0m   [0mSELECT * FROM `announcements` WHERE (updated_at > '2010-09-24 11:28:42') AND (starts_at <= now() AND ends_at >= now()) [0m
+  [4;36;1mroles_users Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.7ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 480ms (View: 156, DB: 12) | 200 OK [http://localhost/titulo_professors/new]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing TituloProfessorsController#new (for 127.0.0.1 at 2010-09-24 12:30:33) [GET]
+  [4;35;1mTitulacao Load (0.2ms)[0m   [0mSELECT * FROM `titulacaos` [0m
+  [4;36;1mProfessor Load (2.3ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula ASC[0m
+  [4;35;1mUser Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mProfessor Load (0.2ms)[0m   [0mSELECT * FROM `professors` ORDER BY matricula LIMIT 0, 20[0m
+  [4;36;1mProfessor Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM `professors` [0m
+  [4;36;1mTituloProfessor Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `titulo_professors`[0m
+Rendering template within layouts/application
+Rendering titulo_professors/new
+  [4;35;1mTitulacao Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `titulacaos`[0m
+  [4;36;1mAnnouncement Load (0.4ms)[0m   [0;1mSELECT * FROM `announcements` WHERE (updated_at > '2010-09-24 11:28:42') AND (starts_at <= now() AND ends_at >= now()) [0m
+  [4;35;1mroles_users Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.3ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 520ms (View: 163, DB: 12) | 200 OK [http://localhost/titulo_professors/new]
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ProfessorsController#gerar_ficha (for 127.0.0.1 at 2010-09-24 12:38:27) [GET]
+  [4;36;1mTitulacao Load (0.7ms)[0m   [0;1mSELECT * FROM `titulacaos` ORDER BY descricao[0m
+  [4;35;1mUnidade Load (0.9ms)[0m   [0mSELECT * FROM `unidades` ORDER BY nome[0m
+  [4;36;1mUnidade Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `unidades`[0m
+  [4;35;1mRegiao Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `regiaos`[0m
+  [4;36;1mRegiao Load (0.4ms)[0m   [0;1mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;35;1mUser Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mUnidade Load (0.5ms)[0m   [0mSELECT * FROM `unidades` [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;35;1mTrabalhado Load (25.7ms)[0m   [0mSELECT * FROM `trabalhados` [0m
+  [4;36;1mTitulacao Load (0.2ms)[0m   [0;1mSELECT * FROM `titulacaos` [0m
+  [4;35;1mTituloProfessor Load (23.1ms)[0m   [0mSELECT * FROM `titulo_professors` [0m
+  [4;36;1mProfessor Load (28.8ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY nome[0m
+  [4;35;1mRegiao Load (0.4ms)[0m   [0mSELECT * FROM `regiaos` ORDER BY nome[0m
+  [4;36;1mProfessor Load (31.6ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY funcao[0m
+  [4;35;1mProfessor Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.3ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`matricula` IS NULL) LIMIT 1[0m
+Rendering template within layouts/application
+Rendering professors/gerar_ficha
+  [4;35;1mAnnouncement Load (0.5ms)[0m   [0mSELECT * FROM `announcements` WHERE (updated_at > '2010-09-24 11:28:42') AND (starts_at <= now() AND ends_at >= now()) [0m
+  [4;36;1mroles_users Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.6ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 1288ms (View: 88, DB: 120) | 200 OK [http://localhost/professors/gerar_ficha]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ProfessorsController#gerar_ficha (for 127.0.0.1 at 2010-09-24 12:38:34) [GET]
+  Parameters: {"ficha"=>"6199"}
+  [4;35;1mTitulacao Load (0.2ms)[0m   [0mSELECT * FROM `titulacaos` ORDER BY descricao[0m
+  [4;36;1mUnidade Load (0.2ms)[0m   [0;1mSELECT * FROM `unidades` ORDER BY nome[0m
+  [4;35;1mUnidade Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `unidades`[0m
+  [4;36;1mRegiao Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `regiaos`[0m
+  [4;35;1mRegiao Load (0.1ms)[0m   [0mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;36;1mUser Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mUnidade Load (0.2ms)[0m   [0;1mSELECT * FROM `unidades` [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;36;1mTrabalhado Load (7.0ms)[0m   [0;1mSELECT * FROM `trabalhados` [0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` [0m
+  [4;36;1mTituloProfessor Load (4.3ms)[0m   [0;1mSELECT * FROM `titulo_professors` [0m
+  [4;35;1mProfessor Load (2.8ms)[0m   [0mSELECT * FROM `professors` ORDER BY nome[0m
+  [4;36;1mRegiao Load (0.1ms)[0m   [0;1mSELECT * FROM `regiaos` ORDER BY nome[0m
+  [4;35;1mProfessor Load (2.7ms)[0m   [0mSELECT * FROM `professors` ORDER BY funcao[0m
+  [4;36;1mProfessor Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.4ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`matricula` = '6199') LIMIT 1[0m
+  [4;36;1mTrabalhado Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `trabalhados`[0m
+  [4;35;1mTrabalhado Load (5.2ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (ano_letivo = '2010') AND (`trabalhados`.`professor_id` = 1) [0m
+  [4;36;1mFicha Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `fichas`[0m
+  [4;35;1mFicha Load (4.2ms)[0m   [0mSELECT * FROM `fichas` WHERE (ano_letivo = '2010') AND (`fichas`.`professor_id` = 1) [0m
+  [4;36;1mAcumTrab Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `acum_trabs`[0m
+  [4;35;1mAcumTrab Load (2.4ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (status = 1) AND (`acum_trabs`.`professor_id` = 1) [0m
+Redirected to http://localhost:3000/professors/1/fichas
+  [4;36;1mAcumTrab Load (2.4ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (professor_id = 1) [0m
+  [4;35;1mTrabalhado Load (5.3ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (ano = '2009' and professor_id = 1 and flag = 0 and ano_letivo = '2010') [0m
+  [4;36;1mTrabalhado Load (5.2ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (ano = '2010' and professor_id = 1 and flag = 0 and ano_letivo = '2010') [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (professor_id = 1) [0m
+  [4;36;1mProfessor Load (0.3ms)[0m   [0;1mSELECT * FROM `professors` WHERE (id = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (ano_letivo = '2010') AND (`trabalhados`.`professor_id` = 1) [0m
+  [4;36;1mProfessor Load (0.3ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) LIMIT 1[0m
+  [4;35;1mTituloProfessor Load (6.4ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id = 1 and t.tipo = 'PERMANENTE'[0m
+  [4;36;1mTituloProfessor Load (6.5ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id = 1 and t.tipo = 'ANUAL' and tp.ano_letivo = + 2010[0m
+Completed in 1446ms (DB: 68) | 302 Found [http://localhost/professors/gerar_ficha?ficha=6199]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#index (for 127.0.0.1 at 2010-09-24 12:38:35) [GET]
+  Parameters: {"professor_id"=>"1"}
+  [4;35;1mProfessor Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.4ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;35;1mFicha Load (4.2ms)[0m   [0mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;36;1mFicha Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `fichas`[0m
+  [4;35;1mUser Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mFicha Load (4.0ms)[0m   [0mSELECT * FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+Rendering template within layouts/ficha
+Rendering fichas/index
+  [4;36;1mroles_users Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.7ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 241ms (View: 125, DB: 15) | 200 OK [http://localhost/professors/1/fichas]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show (for 127.0.0.1 at 2010-09-24 12:38:38) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;35;1mProfessor Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.1ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;35;1mFicha Load (0.2ms)[0m   [0mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;36;1mFicha Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `fichas`[0m
+  [4;35;1mUser Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mFicha Load (0.4ms)[0m   [0mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+Rendering template within layouts/ficha
+Rendering fichas/show
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;35;1mUnidade Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `unidades`[0m
+  [4;36;1mUnidade Load (0.3ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mTrabalhado Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `trabalhados`[0m
+  [4;36;1mTrabalhado Load (0.3ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;35;1mTrabalhado Load (0.3ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;36;1mAcumTrab Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `acum_trabs`[0m
+  [4;35;1mAcumTrab Load (0.3ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;35;1mTituloProfessor Load (6.7ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'ANUAL' and tp.ano_letivo = 2010[0m
+  [4;36;1mTituloProfessor Load (6.3ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'PERMANENTE'[0m
+  [4;35;1mTituloProfessor Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `titulo_professors`[0m
+  [4;36;1mTitulacao Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `titulacaos`[0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 2) LIMIT 1[0m
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 5) LIMIT 1[0m
+  [4;35;1mTrabalhado Load (5.1ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`professor_id` = 1) [0m
+  [4;36;1mroles_users Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.6ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 504ms (View: 366, DB: 34) | 200 OK [http://localhost/professors/1/fichas/986]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show to pdf (for 127.0.0.1 at 2010-09-24 12:38:47) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;35;1mProfessor Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.1ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;35;1mFicha Load (0.2ms)[0m   [0mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;36;1mFicha Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `fichas`[0m
+  [4;35;1mUser Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mFicha Load (0.2ms)[0m   [0mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+
+ActionView::MissingTemplate (Missing template fichas/show.html.haml in view path app/views):
+  app/controllers/fichas_controller.rb:24:in `show'
+  app/controllers/fichas_controller.rb:21:in `show'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `debug_load'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `main'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/bin/rdebug-ide:76
+  /usr/bin/rdebug-ide:19:in `load'
+  /usr/bin/rdebug-ide:19
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show (for 127.0.0.1 at 2010-09-24 12:41:05) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;36;1mProfessor Columns (2.6ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.1ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;35;1mFicha Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (0.1ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+Rendering template within layouts/ficha
+Rendering fichas/show
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mUnidade Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `unidades`[0m
+  [4;35;1mUnidade Load (0.1ms)[0m   [0mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;36;1mTrabalhado Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `trabalhados`[0m
+  [4;35;1mTrabalhado Load (0.1ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;36;1mTrabalhado Load (0.1ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;35;1mAcumTrab Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `acum_trabs`[0m
+  [4;36;1mAcumTrab Load (0.1ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;36;1mTituloProfessor Load (0.2ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'ANUAL' and tp.ano_letivo = 2010[0m
+  [4;35;1mTituloProfessor Load (0.2ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'PERMANENTE'[0m
+  [4;36;1mTituloProfessor Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `titulo_professors`[0m
+  [4;35;1mTitulacao Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `titulacaos`[0m
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 2) LIMIT 1[0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 5) LIMIT 1[0m
+  [4;36;1mTrabalhado Load (0.1ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`professor_id` = 1) [0m
+  [4;35;1mroles_users Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 451ms (View: 328, DB: 16) | 200 OK [http://localhost/professors/1/fichas/986]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show to pdf (for 127.0.0.1 at 2010-09-24 12:43:09) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;36;1mProfessor Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.1ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;35;1mFicha Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (0.3ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+
+ActionView::MissingTemplate (Missing template fichas/show.html.haml in view path app/views):
+  app/controllers/fichas_controller.rb:24:in `show'
+  app/controllers/fichas_controller.rb:21:in `show'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `debug_load'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `main'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/bin/rdebug-ide:76
+  /usr/bin/rdebug-ide:19:in `load'
+  /usr/bin/rdebug-ide:19
+
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show (for 127.0.0.1 at 2010-09-24 12:43:53) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;35;1mProfessor Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.1ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;35;1mFicha Load (0.2ms)[0m   [0mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;36;1mFicha Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `fichas`[0m
+  [4;35;1mUser Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+Rendering template within layouts/ficha
+Rendering fichas/show
+  [4;35;1mroles_users Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+
+ActionController::DoubleRenderError (Can only render or redirect once per action):
+  app/controllers/fichas_controller.rb:21:in `show'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `debug_load'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `main'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/bin/rdebug-ide:76
+  /usr/bin/rdebug-ide:19:in `load'
+  /usr/bin/rdebug-ide:19
+
+Rendered rescues/_trace (310.6ms)
+Rendered rescues/_request_and_response (3.8ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show (for 127.0.0.1 at 2010-09-24 12:44:22) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;35;1mProfessor Columns (2.7ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.2ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;35;1mFicha Load (0.2ms)[0m   [0mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;36;1mFicha Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `fichas`[0m
+  [4;35;1mUser Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mFicha Load (0.1ms)[0m   [0mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+Rendering template within layouts/ficha
+Rendering fichas/show
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;35;1mUnidade Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `unidades`[0m
+  [4;36;1mUnidade Load (0.1ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mTrabalhado Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `trabalhados`[0m
+  [4;36;1mTrabalhado Load (0.1ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;35;1mTrabalhado Load (0.1ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;36;1mAcumTrab Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `acum_trabs`[0m
+  [4;35;1mAcumTrab Load (0.1ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;35;1mTituloProfessor Load (0.2ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'ANUAL' and tp.ano_letivo = 2010[0m
+  [4;36;1mTituloProfessor Load (0.1ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'PERMANENTE'[0m
+  [4;35;1mTituloProfessor Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `titulo_professors`[0m
+  [4;36;1mTitulacao Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `titulacaos`[0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 2) LIMIT 1[0m
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 5) LIMIT 1[0m
+  [4;35;1mTrabalhado Load (0.1ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`professor_id` = 1) [0m
+  [4;36;1mroles_users Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.6ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 469ms (View: 339, DB: 16) | 200 OK [http://localhost/professors/1/fichas/986]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show to xml (for 127.0.0.1 at 2010-09-24 12:44:28) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;35;1mProfessor Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.1ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;35;1mFicha Load (0.2ms)[0m   [0mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;36;1mFicha Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `fichas`[0m
+  [4;35;1mUser Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mFicha Load (0.2ms)[0m   [0mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+Completed in 106ms (View: 2, DB: 6) | 406 Not Acceptable [http://localhost/professors/1/fichas/986.xml]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show to pdf (for 127.0.0.1 at 2010-09-24 12:44:36) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;36;1mProfessor Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.1ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;35;1mFicha Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+
+ActionView::MissingTemplate (Missing template fichas/show.html.haml in view path app/views):
+  app/controllers/fichas_controller.rb:24:in `show'
+  app/controllers/fichas_controller.rb:21:in `show'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `debug_load'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `main'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/bin/rdebug-ide:76
+  /usr/bin/rdebug-ide:19:in `load'
+  /usr/bin/rdebug-ide:19
+
+Rendering rescues/layout (internal_server_error)
+DEPRECATION WARNING: require "activesupport" is deprecated and will be removed in Rails 3. Use require "active_support" instead.. (called from /home/alexandre/pontuacao_v2/pontuacao/vendor/rails/activesupport/lib/activesupport.rb:2)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-09-24 12:51:28) [GET]
+  [4;36;1mUser Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mProfessor Load (2.2ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula[0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mAnnouncement Load (0.4ms)[0m   [0mSELECT * FROM `announcements` WHERE (updated_at > '2010-09-24 11:28:42') AND (starts_at <= now() AND ends_at >= now()) [0m
+  [4;36;1mroles_users Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.6ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 301ms (View: 137, DB: 6) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ProfessorsController#gerar_ficha (for 127.0.0.1 at 2010-09-24 12:51:32) [GET]
+  [4;35;1mTitulacao Load (0.2ms)[0m   [0mSELECT * FROM `titulacaos` ORDER BY descricao[0m
+  [4;36;1mUnidade Load (0.2ms)[0m   [0;1mSELECT * FROM `unidades` ORDER BY nome[0m
+  [4;35;1mUnidade Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `unidades`[0m
+  [4;36;1mRegiao Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `regiaos`[0m
+  [4;35;1mRegiao Load (0.1ms)[0m   [0mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mUnidade Load (0.1ms)[0m   [0;1mSELECT * FROM `unidades` [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;36;1mTrabalhado Load (5.0ms)[0m   [0;1mSELECT * FROM `trabalhados` [0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` [0m
+  [4;36;1mTituloProfessor Load (4.4ms)[0m   [0;1mSELECT * FROM `titulo_professors` [0m
+  [4;35;1mProfessor Load (2.7ms)[0m   [0mSELECT * FROM `professors` ORDER BY nome[0m
+  [4;36;1mRegiao Load (0.2ms)[0m   [0;1mSELECT * FROM `regiaos` ORDER BY nome[0m
+  [4;35;1mProfessor Load (2.7ms)[0m   [0mSELECT * FROM `professors` ORDER BY funcao[0m
+  [4;36;1mProfessor Columns (2.9ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`matricula` IS NULL) LIMIT 1[0m
+Rendering template within layouts/application
+Rendering professors/gerar_ficha
+  [4;36;1mAnnouncement Load (0.6ms)[0m   [0;1mSELECT * FROM `announcements` WHERE (updated_at > '2010-09-24 11:28:42') AND (starts_at <= now() AND ends_at >= now()) [0m
+  [4;35;1mroles_users Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.2ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 8393ms (View: 130, DB: 26) | 200 OK [http://localhost/professors/gerar_ficha]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ProfessorsController#gerar_ficha (for 127.0.0.1 at 2010-09-24 12:51:49) [GET]
+  Parameters: {"ficha"=>"6199"}
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` ORDER BY descricao[0m
+  [4;35;1mUnidade Load (0.2ms)[0m   [0mSELECT * FROM `unidades` ORDER BY nome[0m
+  [4;36;1mUnidade Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `unidades`[0m
+  [4;35;1mRegiao Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `regiaos`[0m
+  [4;36;1mRegiao Load (0.1ms)[0m   [0;1mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;35;1mUser Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mUnidade Load (0.1ms)[0m   [0mSELECT * FROM `unidades` [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;35;1mTrabalhado Load (5.0ms)[0m   [0mSELECT * FROM `trabalhados` [0m
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` [0m
+  [4;35;1mTituloProfessor Load (5.1ms)[0m   [0mSELECT * FROM `titulo_professors` [0m
+  [4;36;1mProfessor Load (2.8ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY nome[0m
+  [4;35;1mRegiao Load (0.2ms)[0m   [0mSELECT * FROM `regiaos` ORDER BY nome[0m
+  [4;36;1mProfessor Load (2.6ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY funcao[0m
+  [4;35;1mProfessor Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.2ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`matricula` = '6199') LIMIT 1[0m
+  [4;35;1mTrabalhado Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `trabalhados`[0m
+  [4;36;1mTrabalhado Load (0.2ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (ano_letivo = '2010') AND (`trabalhados`.`professor_id` = 1) [0m
+  [4;35;1mFicha Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (ano_letivo = '2010') AND (`fichas`.`professor_id` = 1) [0m
+  [4;35;1mAcumTrab Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `acum_trabs`[0m
+  [4;36;1mAcumTrab Load (0.2ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (status = 1) AND (`acum_trabs`.`professor_id` = 1) [0m
+Redirected to http://localhost:3000/professors/1/fichas
+  [4;35;1mAcumTrab Load (0.2ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (professor_id = 1) [0m
+  [4;36;1mTrabalhado Load (0.1ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (ano = '2009' and professor_id = 1 and flag = 0 and ano_letivo = '2010') [0m
+  [4;35;1mTrabalhado Load (0.1ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (ano = '2010' and professor_id = 1 and flag = 0 and ano_letivo = '2010') [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (professor_id = 1) [0m
+  [4;35;1mProfessor Load (0.1ms)[0m   [0mSELECT * FROM `professors` WHERE (id = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (ano_letivo = '2010') AND (`trabalhados`.`professor_id` = 1) [0m
+  [4;35;1mProfessor Load (0.2ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) LIMIT 1[0m
+  [4;36;1mTituloProfessor Load (0.1ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id = 1 and t.tipo = 'PERMANENTE'[0m
+  [4;35;1mTituloProfessor Load (0.1ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id = 1 and t.tipo = 'ANUAL' and tp.ano_letivo = + 2010[0m
+Completed in 1216ms (DB: 28) | 302 Found [http://localhost/professors/gerar_ficha?ficha=6199]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#index (for 127.0.0.1 at 2010-09-24 12:51:51) [GET]
+  Parameters: {"professor_id"=>"1"}
+  [4;36;1mProfessor Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.1ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;35;1mFicha Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (0.1ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+Rendering template within layouts/ficha
+Rendering fichas/index
+  [4;35;1mroles_users Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 448ms (View: 346, DB: 8) | 200 OK [http://localhost/professors/1/fichas]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show (for 127.0.0.1 at 2010-09-24 12:51:55) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;36;1mProfessor Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.1ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;35;1mFicha Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (0.1ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+Rendering template within layouts/ficha
+Rendering fichas/show
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mUnidade Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `unidades`[0m
+  [4;35;1mUnidade Load (0.1ms)[0m   [0mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;36;1mTrabalhado Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `trabalhados`[0m
+  [4;35;1mTrabalhado Load (0.1ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;36;1mTrabalhado Load (0.1ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;35;1mAcumTrab Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `acum_trabs`[0m
+  [4;36;1mAcumTrab Load (0.1ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;36;1mTituloProfessor Load (0.2ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'ANUAL' and tp.ano_letivo = 2010[0m
+  [4;35;1mTituloProfessor Load (0.1ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'PERMANENTE'[0m
+  [4;36;1mTituloProfessor Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `titulo_professors`[0m
+  [4;35;1mTitulacao Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `titulacaos`[0m
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 2) LIMIT 1[0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 5) LIMIT 1[0m
+  [4;36;1mTrabalhado Load (0.1ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`professor_id` = 1) [0m
+  [4;35;1mroles_users Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 608ms (View: 244, DB: 15) | 200 OK [http://localhost/professors/1/fichas/986]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show to pdf (for 127.0.0.1 at 2010-09-24 12:52:00) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;36;1mProfessor Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.1ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;35;1mFicha Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (0.1ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+
+ActionView::MissingTemplate (Missing template fichas/show.html.haml in view path app/views):
+  app/controllers/fichas_controller.rb:24:in `show'
+  app/controllers/fichas_controller.rb:21:in `show'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `debug_load'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `main'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/bin/rdebug-ide:76
+  /usr/bin/rdebug-ide:19:in `load'
+  /usr/bin/rdebug-ide:19
+
+Rendering rescues/layout (internal_server_error)
+DEPRECATION WARNING: require "activesupport" is deprecated and will be removed in Rails 3. Use require "active_support" instead.. (called from /home/alexandre/pontuacao_v2/pontuacao/vendor/rails/activesupport/lib/activesupport.rb:2)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-09-24 12:57:19) [GET]
+  [4;36;1mUser Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mProfessor Load (2.2ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula[0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mAnnouncement Load (0.5ms)[0m   [0mSELECT * FROM `announcements` WHERE (updated_at > '2010-09-24 11:28:42') AND (starts_at <= now() AND ends_at >= now()) [0m
+  [4;36;1mroles_users Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.7ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 299ms (View: 133, DB: 6) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculosController#relatorio_ficha (for 127.0.0.1 at 2010-09-24 12:57:24) [GET]
+  [4;35;1mProfessor Load (3.0ms)[0m   [0mSELECT * FROM `professors` ORDER BY matricula[0m
+  [4;36;1mProfessor Load (14.3ms)[0m   [0;1mSELECT * FROM `professors` [0m
+  [4;35;1mProfessor Columns (5.0ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mFicha Load (23.7ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,24,25,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,130,131,132,133,135,136,137,139,140,141,143,144,145,146,147,148,149,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,173,174,175,176,177,178,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,198,199,200,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,220,221,222,223,225,226,227,228,229,230,231,232,233,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,399,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428,429,430,431,432,433,434,435,436,437,438,439,440,442,443,444,445,446,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,504,505,506,507,508,509,510,511,512,514,515,516,517,518,519,520,521,522,523,524,525,526,527,528,529,530,531,532,533,534,535,536,537,538,539,540,541,542,543,544,545,546,547,548,549,550,551,552,553,554,555,556,557,558,559,560,561,562,563,564,565,566,567,568,569,570,571,572,573,574,575,576,577,578,579,580,581,582,583,584,585,586,587,588,590,591,592,593,594,595,596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,623,624,625,626,627,628,630,632,633,634,635,636,637,638,639,640,641,642,643,644,645,646,647,648,649,650,651,652,653,655,657,658,659,660,662,663,664,665,666,667,668,669,670,671,672,673,674,675,676,679,680,681,682,683,684,685,686,687,688,689,690,691,692,693,694,695,696,697,698,699,700,701,702,703,704,705,706,707,710,711,712,713,714,715,720,721,722,723,724,725,726,727,729,731,732,734,736,737,738,739,741,742,743,744,745,746,747,748,749,750,751,752,753,754,755,756,757,758,759,760,761,762,763,764,765,766,767,768,769,770,771,772,773,774,775,776,777,778,779,780,782,783,784,785,786,787,788,789,790,791,792,793,794,796,797,798,799,800,801,802,803,804,805,806,807,808,809,810,811,812,813,814,815,816,817,818,819,820,821,822,823,824,826,827,828,829,830,831,833,834,835,837,838,839,840,842,843,844,845,846,847,848,849,850,851,852,853,854,855,856,857,858,859,860,861,862,863,864,866,867,868,869,870,871,872,873,874,875,876,877,878,879,880,881,882,883,884,885,886,887,888,889,890,891,892,893,894,895,896,897,898,899,900,901,902,903,904,905,907,908,909,910,911,912,913,914,915,916,917,918,919,920,921,923,924,925,926,927,928,929,930,931,932,933,934,935,936,937,938,939,940,941,942,943,944,945,946,947,948,949,950,951,952,953,955,956,957,958,959,960,961,962,963,964,965,967,968,970,971,972,973,974,975,976,978,979,980,981,982,983,984,986,987,988,989,990,991,992,994,995,997,998,999,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,1018,1019,1020,1021,1022,1023,1024,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,1037,1039,1040,1041,1042,1043,1045,1046,1049,1050,1051,1052,1053,1054,1055,1057,1058,1059,1060,1061,1062,1063,1064,1066,1067,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1085,1086,1087,1088,1089,1090,1091,1092,1093,1094,1095,1096,1097,1098,1099,1100,1101,1102,1103,1104,1105,1106)) [0m
+  [4;35;1mFicha Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (2.6ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (ano_letivo = '2010') LIMIT 0, 25[0m
+  [4;35;1mSQL (1.7ms)[0m   [0mSELECT count(*) AS count_all FROM `fichas` WHERE (ano_letivo = '2010') [0m
+Rendering template within layouts/application
+Rendering calculos/relatorio_ficha
+  [4;36;1mProfessor Load (0.2ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;35;1mUnidade Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `unidades`[0m
+  [4;36;1mUnidade Load (0.1ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.4ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 2) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 5) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 6) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.4ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.4ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 8) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 9) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 10) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 11) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 12) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 13) [0m
+  [4;36;1mUnidade Load (0.2ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 42) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 14) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 15) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.4ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 16) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 17) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 18) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 19) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.4ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 20) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 22) [0m
+  [4;36;1mUnidade Load (0.2ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 38) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 23) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 38) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 25) [0m
+  [4;36;1mUnidade Load (0.2ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 44) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 27) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 44) [0m
+  [4;35;1mProfessor Load (0.3ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 28) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 44) [0m
+  [4;35;1mAnnouncement Load (0.4ms)[0m   [0mSELECT * FROM `announcements` WHERE (updated_at > '2010-09-24 11:28:42') AND (starts_at <= now() AND ends_at >= now()) [0m
+  [4;36;1mroles_users Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.7ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 1655ms (View: 348, DB: 66) | 200 OK [http://localhost/calculos/relatorio_ficha]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show (for 127.0.0.1 at 2010-09-24 12:57:29) [GET]
+  Parameters: {"professor_id"=>"2", "id"=>"987"}
+  [4;35;1mProfessor Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.1ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 2) [0m
+  [4;35;1mFicha Load (4.0ms)[0m   [0mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 2) [0m
+  [4;36;1mFicha Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `fichas`[0m
+  [4;35;1mUser Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mFicha Load (0.6ms)[0m   [0mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 987 AND (`fichas`.professor_id = 2)) [0m
+Rendering template within layouts/ficha
+Rendering fichas/show
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`id` = 2) [0m
+  [4;35;1mUnidade Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `unidades`[0m
+  [4;36;1mUnidade Load (0.1ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;35;1mTrabalhado Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `trabalhados`[0m
+  [4;36;1mTrabalhado Load (0.3ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4446) [0m
+  [4;35;1mTrabalhado Load (0.3ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4447) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4446) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4447) [0m
+  [4;36;1mAcumTrab Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `acum_trabs`[0m
+  [4;35;1mAcumTrab Load (0.4ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 914) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 914) [0m
+  [4;35;1mTituloProfessor Load (7.9ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=2 and t.tipo = 'ANUAL' and tp.ano_letivo = 2010[0m
+  [4;36;1mTituloProfessor Load (6.7ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=2 and t.tipo = 'PERMANENTE'[0m
+  [4;35;1mTituloProfessor Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `titulo_professors`[0m
+  [4;36;1mTitulacao Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `titulacaos`[0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 2) LIMIT 1[0m
+  [4;36;1mTrabalhado Load (8.6ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`professor_id` = 2) [0m
+  [4;35;1mroles_users Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 679ms (View: 530, DB: 44) | 200 OK [http://localhost/professors/2/fichas/987]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show to pdf (for 127.0.0.1 at 2010-09-24 12:57:38) [GET]
+  Parameters: {"professor_id"=>"2", "id"=>"987"}
+  [4;36;1mProfessor Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.2ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 2) [0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 2) [0m
+  [4;35;1mFicha Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (0.1ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 987 AND (`fichas`.professor_id = 2)) [0m
+
+ActionView::MissingTemplate (Missing template fichas/show.html.haml in view path app/views):
+  app/controllers/fichas_controller.rb:24:in `show'
+  app/controllers/fichas_controller.rb:21:in `show'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `debug_load'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/lib/ruby-debug.rb:96:in `main'
+  /usr/lib/ruby/gems/1.8/gems/ruby-debug-ide-0.3.1/bin/rdebug-ide:76
+  /usr/bin/rdebug-ide:19:in `load'
+  /usr/bin/rdebug-ide:19
+
+Rendering rescues/layout (internal_server_error)
+DEPRECATION WARNING: require "activesupport" is deprecated and will be removed in Rails 3. Use require "active_support" instead.. (called from /home/alexandre/pontuacao_v2/pontuacao/vendor/rails/activesupport/lib/activesupport.rb:2)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2010-09-24 13:03:15) [GET]
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mProfessor Load (2.2ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula[0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mAnnouncement Load (0.4ms)[0m   [0mSELECT * FROM `announcements` WHERE (updated_at > '2010-09-24 11:28:42') AND (starts_at <= now() AND ends_at >= now()) [0m
+  [4;36;1mroles_users Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.6ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 297ms (View: 135, DB: 6) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ProfessorsController#gerar_ficha (for 127.0.0.1 at 2010-09-24 13:03:19) [GET]
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` ORDER BY descricao[0m
+  [4;36;1mUnidade Load (0.2ms)[0m   [0;1mSELECT * FROM `unidades` ORDER BY nome[0m
+  [4;35;1mUnidade Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `unidades`[0m
+  [4;36;1mRegiao Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `regiaos`[0m
+  [4;35;1mRegiao Load (0.1ms)[0m   [0mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mUnidade Load (0.1ms)[0m   [0;1mSELECT * FROM `unidades` [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;36;1mTrabalhado Load (4.8ms)[0m   [0;1mSELECT * FROM `trabalhados` [0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` [0m
+  [4;36;1mTituloProfessor Load (4.7ms)[0m   [0;1mSELECT * FROM `titulo_professors` [0m
+  [4;35;1mProfessor Load (2.7ms)[0m   [0mSELECT * FROM `professors` ORDER BY nome[0m
+  [4;36;1mRegiao Load (0.2ms)[0m   [0;1mSELECT * FROM `regiaos` ORDER BY nome[0m
+  [4;35;1mProfessor Load (2.6ms)[0m   [0mSELECT * FROM `professors` ORDER BY funcao[0m
+  [4;36;1mProfessor Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.1ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`matricula` IS NULL) LIMIT 1[0m
+Rendering template within layouts/application
+Rendering professors/gerar_ficha
+  [4;36;1mAnnouncement Load (0.4ms)[0m   [0;1mSELECT * FROM `announcements` WHERE (updated_at > '2010-09-24 11:28:42') AND (starts_at <= now() AND ends_at >= now()) [0m
+  [4;35;1mroles_users Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.6ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 1086ms (View: 87, DB: 23) | 200 OK [http://localhost/professors/gerar_ficha]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ProfessorsController#gerar_ficha (for 127.0.0.1 at 2010-09-24 13:03:25) [GET]
+  Parameters: {"ficha"=>"6199"}
+  [4;36;1mTitulacao Load (0.2ms)[0m   [0;1mSELECT * FROM `titulacaos` ORDER BY descricao[0m
+  [4;35;1mUnidade Load (0.2ms)[0m   [0mSELECT * FROM `unidades` ORDER BY nome[0m
+  [4;36;1mUnidade Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `unidades`[0m
+  [4;35;1mRegiao Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `regiaos`[0m
+  [4;36;1mRegiao Load (0.1ms)[0m   [0;1mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;35;1mUser Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mUnidade Load (0.1ms)[0m   [0mSELECT * FROM `unidades` [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `regiaos` WHERE (`regiaos`.`id` IN (22,6,7,8,1,2,3,4,5)) [0m
+  [4;35;1mTrabalhado Load (4.9ms)[0m   [0mSELECT * FROM `trabalhados` [0m
+  [4;36;1mTitulacao Load (0.2ms)[0m   [0;1mSELECT * FROM `titulacaos` [0m
+  [4;35;1mTituloProfessor Load (5.1ms)[0m   [0mSELECT * FROM `titulo_professors` [0m
+  [4;36;1mProfessor Load (3.9ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY nome[0m
+  [4;35;1mRegiao Load (0.2ms)[0m   [0mSELECT * FROM `regiaos` ORDER BY nome[0m
+  [4;36;1mProfessor Load (3.9ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY funcao[0m
+  [4;35;1mProfessor Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `professors`[0m
+  [4;36;1mProfessor Load (0.2ms)[0m   [0;1mSELECT * FROM `professors` WHERE (`professors`.`matricula` = '6199') LIMIT 1[0m
+  [4;35;1mTrabalhado Columns (1.5ms)[0m   [0mSHOW FIELDS FROM `trabalhados`[0m
+  [4;36;1mTrabalhado Load (0.2ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (ano_letivo = '2010') AND (`trabalhados`.`professor_id` = 1) [0m
+  [4;35;1mFicha Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (ano_letivo = '2010') AND (`fichas`.`professor_id` = 1) [0m
+  [4;35;1mAcumTrab Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `acum_trabs`[0m
+  [4;36;1mAcumTrab Load (0.2ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (status = 1) AND (`acum_trabs`.`professor_id` = 1) [0m
+Redirected to http://localhost:3000/professors/1/fichas
+  [4;35;1mAcumTrab Load (0.2ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (professor_id = 1) [0m
+  [4;36;1mTrabalhado Load (0.2ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (ano = '2009' and professor_id = 1 and flag = 0 and ano_letivo = '2010') [0m
+  [4;35;1mTrabalhado Load (0.1ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (ano = '2010' and professor_id = 1 and flag = 0 and ano_letivo = '2010') [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (professor_id = 1) [0m
+  [4;35;1mProfessor Load (0.2ms)[0m   [0mSELECT * FROM `professors` WHERE (id = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (ano_letivo = '2010') AND (`trabalhados`.`professor_id` = 1) [0m
+  [4;35;1mProfessor Load (0.2ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) LIMIT 1[0m
+  [4;36;1mTituloProfessor Load (0.1ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id = 1 and t.tipo = 'PERMANENTE'[0m
+  [4;35;1mTituloProfessor Load (0.1ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id = 1 and t.tipo = 'ANUAL' and tp.ano_letivo = + 2010[0m
+Completed in 1284ms (DB: 31) | 302 Found [http://localhost/professors/gerar_ficha?ficha=6199]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#index (for 127.0.0.1 at 2010-09-24 13:03:27) [GET]
+  Parameters: {"professor_id"=>"1"}
+  [4;36;1mProfessor Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.1ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;35;1mFicha Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+Rendering template within layouts/ficha
+Rendering fichas/index
+  [4;35;1mroles_users Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.7ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 528ms (View: 425, DB: 8) | 200 OK [http://localhost/professors/1/fichas]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.7ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show (for 127.0.0.1 at 2010-09-24 13:03:31) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;36;1mProfessor Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.2ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;35;1mFicha Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+Rendering template within layouts/ficha
+Rendering fichas/show
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mUnidade Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `unidades`[0m
+  [4;35;1mUnidade Load (0.1ms)[0m   [0mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;36;1mTrabalhado Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `trabalhados`[0m
+  [4;35;1mTrabalhado Load (0.1ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;36;1mTrabalhado Load (0.1ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;35;1mAcumTrab Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `acum_trabs`[0m
+  [4;36;1mAcumTrab Load (0.1ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;36;1mTituloProfessor Load (0.2ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'ANUAL' and tp.ano_letivo = 2010[0m
+  [4;35;1mTituloProfessor Load (0.1ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'PERMANENTE'[0m
+  [4;36;1mTituloProfessor Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `titulo_professors`[0m
+  [4;35;1mTitulacao Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `titulacaos`[0m
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 2) LIMIT 1[0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 5) LIMIT 1[0m
+  [4;36;1mTrabalhado Load (0.1ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`professor_id` = 1) [0m
+  [4;35;1mroles_users Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.6ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 626ms (View: 248, DB: 18) | 200 OK [http://localhost/professors/1/fichas/986]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing FichasController#show (for 127.0.0.1 at 2010-09-24 13:03:36) [GET]
+  Parameters: {"professor_id"=>"1", "id"=>"986"}
+  [4;36;1mProfessor Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `professors`[0m
+  [4;35;1mProfessor Load (0.2ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT `fichas`.* FROM `fichas` WHERE (`fichas`.professor_id = 1) [0m
+  [4;35;1mFicha Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `fichas`[0m
+  [4;36;1mUser Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mFicha Load (0.2ms)[0m   [0;1mSELECT * FROM `fichas` WHERE (`fichas`.`id` = 986 AND (`fichas`.professor_id = 1)) [0m
+Rendering template within layouts/ficha
+Rendering fichas/show
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `professors` WHERE (`professors`.`id` = 1) [0m
+  [4;36;1mUnidade Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `unidades`[0m
+  [4;35;1mUnidade Load (0.1ms)[0m   [0mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 43) [0m
+  [4;36;1mTrabalhado Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `trabalhados`[0m
+  [4;35;1mTrabalhado Load (0.1ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;36;1mTrabalhado Load (0.1ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4448) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`id` = 4449) [0m
+  [4;35;1mAcumTrab Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `acum_trabs`[0m
+  [4;36;1mAcumTrab Load (0.1ms)[0m   [0;1mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `acum_trabs` WHERE (`acum_trabs`.`id` = 915) [0m
+  [4;36;1mTituloProfessor Load (0.2ms)[0m   [0;1mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'ANUAL' and tp.ano_letivo = 2010[0m
+  [4;35;1mTituloProfessor Load (0.1ms)[0m   [0mSELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=1 and t.tipo = 'PERMANENTE'[0m
+  [4;36;1mTituloProfessor Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `titulo_professors`[0m
+  [4;35;1mTitulacao Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `titulacaos`[0m
+  [4;36;1mTitulacao Load (0.1ms)[0m   [0;1mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 2) LIMIT 1[0m
+  [4;35;1mTitulacao Load (0.1ms)[0m   [0mSELECT * FROM `titulacaos` WHERE (`titulacaos`.`id` = 5) LIMIT 1[0m
+  [4;36;1mTrabalhado Load (0.1ms)[0m   [0;1mSELECT * FROM `trabalhados` WHERE (`trabalhados`.`professor_id` = 1) [0m
+  [4;35;1mroles_users Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.6ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Completed in 300ms (View: 191, DB: 15) | 200 OK [http://localhost/professors/1/fichas/986]

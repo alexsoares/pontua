@@ -1,6 +1,6 @@
 body {
 margin:0;
-background-image:url(Imagens/background.jpg);
+background-color:black;
 background-repeat:repeat-y;
 }
 root {
@@ -198,6 +198,7 @@ font-size: large;
     height:800px;
     width:950px;
     background-image:url(Imagens/body.jpg);
+    background-color:gray;
     font-size:10px;
 }
 
