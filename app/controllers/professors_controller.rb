@@ -33,18 +33,18 @@ helper_method :sort_column, :sort_direction
     if (params[:search].nil? || params[:search].empty?)
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
         @search = Professor.search(params[:search])
-        @professors = @search.paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade', :order => sort_column + " " + sort_direction)
+        @professors = @search.order(sort_column + " " + sort_direction).paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade')
       else
         @search = Professor.search(params[:search])
-        @professors = @search.paginate(:page=>params[:page],:per_page =>15, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => sort_column + " " + sort_direction, :include => "unidade")
+        @professors = @search.order(sort_column + " " + sort_direction).paginate(:page=>params[:page],:per_page =>15, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => sort_column + " " + sort_direction, :include => "unidade")
       end
     else
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
         @search = Professor.search(params[:search])
-        @professors = @search.paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade', :order => sort_column + " " + sort_direction)
+        @professors = @search.order(sort_column + " " + sort_direction).paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade', :order => sort_column + " " + sort_direction)
       else
         @search = Professor.search(params[:search])
-        @professors = @search.paginate(:all,:page=>params[:page],:per_page =>15, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => sort_column + " " + sort_direction, :include => "unidade")
+        @professors = @search.order(sort_column + " " + sort_direction).paginate(:all,:page=>params[:page],:per_page =>15, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => sort_column + " " + sort_direction, :include => "unidade")
       end
     end
     respond_to do |format|

@@ -4,14 +4,16 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <title>PONTUAÇÃO DOS PROFESSORES : <%= controller.action_name %></title>
     <%= stylesheet_link_tag 'scaffold' %>
+    <%= stylesheet_link_tag 'pontuacao' %>
     <%= stylesheet_link_tag 'msg' %>
     <%= stylesheet_link_tag 'pontuacao' %>
     <%= stylesheet_link_tag 'menu' %>   
+
+    <%= javascript_include_tag :all %>
     <%= javascript_include_tag :defaults %>
-    <%= javascript_include_tag 'jquery-impromptu.3.1.min' %>
     <%= javascript_include_tag 'msg' %>
-    <%= javascript_include_tag 'jquery.min.js' %>
 </head>
+
 <body>
 <style media="print">
 .botao {
@@ -156,6 +158,7 @@ window.print();
                 </ul>
               </li>
             </ul>
+
 <!-- FIM MENU -->
 </div>
 </div>
@@ -163,7 +166,7 @@ window.print();
       <div id="header">      
       </div>
       <div id="menu">
-      </div>      
+      </div>
       <div id="principal">
         <%= yield  %>
       </div>

@@ -11,10 +11,6 @@ set :scm, :git
 
 server application, :app, :web, :db, :primary => true
 
-
-
-
-
  namespace :deploy do
    task :start do ; end
    task :stop do ; end

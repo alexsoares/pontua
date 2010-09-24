@@ -2,7 +2,8 @@ class RegiaosController < ApplicationController
   before_filter :login_required
   require_role ["supervisao","admin","planejamento"]
   layout :define_layout
-
+  helper_method :sort_column, :sort_direction
+  
   def define_layout
       current_user.layout
   end
@@ -11,9 +12,9 @@ class RegiaosController < ApplicationController
   # GET /regiaos.xml
   def index
    if (params[:search].nil? || params[:search].empty?)
-      @regiaos = Regiao.find(:all, :order =>  'nome ASC')
+      @regiaos = Regiao.find(:all, :order =>  sort_column + " " + sort_direction)
    else
-      @regiaos = Regiao.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"])
+      @regiaos = Regiao.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :order => sort_column + " " + sort_direction)
    end
     respond_to do |format|
       format.html # index.html.erb
@@ -105,6 +106,16 @@ class RegiaosController < ApplicationController
       format.html { redirect_to(regiaos_url) }
       format.xml  { head :ok }
     end
+  end
+
+private
+
+  def sort_column
+    Regiao.column_names.include?(params[:sort]) ? params[:sort] : "nome"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   

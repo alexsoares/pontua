@@ -8,9 +8,7 @@ class TrabalhadosController < ApplicationController
   layout :define_layout
 
   def define_layout
-    if current_user.login == 'dri'
-      current_user.layout
-    end
+    current_user.layout
   end
 
   def professor_unidade

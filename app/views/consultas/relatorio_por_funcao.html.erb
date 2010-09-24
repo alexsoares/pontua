@@ -35,9 +35,9 @@ display: none;
     <tr style="font-size:12px">
      <br/>
 
-        <th bgcolor="gray" width="15%">Matricula</th>
-        <th bgcolor="gray" width="70%">Nome</th>
-        <th bgcolor="gray" width="15%">Pontuação Final</th>
+        <th bgcolor="gray" width="15%"><%= sortable "matricula" %></th>
+        <th bgcolor="gray" width="70%"><%= sortable "nome" %></th>
+        <th bgcolor="gray" width="15%"><%= sortable "pontuação_final", "Pontuação Final" %></th>
     </tr>
     <%if  @relatorio_funcao == "Selecione uma função"%>
       <center><b><%= @relatorio_funcao %></b></center>

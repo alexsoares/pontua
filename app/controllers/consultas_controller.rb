@@ -2,7 +2,7 @@ class ConsultasController < ApplicationController
 before_filter :sede_unidade
 before_filter :load_titulos
 layout :define_layout
-
+helper_method :sort_column, :sort_direction
   def define_layout
       current_user.layout
   end
@@ -167,6 +167,17 @@ layout :define_layout
       page.replace_html 'contents', :partial => 'relatorio_geral_pontuacao'
     end
   end
+
+private
+
+  def sort_column
+    Professor.column_names.include?(params[:sort]) ? params[:sort] : "nome"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 
  protected
   def sede_unidade
