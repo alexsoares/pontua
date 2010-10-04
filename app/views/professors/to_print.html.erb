@@ -42,7 +42,6 @@
     </tr>
 
 <% for professor in @to_print %>
-
   <tr>
     <td colspan="3"><center><%=h professor.nome.upcase %></center></td>
     <td colspan="1"><center><%=h professor.matricula %></center></td>
@@ -54,6 +53,8 @@
     <td colspan="1"><center><%=h professor.unidade.nome %></center></td>
     <td colspan="3"><center><%=h professor.funcao %></center></td>
   </tr>
+  <% count = count + 1 %>
+  <% if count == 10 %>
 <% end %>
 
 

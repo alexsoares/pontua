@@ -8,6 +8,9 @@ class CalculosController < ApplicationController
       current_user.layout
   end
 
+  def index
+  end
+  
   def calcula_pontuacao
       # se o método é get, o formulário ainda não foi enviado, mostramos o form vazio
     if request.get?
@@ -64,7 +67,7 @@ class CalculosController < ApplicationController
     @professor= Professor.all
     for ficha in @professor
       @log = Log.new
-      @log.log(current_user.id, ficha.id, "Criado a ficha de pontuacao via ficha automática para : #{ficha.id} - #{ficha.professor.nome}")
+      @log.log(current_user.id, ficha.id, "Criado a ficha de pontuacao via ficha automática para : #{ficha.id} - #{ficha.nome}")
       @log.save!
 
       @existe = Trabalhado.find_all_by_professor_id(ficha.id, :conditions => ['ano_letivo = ?',$data])
@@ -111,11 +114,21 @@ class CalculosController < ApplicationController
   end
   
   def relatorio_ficha
+
+    if params[:search].blank?
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
         @professor_com_ficha = Ficha.paginate(:all,:page=>params[:page],:per_page =>25,:conditions => ['ano_letivo = ?', $data])
       else
         @professor_com_ficha = Ficha.paginate(:all,:page=>params[:page],:per_page =>25,:conditions => ['ano_letivo = ? and (sede_id = ? or sede_id = 54)', $data, current_user.regiao_id])
       end
+    else
+      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+        @professor_com_ficha = Ficha.paginate(:all,:joins => :professor,:page=>params[:page],:per_page =>25,:conditions => ['ano_letivo = ? and professors.matricula = ?', $data,params[:search]])
+      else
+        @professor_com_ficha = Ficha.paginate(:all,:joins => :professor,:page=>params[:page],:per_page =>25,:conditions => ['ano_letivo = ? and (sede_id = ? or sede_id = 54)  and professors.matricula = ?', $data, current_user.regiao_id,params[:search]])
+      end
+
+    end
   end
 
   protected

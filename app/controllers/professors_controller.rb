@@ -9,6 +9,7 @@ before_filter :load_professorsnome
 before_filter :load_regiaos
 before_filter :load_calculos
 before_filter :load_funcao
+before_filter :load_esmiucar
 before_filter :login_required
 require_role ['direcao',"supervisao","admin","planejamento"], :for => :update # don't allow contractors to destroy
 require_role ["supervisao","admin","planejamento"], :for => :destroy # don't allow contractors to destroy
@@ -30,29 +31,27 @@ helper_method :sort_column, :sort_direction
 
 
   def index
-    if stale?(:etag => etag(@posts), :public => true)
       if params[:search].blank?
         if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
           @search = Professor.search(params[:search])
-          @professors = @search.order(sort_column + " " + sort_direction).paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade')
+          @professors = @search.paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade', :order => sort_column + " " + sort_direction)
         else
           @search = Professor.search(params[:search])
-          @professors = @search.order(sort_column + " " + sort_direction).paginate(:page=>params[:page],:per_page =>15, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => sort_column + " " + sort_direction, :include => "unidade")
+          @professors = @search.paginate(:page=>params[:page],:per_page =>15, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => sort_column + " " + sort_direction, :include => "unidade", :order => sort_column + " " + sort_direction)
         end
       else
         if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
           @search = Professor.search(params[:search])
-          @professors = @search.order(sort_column + " " + sort_direction).paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade', :order => sort_column + " " + sort_direction)
+          @professors = @search.paginate(:all,:page=>params[:page],:per_page =>15, :include => 'unidade', :order => sort_column + " " + sort_direction)
         else
           @search = Professor.search(params[:search])
-          @professors = @search.order(sort_column + " " + sort_direction).paginate(:all,:page=>params[:page],:per_page =>15, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => sort_column + " " + sort_direction, :include => "unidade")
+          @professors = @search.paginate(:all,:page=>params[:page],:per_page =>15, :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => sort_column + " " + sort_direction, :include => "unidade")
         end
       end
       respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @professors }
       end
-    end
   end
 
   # GET /professors/1
@@ -433,7 +432,8 @@ end
         trabalhos.destroy
       end
     end
-
+    @ficha_letiva = Ficha.find_by_professor_id($prof_zerar)
+    @ficha_letiva.destroy
     @reinicia_tblprof = Professor.find($prof_zerar)
     @reinicia_tblprof.total_titulacao = 0
     @reinicia_tblprof.pontuacao_final = @reinicia_tblprof.pontuacao_final - @reinicia_tblprof.total_trabalhado
@@ -450,7 +450,7 @@ end
 
     if $reinicializacao == 1 then
       $reinicializacao = 0
-      flash[:notice] = 'DADOS DO PROFESSOR REINICIADO.'
+      flash[:notice] = 'DADOS DO PROFESSOR REINICIADO. ATENÇÃO, A FICHA LETIVA TAMBÉM FOI APAGADA, APÓS RECADASTRAR OS DADOS RECRIA-LA SE NECESSÁRIO.'
       redirect_to professors_path
     end
     $prof_zerar = 0
@@ -809,16 +809,14 @@ end
     @tp5 = TituloProfessor.find_by_sql("SELECT * FROM titulo_professors tp inner join titulacaos t on tp.titulo_id=t.id where tp.professor_id=" + $professor + " and t.tipo = '5 ANOS'")
     $zerar = 0
     if $professor == '' then
-
-    render :update do |page|
-      page.replace_html 'tempo', :text => ''
-      page.replace_html 'consultas', :text => ''
-    end
-
+      render :update do |page|
+        page.replace_html 'tempo', :text => ''
+        page.replace_html 'consultas', :text => ''
+      end
     else
-    render :update do |page|
-      page.replace_html 'tempo', :partial => 'exibicao_pontuatempservico'
-    end
+      render :update do |page|
+        page.replace_html 'tempo', :partial => 'exibicao_pontuatempservico'
+      end
     end
   end
 
@@ -978,6 +976,44 @@ end
   end
 
   def to_print
+
+    if (params[:search].nil? || params[:search].empty?)
+      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+        @to_print = Professor.all( :conditions => [''],:order =>  'nome ASC', :include => "unidade")
+      else
+        @to_print = Professor.all( :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'nome ASC', :include => "unidade")
+      end
+    else
+      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+        @to_print = Professor.all( :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :include => "unidade")
+      else
+        @to_print = Professor.all( :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => 'nome ASC', :include => "unidade")
+      end
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.pdf {
+        html = render_to_string(:layout => false , :action => "to_print.html.haml")
+        kit = PDFKit.new(html)
+        kit.stylesheets << "#{Rails.root}/public/stylesheets/ficha.css"
+        send_data(kit.to_pdf, :filename => "#{@to_print}.pdf", :type => 'application/pdf')
+        return # to avoid double render call
+        }
+
+    end
+  end
+
+  def check    
+    @count_check = Professor.all(:joins => [:acum_trab], :conditions => ["acum_trabs.status = 1"])
+  end
+
+  def esmiucar_tempo_servico
+  end
+
+  def esmiucar_titulos
+  end
+
+  def esmiucar_pontuacao
   end
 
 private
@@ -990,13 +1026,11 @@ private
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
-
-  def etag(collection)
-    collection.inject(0) { |etag, item| etag += item.updated_at.to_i }
-  end
-
-
 protected
+
+  def load_esmiucar
+    @check_professor = Professor.all(:joins => [:acum_trab], :conditions => ["acum_trabs.status = 1"])
+  end
 
   def load_funcao
     @funcao = Professor.find(:all, :order => 'funcao')

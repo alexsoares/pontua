@@ -70,13 +70,6 @@ class TituloProfessorsController < ApplicationController
 
 #====================================================================================================================================================================
 
-  def professor_unidade
-    if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-      @professor_sede = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :order => 'matricula')
-    else
-      @professor_sede = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'matricula')
-    end
-  end
 
   def index
     @titulo_professors = TituloProfessor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ['professor_id = ' + $teacher.to_s])
@@ -171,13 +164,6 @@ class TituloProfessorsController < ApplicationController
     end
   end
 
-  def load_titulacao
-    @titulacaos = Titulacao.find(:all)
-  end
-
-  def load_professors
-    @professors = Professor.find(:all, :order => "matricula ASC")
-  end
 
   def sel_prof
 
@@ -262,11 +248,31 @@ class TituloProfessorsController < ApplicationController
 
  def titulos_busca
         #@titulo_busca = TituloProfessor.find_by_sql("SELECT * FROM titulo_professors where professor_id = " + params[:altera_professor_id] + " and (ano_letivo = " + Time.current.strftime("%Y") + " or titulo_id in (1,2,3,4,5))" )
-        @titulo_busca = TituloBusca.paginate(:all,:page=>params[:page],:per_page =>20,:conditions =>['professor_id = ? and (ano_letivo = ? or titulo_id in (1,2,3,4,5))',params[:altera_professor_id],Time.current.strftime("%Y")])
+        @titulo_busca = TituloProfessor.paginate(:all,:page=>params[:page],:per_page =>20,:conditions =>['professor_id = ? and (ano_letivo = ? or titulo_id in (1,2,3,4,5))',params[:altera_professor_id],Time.current.strftime("%Y")])
       render :update do |page|
         page.replace_html 'alteracao', :partial => 'alterar'
       end
+ end
 
+ protected
+
+  def load_titulacao
+    @titulacaos = Titulacao.find(:all)
   end
+
+  def load_professors
+    @professors = Professor.find(:all, :order => "matricula ASC")
+  end
+
+
+  def professor_unidade
+    if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+      @professor_sede = Professor.all(:order => 'matricula')
+    else
+      @professor_sede = Professor.all(:conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'matricula')
+    end
+  end
+
+
 end
 

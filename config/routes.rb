@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :trabalhados
 
-  map.resources :professors, :has_many=>:fichas, :collection => { :gerar_ficha => :get, :status => :get, :to_print => :get}
+  map.resources :professors, :has_many=>:fichas, :collection => { :gerar_ficha => :get, :status => :get, :to_print => :get, :check => :get, :esmiucar_tempo_servico => :get, :esmiucar_titulos => :get, :esmiucar_pontuacao => :get}
 
   map.resource :password
 

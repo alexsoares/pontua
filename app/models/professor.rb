@@ -69,4 +69,8 @@ validates_numericality_of :RD, :only_integer => true, :message =>  ' - SOMENTE N
     Professor.find_all_by_sede_id(unidade).count
   end
 
+  def self.look_for_all
+    find(:all)
+  end
+
 end

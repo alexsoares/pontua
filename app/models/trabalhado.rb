@@ -86,43 +86,20 @@ has_many :fichas
       end
       self.dias_rede = self.dias + self.outro_trab
 
-    if self.ano == ((((Date.today).strftime("%Y")).to_i) - 1)
-      @trab_ant = Trabalhado.find_by_professor_id(self.professor_id, :conditions => 'ano = ' + (((self.ano).to_i) + 1).to_s + ' and ano_letivo = ' + (self.ano_letivo).to_s)
-      if !(@trab_ant.nil?)
-        if ((self.f_abonada + @trab_ant.f_abonada) + (self.atestado + @trab_ant.atestado) + (self.lic_saude + @trab_ant.lic_saude))  <= 10
-          self.dias_efetivos = self.dias - (self.f_justif + self.f_injustif + self.afastamento)
-          
-          @trab_ant.dias_efetivos = @trab_ant.dias - (@trab_ant.f_justif + @trab_ant.f_injustif + @trab_ant.afastamento)
-          @trab_ant.call_back = 1
-          @trab_ant.save
-        else
-          self.dias_efetivos = self.dias - (self.f_abonada + self.atestado + self.lic_saude + self.f_justif + self.f_injustif + self.afastamento)
-          @trab_ant.dias_efetivos = @trab_ant.dias - (@trab_ant.f_abonada + @trab_ant.lic_saude + @trab_ant.f_justif + @trab_ant.f_injustif + @trab_ant.afastamento)
-          @trab_ant.call_back = 1
-          @trab_ant.save
-        end
-      else
-        if ((self.f_abonada) + (self.atestado) + (self.lic_saude))  <= 10
-          self.dias_efetivos = self.dias - (self.f_justif + self.f_injustif + self.afastamento)
-        else
-          self.dias_efetivos = self.dias - (self.f_abonada + self.atestado + self.lic_saude + self.f_justif + self.f_injustif + self.afastamento)
-        end
-      end
-    else
-      if self.ano == ((((Date.today).strftime("%Y")).to_i))
-        @trab_atual = Trabalhado.find_by_professor_id(self.professor_id, :conditions => 'ano = ' + (((self.ano).to_i) - 1).to_s + ' and ano_letivo = ' + (self.ano_letivo).to_s)
-        if !(@trab_atual.nil?)
-          verificando = ((self.f_abonada + @trab_atual.f_abonada) + (self.atestado + @trab_atual.atestado) + (self.lic_saude + @trab_atual.lic_saude))  <= 10
-          if ((self.f_abonada + @trab_atual.f_abonada) + (self.atestado + @trab_atual.atestado) + (self.lic_saude + @trab_atual.lic_saude))  <= 10
+      if self.ano == ((((Date.today).strftime("%Y")).to_i) - 1)
+        @trab_ant = Trabalhado.find_by_professor_id(self.professor_id, :conditions => 'ano = ' + (((self.ano).to_i) + 1).to_s + ' and ano_letivo = ' + (self.ano_letivo).to_s)
+        if !(@trab_ant.nil?)
+          if ((self.f_abonada + @trab_ant.f_abonada) + (self.atestado + @trab_ant.atestado) + (self.lic_saude + @trab_ant.lic_saude))  <= 10
             self.dias_efetivos = self.dias - (self.f_justif + self.f_injustif + self.afastamento)
-            @trab_atual.dias_efetivos = @trab_atual.dias - (@trab_atual.f_justif + @trab_atual.f_injustif + @trab_atual.afastamento)
-            @trab_atual.call_back = 1
-            @trab_atual.save
+
+            @trab_ant.dias_efetivos = @trab_ant.dias - (@trab_ant.f_justif + @trab_ant.f_injustif + @trab_ant.afastamento)
+            @trab_ant.call_back = 1
+            @trab_ant.save
           else
             self.dias_efetivos = self.dias - (self.f_abonada + self.atestado + self.lic_saude + self.f_justif + self.f_injustif + self.afastamento)
-            @trab_atual.dias_efetivos = @trab_atual.dias - (@trab_atual.f_abonada + @trab_atual.atestado + @trab_atual.lic_saude + @trab_atual.f_justif + @trab_atual.f_injustif + @trab_atual.afastamento)
-            @trab_atual.call_back = 1
-            @trab_atual.save
+            @trab_ant.dias_efetivos = @trab_ant.dias - (@trab_ant.f_abonada + @trab_ant.lic_saude + @trab_ant.f_justif + @trab_ant.f_injustif + @trab_ant.afastamento)
+            @trab_ant.call_back = 1
+            @trab_ant.save
           end
         else
           if ((self.f_abonada) + (self.atestado) + (self.lic_saude))  <= 10
@@ -131,9 +108,32 @@ has_many :fichas
             self.dias_efetivos = self.dias - (self.f_abonada + self.atestado + self.lic_saude + self.f_justif + self.f_injustif + self.afastamento)
           end
         end
+      else
+        if self.ano == ((((Date.today).strftime("%Y")).to_i))
+          @trab_atual = Trabalhado.find_by_professor_id(self.professor_id, :conditions => 'ano = ' + (((self.ano).to_i) - 1).to_s + ' and ano_letivo = ' + (self.ano_letivo).to_s)
+          if !(@trab_atual.nil?)
+            verificando = ((self.f_abonada + @trab_atual.f_abonada) + (self.atestado + @trab_atual.atestado) + (self.lic_saude + @trab_atual.lic_saude))  <= 10
+            if ((self.f_abonada + @trab_atual.f_abonada) + (self.atestado + @trab_atual.atestado) + (self.lic_saude + @trab_atual.lic_saude))  <= 10
+              self.dias_efetivos = self.dias - (self.f_justif + self.f_injustif + self.afastamento)
+              @trab_atual.dias_efetivos = @trab_atual.dias - (@trab_atual.f_justif + @trab_atual.f_injustif + @trab_atual.afastamento)
+              @trab_atual.call_back = 1
+              @trab_atual.save
+            else
+              self.dias_efetivos = self.dias - (self.f_abonada + self.atestado + self.lic_saude + self.f_justif + self.f_injustif + self.afastamento)
+              @trab_atual.dias_efetivos = @trab_atual.dias - (@trab_atual.f_abonada + @trab_atual.atestado + @trab_atual.lic_saude + @trab_atual.f_justif + @trab_atual.f_injustif + @trab_atual.afastamento)
+              @trab_atual.call_back = 1
+              @trab_atual.save
+            end
+          else
+            if ((self.f_abonada) + (self.atestado) + (self.lic_saude))  <= 10
+              self.dias_efetivos = self.dias - (self.f_justif + self.f_injustif + self.afastamento)
+            else
+              self.dias_efetivos = self.dias - (self.f_abonada + self.atestado + self.lic_saude + self.f_justif + self.f_injustif + self.afastamento)
+            end
+          end
+        end
       end
     end
-  end
   end
 
   def delete_tempo_trabalhado
@@ -167,4 +167,9 @@ has_many :fichas
       end
     end
   end
+
+  def self.check(professor,ano_letivo)
+    find_by_professor_id(professor, :conditions => ["ano_letivo = ?", ano_letivo], :select => "sum(dias_trab) as soma_trab,sum(dias_efetivos) as soma_efet, sum(dias_rede) as soma_rede,sum(dias_unidade) as soma_unid")
+  end
+
 end

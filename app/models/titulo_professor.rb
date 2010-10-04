@@ -109,4 +109,8 @@ protected
 
   end
 
+  def self.check_titulos(ano_letivo,professor)
+   a = find_by_professor_id(professor,:joins => :professor, :select => "professors.total_titulacao as total_titulacao, professors.total_trabalhado as total_trabalhado, professors.pontuacao_final as pontuacao_final, sum(pontuacao_titulo) as soma_pont_titulo", :conditions => ["(titulo_id in (1,2,3,4,5) or ( ano_letivo = ? and status = 1))",ano_letivo])
+  end
+
 end

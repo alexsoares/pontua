@@ -44,5 +44,9 @@ has_many :fichas
     Trabalhado.find(:all, :conditions => ['professor_id = ? and ano_letivo = ?', professor_id,ano_letivo])
   end
   
-  
+  def self.acum(professor)
+    find_by_professor_id(professor, :select => "tot_acum_ant_trab, tot_acum_ant_efet, tot_acum_ant_rede, tot_acum_ant_unid, tot_acum_trab, tot_acum_efet, tot_acum_rede, tot_acum_unid")
+  end
+
+
 end

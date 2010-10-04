@@ -45,7 +45,7 @@ display: none;
         <%= Titulacao.find_by_id(tp1.titulo_id).descricao %>
       </td>
       <td width="30%" align="center">
-        <%= truncate(tp1.obs,20,"...") %>
+        <%= truncate(tp1.obs,:lngth => 20,:omission => "...") %>
      </td>
      <td width="10%" align="center">
         <%= tp1.valor %>
@@ -120,7 +120,7 @@ display: none;
          <%= Titulacao.find_by_id(tp.titulo_id).descricao %>
       </td>
       <td width="30%" align="center">
-        <%= truncate(tp.obs,30,"...")%>
+        <%= truncate(tp.obs,:length => 30,:omission => "...")%>
       </td>
 
       <td width="10%" align="center">

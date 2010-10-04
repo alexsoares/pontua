@@ -100,10 +100,11 @@ ActiveRecord::Schema.define(:version => 20100920125217) do
   create_table "mensagems", :force => true do |t|
     t.integer  "user_id"
     t.string   "titulo"
+    t.string   "from"
     t.string   "texto"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "lido",       :default => false
+    t.boolean  "lido"
     t.integer  "para"
     t.integer  "geral",      :default => 0
   end
@@ -255,7 +256,7 @@ ActiveRecord::Schema.define(:version => 20100920125217) do
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
     t.integer  "regiao_id",                               :default => 0
-    t.string   "layout"
+    t.string   "layout",                                  :default => "application"
     t.string   "password_reset_code"
   end
 
