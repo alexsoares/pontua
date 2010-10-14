@@ -7,22 +7,25 @@ display: none;
 <br/>
 <br/>
 <hr/>
+
 <div class="botao">
-  <%= form_tag relatorio_por_funcao_path, :method => :get%>
-    <%= error_messages_for 'contact' %>
-   <table width="100%">
-    <div class="botao">
+    <table width="100%">
       <tr>
-        <td width="80%" align="right">
-          <div class="botao">
-           Função:
-          <%= select_tag :funcao, options_for_select(CARGO)%>
-          <%= submit_tag 'Filtrar', :name => nil %></div>
-        </td>
+        <% form_for @search do |f| %>
+          <tr>
+            <td align="right">
+              <%= f.label :funcao_equals, "Função" %>
+              <%= f.select :funcao_equals, options_for_select(CARGO), :include_blank => true%>
+            </td>
+            <td align="center" colspan="2">
+              <%= f.submit "Buscar" %>
+            </td>
+          </tr>
+        <% end %>
       </tr>
-    </div>
     </table>
 </div>
+
 <hr/>
 <br/>
 <br/>
@@ -30,20 +33,19 @@ display: none;
 <div class="botao">
   <input type="Button" Value="Imprimir" onclick="Imprimir()">
 </div>
-<div class="relatorios">
-<table border ="1" cellpadding="1" cellspacing="1" width="100%" frame="box" rules="all">
+<table border ="1" width="100%"  class="tabelas">
     <tr style="font-size:12px">
      <br/>
 
-        <th bgcolor="gray" width="15%"><%= sortable "matricula" %></th>
-        <th bgcolor="gray" width="70%"><%= sortable "nome" %></th>
-        <th bgcolor="gray" width="15%"><%= sortable "pontuação_final", "Pontuação Final" %></th>
+        <th width="15%"><%= sortable(params[:search],"matricula") %></th>
+        <th width="70%"><%= sortable(params[:search],"nome") %></th>
+        <th width="15%"><%= sortable(params[:search],"pontuacao_final","Pontuação Final") %></th>
     </tr>
     <%if  @relatorio_funcao == "Selecione uma função"%>
       <center><b><%= @relatorio_funcao %></b></center>
       <br/>
     <%else%>
-        <h3 align="center">Professores com cargo de:  <%= params[:funcao] %></h3>
+        <h3 align="center">Professores com cargo de:  <%= params[:search][:funcao_equals] %></h3>
       <% for funcao in @relatorio_funcao %>
         <tr>
           <td><center><%=h funcao.matricula %></center></td>
@@ -61,7 +63,6 @@ display: none;
 
 <div class="botao">
   <input type="Button" Value="Imprimir" onclick="Imprimir()">
-</div>
 </div>
 </div>
 

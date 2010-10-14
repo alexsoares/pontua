@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100920125217) do
+ActiveRecord::Schema.define(:version => 20101004180657) do
 
   create_table "acum_trabs", :force => true do |t|
     t.integer  "professor_id"
@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(:version => 20100920125217) do
     t.integer "matricula", :null => false
     t.string  "nome",      :null => false
     t.string  "funcao",    :null => false
+  end
+
+  create_table "correcaos", :force => true do |t|
+    t.integer  "professor_id"
+    t.integer  "acum_trab_id"
+    t.integer  "valor_ant",    :limit => 10, :precision => 10, :scale => 0
+    t.integer  "valor",        :limit => 10, :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "fichas", :force => true do |t|

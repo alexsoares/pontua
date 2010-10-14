@@ -15,8 +15,9 @@ helper_method :sort_column, :sort_direction
   end
 
   def relatorio_por_funcao
-   if (params[:funcao]).present?
-      @relatorio_funcao = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => ["funcao like ?","%" + params[:funcao] + "%"], :order => 'nome ASC')
+    @search = Professor.search(params[:search])
+    if (params[:search]).present?
+      @relatorio_funcao = @search.paginate(:all,:page=>params[:page],:per_page =>20, :order => sort_column + " " + sort_direction)
    else
       @relatorio_funcao = "Selecione uma função"
    end

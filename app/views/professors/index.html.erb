@@ -19,7 +19,6 @@
     </table>
   </div>
 
-  <div class="relatorios">
     <div class="botao">
       <input type="Button" Value="Imprimir" onclick="Imprimir()">
       <br/>
@@ -27,19 +26,19 @@
     </div>
     <fieldset>
       <legend><font size=5>Professor</font></legend>
-      <table border ="1" cellpadding="5" cellspacing="1" width="100%" frame="box" rules="all" >
+      <table border ="1" class="tabelas" >
         <tr>
           <td colspan="14">
             <h1 align="center">Relatório de Professores</h1>
           </td>
         </tr>
         <tr>
-          <th colspan="3" bgcolor="#cccccc"><%= sortable params[:search],"nome" %></th>
-          <th colspan="1" bgcolor="#cccccc"><%= sortable params[:search],"matricula" %></th>
-          <th colspan="2" bgcolor="#cccccc"><%= sortable params[:search],"dt_ingresso" %></th>
-          <th colspan="1" bgcolor="#cccccc"><%= sortable params[:search],"sede_id"%></th>
-          <th colspan="3" bgcolor="#cccccc"><%= sortable params[:search],"funcao"%></th>
-          <th colspan="4" bgcolor="#cccccc"></th>
+          <th colspan="3" ><%= sortable params[:search],"nome" %></th>
+          <th colspan="1" ><%= sortable params[:search],"matricula" %></th>
+          <th colspan="2" ><%= sortable params[:search],"dt_ingresso" %></th>
+          <th colspan="1" ><%= sortable params[:search],"sede_id"%></th>
+          <th colspan="3" ><%= sortable params[:search],"funcao"%></th>
+          <th colspan="4" class="botao"></th>
         </tr>
         <% for professor in @professors %>
           <tr>
@@ -52,24 +51,24 @@
             <%end%>
             <td colspan="1"><center><%=h professor.unidade.nome %></center></td>
             <td colspan="3"><center><%=h professor.funcao %></center></td>
-            <td><div class="botao3d"><%= link_to 'Ficha', professor_fichas_path(professor) %></div></td>
-            <td><div class="botao3d"><%= link_to 'Exibir', professor %></div></td>
-            <td><div class="botao3d"><%= link_to 'Alterar', edit_professor_path(professor) %></div></td>
-            <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
-              <td><div class="botao3d"><%= link_to 'Apagar', professor, :confirm => 'Tem certeza?', :method => :delete %></div></td>
-            <%end%>
+              <td class="botao"><%= link_to 'Ficha', professor_fichas_path(professor),:class=>"botao3d" %></td>
+              <td class="botao"><%= link_to 'Exibir', professor,:class=>"botao3d" %></td>
+              <td class="botao"><%= link_to 'Alterar', edit_professor_path(professor),:class=>"botao3d" %></td>
+              <%  if current_user.has_role?('admin') or current_user.has_role?('supervisao') or current_user.has_role?('planejamento') then%>
+                <td class="botao"><%= link_to 'Apagar', professor, :confirm => 'Tem certeza?', :method => :delete,:class=>"botao3d" %></td>
+              <%end%>
           </tr>
         <% end %>
       </table>
     </fieldset>
-    <%= will_paginate @professors %>
     <br/>
     <b><%=  @professors.count %> registros encontrados nesta pagina</b>
     <div class="botao">
       <br/>
+      <%= will_paginate @professors %>
       <input type="Button" Value="Imprimir" onclick="Imprimir()">
     </div>
     <br/>
     <br/>
   </div>
-</div>
+

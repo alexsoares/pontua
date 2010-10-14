@@ -1,30 +1,10 @@
 <div id="conteudo">
-  <div class="botao">
-    <table width="100%">
-      <tr>
-          <% form_tag professors_path, :method => 'get' do %>
-           <p>
-            <tr>
-                <td align="right"> Nome do Professor:
-                 <%= text_field_tag :search, params[:search] %>
-                 <%= submit_tag "Filtrar", :name => nil %></td>
-              </tr>
-           </p>
-          <% end %>
-
-      </tr>
-    </table>
-  </div>
-
-<div class="relatorios">
 <div class="botao">
    <input type="Button" Value="Imprimir" onclick="Imprimir()">
    <br/>
   <br/>
 </div>
-  <fieldset>
-    <legend><font size=5>Professor</font></legend>
-   <table border ="1" cellpadding="5" cellspacing="1" width="100%" frame="box" rules="all" >
+   <table border ="1" class="tabelas" width="100%">
       <tr>
         <td colspan="14">
           <h1 align="center">Relatório de Professores</h1>
@@ -36,9 +16,6 @@
       <th colspan="2" bgcolor="#cccccc">Data Ingresso</th>
       <th colspan="1" bgcolor="#cccccc">Sede</th>
       <th colspan="3" bgcolor="#cccccc">Função</th>
-      <th colspan="4" bgcolor="#cccccc"></th>
-
-
     </tr>
 
 <% for professor in @to_print %>
@@ -53,14 +30,12 @@
     <td colspan="1"><center><%=h professor.unidade.nome %></center></td>
     <td colspan="3"><center><%=h professor.funcao %></center></td>
   </tr>
-  <% count = count + 1 %>
-  <% if count == 10 %>
 <% end %>
 
 
     </table>
 
-  </fieldset>
+  
  <br />
    <b><%=  @to_print.count %> registros encontrados nesta pagina</b>
 
@@ -72,4 +47,4 @@
   <br/>
   <br/>
   </div>
-</div>
+

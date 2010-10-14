@@ -976,31 +976,25 @@ end
   end
 
   def to_print
-
     if (params[:search].nil? || params[:search].empty?)
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
         @to_print = Professor.all( :conditions => [''],:order =>  'nome ASC', :include => "unidade")
       else
         @to_print = Professor.all( :conditions => ['sede_id = ' + current_user.regiao_id.to_s + ' or sede_id = 54'], :order => 'nome ASC', :include => "unidade")
       end
-    else
-      if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-        @to_print = Professor.all( :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :include => "unidade")
-      else
-        @to_print = Professor.all( :conditions => ["nome like ?  and (sede_id = ? or sede_id = 54)", "%" + params[:search].to_s + "%",current_user.regiao_id.to_s], :order => 'nome ASC', :include => "unidade")
-      end
     end
+
     respond_to do |format|
-      format.html # index.html.erb
+      format.html {render(:layout => 'application')} ## index.html.erb
       format.pdf {
         html = render_to_string(:layout => false , :action => "to_print.html.haml")
         kit = PDFKit.new(html)
-        kit.stylesheets << "#{Rails.root}/public/stylesheets/ficha.css"
+        
         send_data(kit.to_pdf, :filename => "#{@to_print}.pdf", :type => 'application/pdf')
         return # to avoid double render call
         }
-
     end
+
   end
 
   def check    
@@ -1008,12 +1002,15 @@ end
   end
 
   def esmiucar_tempo_servico
+   @tempo = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :joins => [:acum_trab,:trabalhados], :conditions => ["trabalhados.ano_letivo = ? and acum_trabs.status = 1",$data], :select => "sum(dias_trab) as soma_trab,sum(dias_efetivos) as soma_efet, sum(dias_rede) as soma_rede,sum(dias_unidade) as soma_unid,matricula, tot_acum_ant_trab, tot_acum_ant_efet, tot_acum_ant_rede, tot_acum_ant_unid, tot_acum_trab, tot_acum_efet, tot_acum_rede, tot_acum_unid", :group => 'matricula', :having => "(((sum(dias_trab) + tot_acum_ant_trab) <> tot_acum_trab) and ((sum(dias_efetivos) + tot_acum_ant_efet) <> tot_acum_efet) and ((sum(dias_rede) + tot_acum_ant_rede) <> tot_acum_rede) and ((sum(dias_unidade) + tot_acum_ant_unid) <> tot_acum_unid))" )
   end
 
   def esmiucar_titulos
+    @titulo = Professor.paginate(:all,:page=>params[:page],:per_page =>20,:joins => :titulo_professors,:select => "professors.id,matricula,total_titulacao,titulo_professors.titulo_id, titulo_professors.ano_letivo,titulo_professors.pontuacao_titulo", :conditions => ["(titulo_professors.titulo_id in (1,2,3,4,5) or ( titulo_professors.ano_letivo = ? and titulo_professors.status = 1))",$data], :group => "matricula", :having => "professors.total_titulacao <> sum(titulo_professors.pontuacao_titulo)")
   end
 
   def esmiucar_pontuacao
+    @pontuacao = Professor.paginate(:all,:page=>params[:page],:per_page =>20, :conditions => "(total_trabalhado + total_titulacao) <> pontuacao_final")
   end
 
 private

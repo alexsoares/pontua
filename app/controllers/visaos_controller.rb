@@ -1,23 +1,20 @@
 class VisaosController < ApplicationController
-  
-  layout 'login'
+  before_filter :login_required
+  before_filter :sede_unidade
   before_filter :load_professors
+  layout 'exibicao'
   # GET /visaos
   # GET /visaos.xml
   def index
-    @professor_rel_geral = Professor.find(:all, :order => 'pontuacao_final DESC')
-    
-  end
-
-  def load_professors
-    @professors = Professor.find(:all, :order => "matricula")
-  end
-
-  def sede_unidade
-    if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-      @unidade_sede = Unidade.find(:all)
-    else
-      @unidade_sede = Unidade.find(:all, :conditions => ['id = ' + current_user.regiao_id.to_s + ' or id = 54'])
+    @search = Professor.search(params[:search])
+    if !(params[:search].blank?)
+        if params[:search][:funcao_equals] == 'TODOS'
+          @search = Professor.search(params[:search])
+          @professor_rel_geral = Professor.all(:joins => :unidade, :conditions => ["unidades.tipo in (1,2,3)"], :order => 'pontuacao_final DESC')
+        else
+          @search = Professor.search(params[:search])
+          @professor_rel_geral = @search.all(:joins => :unidade, :conditions => ["unidades.tipo in (1,2,3)"], :order => 'pontuacao_final DESC')
+        end
     end
   end
 
@@ -32,19 +29,21 @@ class VisaosController < ApplicationController
 
   def lista_funcao
     $funcao = params[:visaos_funcao].to_s
- if $funcao == 'ADI' or $funcao == 'Prof. de Creche' then
-    @funcao = Professor.find_by_sql("Select * from professors where funcao = 'ADI' or funcao = 'Prof. de Creche' order by pontuacao_final DESC")
-  else
-    @funcao = Professor.find_by_sql("Select * from professors where funcao = '" + $funcao + "' order by pontuacao_final DESC")
-  end
 
+  if $funcao == 'ADI' or $funcao == 'Prof. de Creche' then
+    #@funcao = Professor.find_by_sql("Select * from professors where funcao = 'ADI' or funcao = 'Prof. de Creche' order by pontuacao_final DESC")
+    @funcao = Professor.find(:all, :conditions =>["(funcao = ADI or funcao = Prof. de Creche) and tipo in (1,2,3) "], :order => "pontuacao_final DESC")
+  else
+    #@funcao = Professor.find_by_sql("Select * from professors where funcao = '" + $funcao + "' order by pontuacao_final DESC")
+    @funcao = Professor.find_all_by_funcao($funcao, :conditions =>["tipo in (1,2,3) "], :order => "pontuacao_final DESC")
+  end
     render :update do |page|
       page.replace_html 'tempo', :text => ''
       page.replace_html 'funcao', :text => $funcao
       page.replace_html 'professores', :partial => 'lista_funcao_pontuacao'
     end
 
-  end
+   end
 
   def consulta
     $v = 0
@@ -77,7 +76,7 @@ $v = 1
 
  def consulta_geral
   $tipo_con = 10
-  @professor_rel_geral = Professor.find(:all, :order => 'pontuacao_final DESC')
+  @professor_rel_geral = Professor.find(:all, :joins => :unidade, :conditions => ["unidades.tipo in (1,2,3)"], :order => 'pontuacao_final DESC')
 
     render :update do |page|
       page.replace_html 'tempo', :text => ''
@@ -99,10 +98,11 @@ $v = 1
 
         $reg_prof = current_user.regiao_id
         if $reg_prof == 53 then
-          @professors = Professor.find(:all, :conditions => ['id=' + $professor.to_s])
+          @professors = Professor.find(:all,:joins => :unidade, :conditions => ['id= ? and unidades.tipo in (1,2,3)', $professor.to_s])
         else
          #@professors = Professor.find(:all, :conditions => ['id=' + $professor,'regiao_id = ' + $reg_prof])
-         @professors = Professor.find_by_sql("SELECT * FROM professors where id = " + $professor.to_s + " and (sede_id = " + $reg_prof.to_s + " or sede_id = 54)")
+         #@professors = Professor.find_by_sql("SELECT * FROM professors where id = " + $professor.to_s + " and (sede_id = " + $reg_prof.to_s + " or sede_id = 54)")
+         @professors = Professor.find($professor, :joins => :unidade, :conditions => ["unidades.tipo in (1,2,3) and (sede_id = ? or sede_id = 54)"])
         end
     end
     render :update do |page|
@@ -401,9 +401,11 @@ end
 
 
   def consulta_prof_rem_aprovada
-    @cpra = Remocao.find_by_sql('Select r.*,p.* from remocaos r inner join professors p on r.professor_id = p.id where flag_remocao_finalizada = 1 and status = 0 and remocao_efetivada = 1 and ano_letivo = year(curdate()) order by p.pontuacao_final desc')
+#    @cpra = Remocao.find_by_sql('Select r.*,p.* from remocaos r inner join professors p on r.professor_id = p.id where flag_remocao_finalizada = 1 and status = 0 and remocao_efetivada = 1 and ano_letivo = year(curdate()) order by p.pontuacao_final desc')
+	@cpra = Remocao.find_by_sql('Select r.*,p.*,u.* from remocaos r inner join professors p on r.professor_id = p.id inner join unidades u on p.sede_id = u.id where flag_remocao_finalizada = 1 and status = 0 and remocao_efetivada = 1 and ano_letivo = year(curdate()) order by p.pontuacao_final desc')
+
       render :update do |page|
-        page.replace_html 'remocao', :partial => 'lista_prof_rem_ap'
+        page.replace_html 'remocao', :partial => 'lista_prof_rem_de_para'
       end
 
   end
@@ -423,5 +425,20 @@ end
         page.replace_html 'remocao', :partial => 'lista_prof_rem'
       end
   end
+
+protected
+
+  def load_professors
+    @professors = Professor.find(:all,:joins => :unidade, :conditions => ["unidades.tipo in (1,2,3)"], :order => "matricula")
+  end
+
+  def sede_unidade
+    if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
+      @unidade_sede = Unidade.find(:all,:conditions => ["tipo in (1,2,3)"])
+    else
+      @unidade_sede = Unidade.find(:all, :conditions => ['(id = ' + current_user.regiao_id.to_s + ' or id = 54) and tipo in (1,2,3)'])
+    end
+  end
+
 
 end

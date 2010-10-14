@@ -7,6 +7,13 @@ class CreateUnidades < ActiveRecord::Migration
       t.references :regiao
       t.timestamps
     end
+# Tipos:
+    # 1 - CRECHE
+    # 2 - EMEI
+    # 3 - CASA DA CRIANÇA
+    # 4 - EMEF
+    # 5 - CIEP
+    # 6 - TEMPO DE VIVER
 
     # São Jerônimo
     

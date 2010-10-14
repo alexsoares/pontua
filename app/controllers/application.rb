@@ -93,6 +93,7 @@ CARGO = {'Diretor Ed. Básica'=> 'Diretor Ed. Básica',
           'PEB2 - Inglês'=> 'PEB2 - Inglês',
           'PEB2 - Ciências'=> 'PEB2 - Ciências',
           'PEB - Ed. Especial'=> 'PEB - Ed. Especial',
+          'TODOS' => 'TODOS'
           }
 PERIODO = {'Manhã' => 'Manhã', 'Tarde' => 'Tarde', 'Integral' => 'Integral'}
 $acao = 0

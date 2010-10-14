@@ -6,7 +6,7 @@ background-repeat:repeat-y;
 root {
     display: block;
 }
-a { color: blue;
+a { color: gray;
 
     }
 a:visited { color: gray; }
@@ -54,16 +54,6 @@ margin:25px;
    top: 180px;
    }
 
-#topo {
-background-image:url(Imagens/logo.jpg);
-background-repeat: no-repeat;
-text-align: center;
-color:white;
-width:100%;
-height:80px;
-margin:0;
-font:bold;
-}
 #rodape{
     background-image:url(Imagens/fundo_rodape.jpg);
     margin:25px;
@@ -100,7 +90,6 @@ color: red;
   display:inline;
   
 }
-
 #menu li a {
   padding:1px;
   border:1px solid black;
@@ -188,14 +177,14 @@ font-size: large;
 #contents{
     margin:0 auto;
     background-image:url(Imagens/body.jpg);
-    height:800px;
+    height:980px;
     width:950px;
 
 }
 
 #principal{
     float:right;
-    height:800px;
+    height:980px;
     width:950px;
     background-image:url(Imagens/body.jpg);
     background-color:gray;
@@ -387,4 +376,59 @@ font-size: large;
 #announcement h4{color:green;}
 #color a{
     color:red;
+}
+
+#true {
+    background-image:url(images/true.jpg);
+    width:20px;
+    height:20px;
+    background-repeat:no-repeat;
+}
+#false {
+    background-image:url(images/false.jpg);
+    width:20px;
+    height:20px;
+    background-repeat:no-repeat;
+
+}
+
+
+
+
+.tabelas {
+  border: solid 1px #666;
+  border-collapse: collapse;
+  
+}
+
+.tabelas th {
+  font-size: 10px;
+  color: white;
+  background-color: #404C99;
+  padding: 4px 8px;
+  padding-bottom: 4px;
+  text-align: center;
+}
+.tabelas th.titulo {
+    background-color: yellow;   
+}
+.tabelas th.titulo h1{
+    color:#000;
+}
+
+
+.tabelas td {
+  padding: 4px 8px;
+}
+
+.tabelas td:hover {
+  background-color: white;
+}
+
+.tabelas .even td {
+  background-color: #E3E6FF;
+}
+
+.tabelas .odd td {
+  background-color: #D1D8F6;
 }

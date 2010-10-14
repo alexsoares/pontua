@@ -97,3 +97,5 @@ ActionMailer::Base.smtp_settings = {
    :user_name => "no-reply@ribeirosoares.com", #Você pode usar o Google Apps!
    :password => 's3inf09'
 }
+WillPaginate::ViewHelpers.pagination_options[:previous_label]=I18n.t("pagination.prev")
+WillPaginate::ViewHelpers.pagination_options[:next_label]=I18n.t("pagination.next")

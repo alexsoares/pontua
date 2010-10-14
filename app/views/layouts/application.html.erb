@@ -6,7 +6,7 @@
     <%= stylesheet_link_tag 'scaffold' %>
     <%= stylesheet_link_tag 'pontuacao' %>
     <%= stylesheet_link_tag 'msg' %>
-    <%= stylesheet_link_tag 'pontuacao' %>
+    <%= stylesheet_link_tag 'impressao', :media => "print" %>
     <%= stylesheet_link_tag 'menu' %>
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tag 'msg.js' %>
@@ -138,7 +138,12 @@ window.print();
                 <li class="top"><a href="#nogo2" id="relatorios" class="top_link"><span class="down">Relatórios</span></a>
                 <ul class="sub">
                   <li><b>Professores</b></li>
-                    <li><%= link_to "Nome || Matricula", professors_path %></li>
+                    <li><a href="#nogo29" class="fly">Imprimir</a>
+                    <ul>
+                      <li><%= link_to "Em video", professors_path %></li>
+                      <li><%= link_to "Via impressora", to_print_professors_path %></li>
+                      <li><%= link_to "Em disco (PDF)", to_print_professors_path(:format => "pdf") %></li>
+                    </ul>
                     <li><%= link_to "Função", relatorio_por_funcao_path %></li>
                     <li><a href="#nogo29" class="fly">Titulação</a>
                     <ul>

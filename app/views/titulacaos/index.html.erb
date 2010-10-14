@@ -32,24 +32,23 @@ display: none;
 </div>
   <fieldset>
    <legend><font size=4>Títulos</font></legend>
-<div class="relatorios">
-<table border ="1" frame="box" width="100%" rules="all">
+
+<table border ="1" width="100%" class="tabelas">
   <tr>
-    <td colspan="14">
+    <th colspan="14" class="titulo">
       <h1 align="center">Relatório Títulos</h1>
-    </td>
+    </th>
   </tr>
-
-<% for titulacao in @titulacaos %>
-
   <tr>
     <th colspan="3">Descrição</th>
     <th colspan="3">Validade</th>
     <th colspan="2">Valor</th>
     <th colspan="3">Referência</th>
     <th colspan="3"></th>
-
   </tr>
+
+<% @titulacaos.each do |titulacao| %>
+
   <tr>
     <td colspan="3" align="center"><%= titulacao.descricao %></td>
     <td colspan="3" align="center"><%= titulacao.tipo %></td>
@@ -68,7 +67,7 @@ display: none;
 
 <% end %>
 </table>
-</div>
+
 </fieldset>
 <br />
 

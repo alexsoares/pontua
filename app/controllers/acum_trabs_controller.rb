@@ -15,13 +15,13 @@ before_filter :professor_unidade
         @listagem = AcumTrab.paginate(:all, :include => 'professor',:page=>params[:page],:per_page =>20,:conditions => ['acum_trabs.status = 0'])
       else
         #      @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['status = 0'], :order => "professor_id")
-        @listagem = AcumTrab.find(:all, :include => 'professor',:page=>params[:page],:per_page =>20, :conditions => ['acum_trabs.status = 0 and (professors.sede_id = ? or professors.sede_id = 54)',current_user.regiao_id], :order => "professors.sede_id,professors.nome")
+        @listagem = AcumTrab.paginate(:all, :include => 'professor',:page=>params[:page],:per_page =>20, :conditions => ['acum_trabs.status = 0 and (professors.sede_id = ? or professors.sede_id = 54)',current_user.regiao_id], :order => "professors.sede_id,professors.nome")
       end
     else
       if current_user.regiao_id == 53 or current_user.regiao_id == 52 then
-        @listagem = AcumTrab.find(:all, :include => 'professor',:page=>params[:page],:per_page =>20, :conditions => ['acum_trabs.status = 0 and professors.matricula = ?',params[:search]], :order => "professor_id")
+        @listagem = AcumTrab.paginate(:all, :include => 'professor',:page=>params[:page],:per_page =>20, :conditions => ['acum_trabs.status = 0 and professors.matricula = ?',params[:search]], :order => "professor_id")
       else
-        @listagem = AcumTrab.find(:all, :include => 'professor',:page=>params[:page],:per_page =>20, :conditions => ['acum_trabs.status = 0 and (professors.sede_id = ? or professors.sede_id = 54) and professors.matricula = ?',current_user.regiao_id,params[:search]], :order => "professor_id")
+        @listagem = AcumTrab.paginate(:all, :include => 'professor',:page=>params[:page],:per_page =>20, :conditions => ['acum_trabs.status = 0 and (professors.sede_id = ? or professors.sede_id = 54) and professors.matricula = ?',current_user.regiao_id,params[:search]], :order => "professor_id")
       end
 #      @listagem = AcumTrab.find(:all, :include => 'professor', :conditions => ['status = 0 and professors.matricula = ?',params[:search]], :order => "professor_id")
     end

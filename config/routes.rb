@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :correcaos, :collection => {:find_professor => :get}
+
   map.resources :announcements
     
   map.resources :mensagems, :collection => { :saida => :get, :entrada => :get, :message_read => :put, :lidas => :get,:message_unread => :put}

@@ -11,10 +11,11 @@ class RegiaosController < ApplicationController
   # GET /regiaos
   # GET /regiaos.xml
   def index
-   if (params[:search].nil? || params[:search].empty?)
-      @regiaos = Regiao.find(:all, :order =>  sort_column + " " + sort_direction)
+   @search = Regiao.search(params[:search])
+   if (params[:search].blank?)
+      @regiaos = @search.all( :order =>  sort_column + " " + sort_direction)
    else
-      @regiaos = Regiao.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%"], :order => sort_column + " " + sort_direction)
+      @regiaos = @search.all(:order => sort_column + " " + sort_direction)
    end
     respond_to do |format|
       format.html # index.html.erb
