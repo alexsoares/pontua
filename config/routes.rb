@@ -87,7 +87,8 @@ map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
-  map.root :controller => "home"
+  #map.root :controller => "home"
+  map.root :controller => "visaos"
   map.calculo_dias '/calculo_dias', :controller => 'calculos', :action => 'calcula_pontuacao'
   map.consulta '/consulta', :controller => 'consultas'
   map.relatorio_por_funcao '/relatorio_por_funcao', :controller => 'consultas', :action => 'relatorio_por_funcao'

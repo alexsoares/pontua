@@ -258,6 +258,13 @@ font-size: large;
         border-left: gray 1px solid;
 
        }
+
+.botao #caixa {
+    border-width: medium;
+    border-style: solid;
+    border-color: #0000FF;
+}
+
 .botao3d:hover{
         font-size:14px;
         font-family:Verdana,Helvetica;
