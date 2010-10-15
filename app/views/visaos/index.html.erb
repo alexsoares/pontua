@@ -11,7 +11,6 @@ display: none;
 <br/>
 <h2 align="center">   Sistema de Pontuação de Professores - Secretaria de Educação</h2>
 <br/>
-<br/>
 <div class="botao">
   <div id ="caixa">
     <br/>
@@ -38,20 +37,10 @@ display: none;
   </div>
 </div>
 <br/>
-<br/>
-<div class="botao">
-  <table width="100%">
-    <tr>
-      <td align="right"><input type="Button" Value="Imprimir" onclick="Imprimir()"></td>
-    </tr>
-  </table>
-</div>
 <%if !(params[:search]).blank? %>
   <h1 align = "center" id="teste">RELATORIO DE PONTUACAO - <%= params[:search][:funcao_equals] %> </h1>
   <h5 style="color:red" align="center">Obs.: Listagem sujeita a alterações </h5>
 <%end%>
-
-<br/>
 <br/>
 <table border ="1" width="90%" align="center" class="tabelas" >
   <tr>

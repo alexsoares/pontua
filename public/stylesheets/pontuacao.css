@@ -416,11 +416,6 @@ font-size: large;
     color:#000;
 }
 
-.botao #caixa {
-    border-width: medium;
-    border-style: solid;
-    border-color: #0000FF;
-}
 
 .tabelas td {
   padding: 4px 8px;
