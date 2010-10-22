@@ -2,7 +2,7 @@
   <div id="entrar">
     <%if logged_in? then%>
       <td><%= link_to '|Sair|', logout_path %></td>
-     <td>Está logado como: <%= current_user.name %></td>
+     <td>Está logado como: <%= current_user.login %></td>
     <%else%>
       <td><%= button_to 'Login', login_path %></td>
     <%end%>

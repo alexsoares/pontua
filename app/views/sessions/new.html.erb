@@ -1,14 +1,14 @@
 <div id="conteudo">
-<table width="100%" border="1">
+<table width="100%" border="1" class="login">
 <tr>
    <td rowspan="2">
      <div id="img"></div>
    </td>
-   <td width="15%">
-     <p align="center"><font color="blue" size="3">Acesse o Pontua</font></p>
-    <center>
+   <td width="20%">
+     <p align="center"><font color="blue" size="3">Acesse o Pontua</font>
+    
        <% form_tag session_path do -%>
-<p>        <b><label for="login">Login</label></b>
+        <b><label for="login">Login</label></b>
         <%= text_field_tag 'login','',:size => 10 %><br/>
 </p>
 <p>
@@ -19,7 +19,9 @@
         <font size="2"><b>Memorizar usuário</b></font><br/> !-->
         <%= submit_tag 'Entrar' %>
        <% end -%>
-    </center>
+<br/>
+<br/>
+<br/>
     <%= link_to 'Esqueci a Senha', new_password_path%>
    </td>
 </tr>

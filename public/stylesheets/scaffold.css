@@ -73,14 +73,15 @@ a:hover { color: #fff; background-color:#000; }
        margin: 2px;
        border: 1px solid black;
        font-weight: bold;
-       background-color: black;
-       color: gray;}
+       background-color: gray;
+       color: black;}
 
      .pagination span.disabled {
        padding: 2px 5px 2px 5px;
        margin: 2px;
        border: 1px solid #eee;
        color: #ddd;
+       background-color:orange;
      }
      #topo {
         background-image:url(Imagens/logo.jpg);

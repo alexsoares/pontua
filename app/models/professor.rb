@@ -12,7 +12,7 @@ validates_presence_of :sede_id, :message => ' -  SEDE - PREENCHIMENTO OBRIGATÓR
 
 validates_numericality_of :INEP, :only_integer => true, :message =>  ' - SOMENTE NÚMEROS'
 validates_numericality_of :RD, :only_integer => true, :message =>  ' - SOMENTE NÚMEROS'
-
+validates_uniqueness_of :matricula, :message => ' - PROFESSOR JA CADASTRADO'
   def before_save
     self.pontuacao_final = (self.total_trabalhado + self.total_titulacao)
     self.nome.upcase!

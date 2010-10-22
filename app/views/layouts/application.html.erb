@@ -41,12 +41,14 @@ window.print();
           <p style="color: red"><%= flash[:notice] %></p>
           <div id="topo">
           </div>
+          <div id="linha">
           <%if logged_in? then%>
             <td width="100%" align="right">
             <font size="4" color="green"><%= link_to h(current_user.login.capitalize), user_path(current_user) %> - <%= link_to 'Edit Profile', edit_user_path(current_user) %></font>
           <%else%>
             <td><%= link_to '|Entrar|', login_path %></td>
-          <%end%>        
+          <%end%>
+          </div>
 <!-- FIM HEADER -->
 <!-- MENU-->
             <span class="preload1"></span>

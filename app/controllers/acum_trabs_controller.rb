@@ -6,7 +6,7 @@ before_filter :professor_unidade
  layout :define_layout
 
   def define_layout
-      current_user.layout
+      current_user.layout ? current_user.layout : "application"
   end
   
   def index

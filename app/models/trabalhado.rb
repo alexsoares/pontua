@@ -82,7 +82,7 @@ has_many :fichas
       if self.unidade == 0
         self.dias_unidade = 0
       else
-        self.dias_unidade = self.unidade - (self.f_abonada + self.atestado + self.f_justif + self.f_injustif + self.lic_saude)
+        self.dias_unidade = self.unidade - (self.f_abonada + self.atestado + self.f_justif + self.f_injustif + self.lic_saude + self.afastamento)
       end
       self.dias_rede = self.dias + self.outro_trab
 

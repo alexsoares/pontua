@@ -6,10 +6,7 @@ background-repeat:repeat-y;
 root {
     display: block;
 }
-a { color: gray;
 
-    }
-a:visited { color: gray; }
 
 .botao3d a { color: white;
 
@@ -27,7 +24,7 @@ margin:25px;
 }
 
 #alinha{
-    margin-left:95px;
+    margin-left:150px;
     margin-right:95px;
 }
 #instrucoes{
@@ -189,6 +186,16 @@ font-size: large;
     background-image:url(Imagens/body.jpg);
     background-color:gray;
     font-size:10px;
+}
+
+.login{
+      border: solid 1px #666;
+      border-collapse: collapse;
+
+}
+
+.relatorios {
+
 }
 
 .relatorios th {

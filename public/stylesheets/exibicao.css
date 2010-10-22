@@ -17,7 +17,11 @@ a:visited { color: gray; }
     border-width: thin;
     border-style: solid;
     border-color: #000;
-    height:70px;
+    height:100px;
+}
+#alinha{
+    margin-left:160px;
+    margin-right:95px;
 }
 
 
@@ -35,7 +39,6 @@ a:visited { color: gray; }
 #contents{
     margin:0 auto;
     background-image:url(Imagens/body.jpg);
-    height:14550px;
     width:950px;
 
 }
@@ -57,6 +60,16 @@ a:visited { color: gray; }
 
 .tabelas td {
   padding: 4px 8px;
+}
+
+.frame{
+    margin:0;
+    border-width: medium;
+    border-style: solid;
+    border-color: orange;
+    height:100px;
+    text-align:center;
+
 }
 
 .tabelas .even td {
