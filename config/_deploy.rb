@@ -1,8 +1,8 @@
 set :application, "192.168.0.118"
-set :repository, "git@192.168.0.118:~/repositorio/pontuacao.git"
+set :repository, "git@192.168.0.118:/home/git/repositorio/pontuacao.git"
 
 
-set :user, "alexandre"
+set :user, "administrador"
 set :use_sudo, false
 set :deploy_to, "/home/#{user}/consulta_pon"
 

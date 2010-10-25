@@ -1227,3 +1227,82 @@ Rendering visaos/fundamental
   [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 52) [0m
   [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `unidades` WHERE (`unidades`.`id` = 54) [0m
 Completed in 1281ms (View: 1063, DB: 8) | 200 OK [http://192.168.0.118/visaos/fundamental?search%5Border%5D=&search%5Bsede_id_equals%5D=&search%5Bfuncao_equals%5D=&commit=Buscar]
+  [4;36;1mSQL (41.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 192.168.0.245 at 2010-10-22 15:48:53) [GET]
+  [4;36;1mUser Columns (81.7ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (8.7ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mProfessor Load (3.8ms)[0m   [0;1mSELECT * FROM `professors` ORDER BY matricula[0m
+Rendering template within layouts/application
+Rendering home/index
+  [4;35;1mAnnouncement Load (56.2ms)[0m   [0mSELECT * FROM `announcements` WHERE (starts_at <= now() AND ends_at >= now()) [0m
+  [4;36;1mroles_users Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+Completed in 1584ms (View: 175, DB: 195) | 200 OK [http://192.168.0.118/]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#show (for 192.168.0.245 at 2010-10-22 15:49:02) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mUnidade Load (0.2ms)[0m   [0mSELECT * FROM `unidades` ORDER BY nome[0m
+Rendering template within layouts/application
+Rendering users/show
+  [4;36;1mRolesUser Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRolesUser Load (79.1ms)[0m   [0mSELECT * FROM `roles_users` WHERE (`roles_users`.`user_id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`id` = 1) [0m
+  [4;36;1mAnnouncement Load (0.4ms)[0m   [0;1mSELECT * FROM `announcements` WHERE (starts_at <= now() AND ends_at >= now()) [0m
+  [4;35;1mroles_users Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+Completed in 385ms (View: 251, DB: 85) | 200 OK [http://192.168.0.118/users/1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing VisaosController#index (for 192.168.0.245 at 2010-10-22 15:49:47) [GET]
+  [4;35;1mUnidade Load (0.2ms)[0m   [0mSELECT * FROM `unidades` [0m
+  [4;36;1mProfessor Load (1.2ms)[0m   [0;1mSELECT `professors`.* FROM `professors` INNER JOIN `unidades` ON `unidades`.id = `professors`.sede_id WHERE (unidades.tipo in (1,2,3)) ORDER BY matricula[0m
+Rendering template within layouts/exibicao
+Rendering visaos/index
+Completed in 394ms (View: 34, DB: 2) | 200 OK [http://192.168.0.118/VISAOS]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#destroy (for 192.168.0.245 at 2010-10-22 15:50:12) [GET]
+  [4;35;1mUser Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://192.168.0.118:3001/
+Completed in 63ms (DB: 2) | 302 Found [http://192.168.0.118/logout]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing HomeController#index (for 192.168.0.245 at 2010-10-22 15:50:12) [GET]
+Redirected to http://192.168.0.118:3001/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 3ms (DB: 0) | 302 Found [http://192.168.0.118/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 192.168.0.245 at 2010-10-22 15:50:12) [GET]
+Rendering template within layouts/login
+Rendering sessions/new
+Completed in 69ms (View: 58, DB: 0) | 200 OK [http://192.168.0.118/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 192.168.0.245 at 2010-10-22 15:50:22) [GET]
+Rendering template within layouts/login
+Rendering sessions/new
+Completed in 35ms (View: 25, DB: 0) | 200 OK [http://192.168.0.118/session/new]
